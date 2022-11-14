@@ -1,0 +1,30 @@
+<div class="nav-search">
+	<div class="nav-search-overlay">
+		<div class="nav-search-scroller" data-scroll-lock-fill-gap>
+			<div class="nav-search-container container">
+				<div class="search-form__sticky-container">
+					<form action="{{ routes.search_url }}" method="get" class="search-form" role="search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" maxlength="250">
+						<div class="inputGroup">
+							<input type="search" name="q" class="nav-search-input" tabindex="-1" id="search-field" placeholder="{{ 'general.slide_out_navigation.search_placeholder' | t }}" value="" />
+							<input type="hidden" name="type" value="{{ settings.search_type }}" />
+							<input type="hidden" name="options[prefix]" class="nav-search-options" value="last" />
+							<button tabindex="-1" type="submit" class="nav-search-submit" aria-label="{{ 'general.accessibility.search' | t }}">
+								{%- render 'icon-submit' -%}
+							</button>
+						</div>
+
+						<label for="search-field" class="icon-search">
+							{%- render 'icon-search' -%}
+							<span class="accessible-label">{{ 'general.slide_out_navigation.search_label' | t }}</span>
+						</label>
+						<button type="button" tabindex="-1" class="js-searchToggle js-searchToggle--close searchToggle searchToggle--close" aria-expanded="true" aria-label="{{ 'general.accessibility.close' | t }}">
+							{%- render 'icon-close' -%}
+						</button>
+					</form>
+				</div>
+
+				<div id="search-results" class="results"></div>
+			</div>
+		</div>
+	</div>
+</div>

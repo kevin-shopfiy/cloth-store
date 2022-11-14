@@ -1,0 +1,13 @@
+{% comment %}
+  DO NOT MODIFY THIS FILE DIRECTLY. THIS FILE WILL BE OVERWRITTEN.
+  YOU CAN MODIFY THE LIQUID CODE FOR THIS CUSTOM FIELD HERE:
+  https://customfields.bonify.io/dashboard/oonique.myshopify.com/products/configure/231614/edit
+{% endcomment %}
+{% if product.metafields.custom_fields["lauflnge_cm"] != blank %}
+  <div class="custom-field custom-field__lauflnge-cm custom-field__type--number">
+    <h3 class="custom-field--title">Lauflänge</h3>
+    <div class="custom-field--value">
+      {{ product.metafields.custom_fields["lauflnge_cm"] }}
+    </div>
+  </div>
+{% endif %}

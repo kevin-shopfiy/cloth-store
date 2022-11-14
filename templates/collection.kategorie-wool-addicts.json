@@ -1,0 +1,86 @@
+{
+  "sections": {
+    "1651749686dd046486": {
+      "type": "slideshow",
+      "disabled": true,
+      "blocks": {
+        "1651749686e0b0483f-0": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/7027FE0E-038E-4857-B02F-8BD4EE82127E.jpg",
+            "image_position": "center-center",
+            "alignment": "center",
+            "color_style": "white",
+            "subheading": "",
+            "title": "",
+            "text": "",
+            "cta": "",
+            "link": "",
+            "cta_primary_btn_style": "primary",
+            "cta_2": "",
+            "link_2": "",
+            "cta_secondary_btn_style": "secondary",
+            "overlay_color": "#333333",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "1651749686e0b0483f-0"
+      ],
+      "settings": {
+        "showNavArrows": true,
+        "show_arrow_down": false,
+        "autoplay": true,
+        "duration": 4,
+        "transition": "slide",
+        "dots_position": "center",
+        "slide_height": "four-fifty-height-hero",
+        "button_size": "normal"
+      }
+    },
+    "main": {
+      "type": "collection-template",
+      "settings": {
+        "test": "",
+        "show_title": true,
+        "show_sort_filter": false,
+        "filter_mode": "tag",
+        "position_filters": "left",
+        "show_banner": false,
+        "banner_height": "small",
+        "banner_subheading": "",
+        "banner_text_position": "center",
+        "banner_color_text": "#ffffff",
+        "banner_color_overlay": "#333333",
+        "banner_overlay_opacity": 0,
+        "show_featured_image": false,
+        "featured_heading": "Use this image showcase promotional content.",
+        "featured_text": "<p>Elaborate on it with rich text<\/p>",
+        "featured_button_text": "Learn More",
+        "featured_button_link": "",
+        "featured_button_style": "primary",
+        "featured_color_text": "#ffffff",
+        "featured_color_overlay": "#333333",
+        "featured_overlay_opacity": 30
+      }
+    },
+    "16582409937c2c4e11": {
+      "type": "rich-text",
+      "settings": {
+        "layout": "default",
+        "subheading": "Wool addicts",
+        "title": "Knallig, Modern, WOOL ADDICTS",
+        "content": "<p><strong>Lang Yarns Wool Addicts<\/strong><\/p><p> <\/p><p>Ob Pullover oder Socken, zum Stricken ist die hochwertige<br\/>Wolle von Wool Addicts zu empfehlen. Sie zeichnet sich durch eine exzellente<br\/>Material- und Fertigungsqualität aus. Die Wolle vermittelt einen jungen und<br\/>modischen Eindruck und ist in zahlreichen Trendfarben erhältlich. Darüber<br\/>hinaus sind Wolle und Garn von Wool Addicts museling free und werden nachhaltig<br\/>produziert. Hier im Shop von OONIQUE findest du die Wolle und Garne von Wool<br\/>Addicts in vielen verschiedenen Formen und Farben. Im Folgenden erfährst du<br\/>mehr über Lang Yarns Wool Addicts und andere Produkte des Herstellers.<\/p><p> <\/p><p><strong>Hochwertige<br\/>Wolle und Garne mit Strickanleitung<\/strong><\/p><p> <\/p><p>Mit den Lang Yarns Wool Addicts erhältst du hier im<br\/>Shop passende Strickanleitungen, die Ihnen zeigen, was man aus den Lang Yarns<br\/>Garnen so alles machen kann. Die ausgedruckten Strickanleitungen bieten viele<br\/>fantasievolle Ideen für Kleidungsstücke und Heimtextilien. Für jedes Vorhaben<br\/>findest du hier im Shop die perfekt geeigneten Garne, wie Lang Yarns, Water<br\/>Wool Addicts, Honor Wool Addicts und Earth Wool Addicts. Profitiere von einer<br\/>hochwertigen und strapazierfähigen Materialqualität. Darüber hinaus hast du<br\/>hier im Shop von OONIQUE eine breite Farbauswahl:<\/p><p> <\/p><p>WeißGrauSchwarzBlauRotWeinrotOrangeGrünBraun<\/p><p><strong>Nachhaltig<br\/>produzierte Wolle und Garne von Wool Addicts<\/strong><\/p><p> <\/p><p>Die Wolle und Garne von Wool Addicts werden umwelt-<br\/>und klimaschonend hergestellt. Sie werden ohne Tierleid gewonnen und erhalten<br\/>durch eine präzise Verarbeitung ihre Robustheit und Strapazierfähigkeit. Dabei<br\/>wird auf einen hohen Anteil natürlicher Fasern geachtet, während nur wenige<br\/>synthetische Fasern beigemischt werden. Die Wolle und Garne können einfach und<br\/>flexibel verarbeitet werden.<\/p><p> <\/p><p><strong>Vielfältige<br\/>Wolle und Garne im passenden Knäuel<\/strong><\/p><p> <\/p><p>OONIQUE führt hochwertige Garne und Wolle in<br\/>verschiedenen Nadelstärken. Jedes Knäuel hat die Standardlänge von 140 Metern<br\/>bei einer Maschenprobe von 17 mal 24. Pro Pullover in der Größe zwischen 38 und<br\/>40 liegt der Verbrauch bei durchschnittlich 300 Gramm. Das Gewicht eines<br\/>Knäuels beträgt 50 Gramm. Besonders gefragt ist die natürliche und robuste<br\/>Wolle von Wool Addicts, die zu 100 Prozent vom Alpaka gewonnen wird.<\/p><p> <\/p><p><strong>Hochwertige<br\/>Garne und Wolle günstig kaufen<\/strong><\/p><p> <\/p><p>Nutze jetzt die zahlreichen Vorteile von OONIQUE. In<br\/>unserem Shop findest du ein breites Angebot an hochwertiger Wolle und<br\/>erstklassigen Garnen in vielen verschiedenen Trendfarben. Lasse dich von den<br\/>Strickanleitungen inspirieren, und sichere dir sich hochwertige Wolle zu<br\/>günstigen Preisen. Für jedes Projekt findest du darüber hinaus die passenden<br\/>Stricknadeln. OONIQUE garantiert eine plastikfrei Verpackung und eine schnelle<br\/>Lieferung.<\/p><p> <\/p>",
+        "button_text": "",
+        "button_link": "",
+        "button_style": "primary"
+      }
+    }
+  },
+  "order": [
+    "1651749686dd046486",
+    "main",
+    "16582409937c2c4e11"
+  ]
+}

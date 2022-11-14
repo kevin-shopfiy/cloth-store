@@ -1,0 +1,432 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-template",
+      "disabled": true,
+      "settings": {
+        "show_page_title": false
+      }
+    },
+    "1654000156c40a36da": {
+      "type": "slideshow",
+      "blocks": {
+        "16540001566707cfc8-1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/220602_banner_web_OO.jpg",
+            "image_mobile": "shopify:\/\/shop_images\/220602_banner_mobile_OO.jpg",
+            "image_position": "center-center",
+            "alignment": "center",
+            "color_style": "white",
+            "subheading": "",
+            "title": "",
+            "text": "",
+            "cta": "",
+            "link": "",
+            "cta_primary_btn_style": "primary",
+            "cta_2": "",
+            "link_2": "",
+            "cta_secondary_btn_style": "secondary",
+            "overlay_color": "#333333",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "16540001566707cfc8-1"
+      ],
+      "settings": {
+        "showNavArrows": true,
+        "show_arrow_down": false,
+        "autoplay": true,
+        "duration": 4,
+        "transition": "slide",
+        "dots_position": "center",
+        "slide_height": "original-height",
+        "button_size": "normal"
+      }
+    },
+    "1654001568bc7f186a": {
+      "type": "rich-text",
+      "settings": {
+        "layout": "default",
+        "subheading": "WE ARE OONIQUE",
+        "title": "DAS TEAM",
+        "content": "",
+        "button_text": "",
+        "button_link": "",
+        "button_style": "primary"
+      }
+    },
+    "165400054671e048d6": {
+      "type": "testimonials",
+      "blocks": {
+        "1654000546e0f6a7c3-0": {
+          "type": "testimonial",
+          "settings": {
+            "blockquote": "Mit OONIQUE kannst du etwas erschaffen, dass es nur einmal gibt. So einzigartig, wie jeder\/jede von uns.\nDafür haben wir die schönsten Designs und Kollektionen zusammengestellt. So finden alle die richtige Inspiration für ihre Leidenschaft.",
+            "author": "Boris - Geschäftsführer von OONIQUE"
+          }
+        },
+        "1654000546e0f6a7c3-1": {
+          "type": "testimonial",
+          "settings": {
+            "blockquote": "Für mich macht OONIQUE nicht nur das Produkt an sich aus, sondern einfach auch unsere tolle Community und die Kund*innen mit denen ich Tag täglich in Kontakt stehe. Dabei steht die gemeinsame Leidenschaft fürs Stricken ganz klar im Vordergrund.",
+            "author": "Christine - Head of Customer Service bei OONIQUE"
+          }
+        },
+        "1654000546e0f6a7c3-2": {
+          "type": "testimonial",
+          "settings": {
+            "blockquote": "Stricken ist das entspannendste und gleichzeitig nachhaltigste Hobby das ich kenne. Diese Kombination ist einfach toll! \nGenau deshalb ist es uns so wichtig unsere Partner*innen für die benötigten Materialien sehr sorgfältig auszuwählen, damit wir hochwertige und ethische Produkte für ein einzigartiges Hobby anbieten können.",
+            "author": "Johanna - E-Commerce Managerin bei OONIQUE"
+          }
+        }
+      },
+      "block_order": [
+        "1654000546e0f6a7c3-0",
+        "1654000546e0f6a7c3-1",
+        "1654000546e0f6a7c3-2"
+      ],
+      "settings": {
+        "title": "",
+        "title_position": "left",
+        "blocks_text_align": "justify",
+        "hide_quotes": false,
+        "columns": 3
+      }
+    },
+    "16540037099a01c30c": {
+      "type": "image-with-text",
+      "blocks": {
+        "16540037093e12c186-0": {
+          "type": "gallery_image",
+          "settings": {
+            "slide": "shopify:\/\/shop_images\/Kopie_von_HELLO_SUMMER_29_x_12_cm_29_x_20_cm_Praesentation_169_7.png"
+          }
+        },
+        "16540037093e12c186-1": {
+          "type": "gallery_image",
+          "disabled": true,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "16540037093e12c186-0",
+        "16540037093e12c186-1"
+      ],
+      "settings": {
+        "show_nav_arrows": true,
+        "color_style": "white",
+        "transition": "fade",
+        "autoplay": true,
+        "duration": 4,
+        "show_margins": false,
+        "slide_height": "four-fifty-height-hero",
+        "slide_image_position": "left",
+        "slide_image_width": "med_s12|med_s12",
+        "subheading": "Head of Customer Service",
+        "title": "Christine",
+        "content": "<p>Steht unseren Kund*innen mit Rat und Tat zur Seite<br\/>Zudem ist sie als @crisalino auf Instagram aktiv und präsentiert dort tolle Projekte<\/p><p><\/p><p><strong>Strickniveau:<\/strong> Strick-Maniac<\/p>",
+        "cta": "",
+        "link": "",
+        "button_style": "primary"
+      }
+    },
+    "1654003748a6109f40": {
+      "type": "image-with-text",
+      "blocks": {
+        "165400374858327883-0": {
+          "type": "gallery_image",
+          "settings": {
+            "slide": "shopify:\/\/shop_images\/Kopie_von_HELLO_SUMMER_29_x_12_cm_29_x_20_cm_Praesentation_169_9.png"
+          }
+        },
+        "165400374858327883-1": {
+          "type": "gallery_image",
+          "disabled": true,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "165400374858327883-0",
+        "165400374858327883-1"
+      ],
+      "settings": {
+        "show_nav_arrows": true,
+        "color_style": "white",
+        "transition": "fade",
+        "autoplay": true,
+        "duration": 4,
+        "show_margins": false,
+        "slide_height": "four-fifty-height-hero",
+        "slide_image_position": "right",
+        "slide_image_width": "med_s12|med_s12",
+        "subheading": "Geschäftsführer",
+        "title": "Boris",
+        "content": "<p>Der Hahn im Korb und für alle Angelegenheiten im Hintergrund zuständig. Stattet gern seine 3 Kinder mit Selbstgestricktem aus<\/p><p><br\/><strong>Strickniveau:<\/strong> Blutiger Anfänger<\/p>",
+        "cta": "",
+        "link": "",
+        "button_style": "primary"
+      }
+    },
+    "1654004113d67a0699": {
+      "type": "image-with-text",
+      "blocks": {
+        "16540041132ac9e38a-0": {
+          "type": "gallery_image",
+          "settings": {
+            "slide": "shopify:\/\/shop_images\/Kopie_von_HELLO_SUMMER_29_x_12_cm_29_x_20_cm_Praesentation_169_8.png"
+          }
+        },
+        "16540041132ac9e38a-1": {
+          "type": "gallery_image",
+          "disabled": true,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "16540041132ac9e38a-0",
+        "16540041132ac9e38a-1"
+      ],
+      "settings": {
+        "show_nav_arrows": true,
+        "color_style": "white",
+        "transition": "fade",
+        "autoplay": true,
+        "duration": 4,
+        "show_margins": false,
+        "slide_height": "four-fifty-height-hero",
+        "slide_image_position": "left",
+        "slide_image_width": "med_s12|med_s12",
+        "subheading": "E-Commerce Managerin",
+        "title": "Johanna",
+        "content": "<p>Zuständig für Alles rund um das Produkt: Einkauf, Kuration der Produkte und Präsentation auf Social Media<br\/><strong><br\/>Strickniveau: <\/strong>Fertig wird's immer<\/p>",
+        "cta": "",
+        "link": "",
+        "button_style": "primary"
+      }
+    },
+    "1654004552122fa3be": {
+      "type": "image-with-text",
+      "blocks": {
+        "16540045514ca2c766-0": {
+          "type": "gallery_image",
+          "settings": {
+            "slide": "shopify:\/\/shop_images\/Kopie_von_HELLO_SUMMER_29_x_12_cm_29_x_20_cm_Praesentation_169_10.png"
+          }
+        },
+        "16540045514ca2c766-1": {
+          "type": "gallery_image",
+          "disabled": true,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "16540045514ca2c766-0",
+        "16540045514ca2c766-1"
+      ],
+      "settings": {
+        "show_nav_arrows": true,
+        "color_style": "white",
+        "transition": "fade",
+        "autoplay": true,
+        "duration": 4,
+        "show_margins": false,
+        "slide_height": "four-fifty-height-hero",
+        "slide_image_position": "right",
+        "slide_image_width": "med_s12|med_s12",
+        "subheading": "SOCIAL MEDIA",
+        "title": "Anika",
+        "content": "<p>Hat alle Social Media Kanäle im Griff und ist außerdem als @annidestages aktiv auf Instagram<br\/><br\/><strong>Strickniveau:<\/strong>  absoluter Profi<\/p>",
+        "cta": "",
+        "link": "",
+        "button_style": "primary"
+      }
+    },
+    "1654073458bafdd20c": {
+      "type": "image-with-text",
+      "blocks": {
+        "1654073458a2030fb2-0": {
+          "type": "gallery_image",
+          "settings": {
+            "slide": "shopify:\/\/shop_images\/Kopie_von_HELLO_SUMMER_29_x_12_cm_29_x_20_cm_Praesentation_169_6.png"
+          }
+        },
+        "1654073458a2030fb2-1": {
+          "type": "gallery_image",
+          "disabled": true,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "1654073458a2030fb2-0",
+        "1654073458a2030fb2-1"
+      ],
+      "settings": {
+        "show_nav_arrows": true,
+        "color_style": "white",
+        "transition": "fade",
+        "autoplay": true,
+        "duration": 4,
+        "show_margins": false,
+        "slide_height": "five-fifty-height-hero",
+        "slide_image_position": "left",
+        "slide_image_width": "med_s12|med_s12",
+        "subheading": "PRODUCT MANAGERIN",
+        "title": "Consuelo",
+        "content": "<p>Als gute Seele im Hintergrund inspiriert sie mit ihren kreativen Ideen und sorgt dafür, dass alle Produkte vollständig und sauber erhältlich sind<\/p><p><\/p><p><strong>Strickniveau:<\/strong> Noch ganz am Anfang aber auf dem Weg in den Strick-Olymp<\/p>",
+        "cta": "",
+        "link": "",
+        "button_style": "primary"
+      }
+    },
+    "16571166491c97cfda": {
+      "type": "image-with-text",
+      "blocks": {
+        "16571166496456b663-0": {
+          "type": "gallery_image",
+          "settings": {
+            "slide": "shopify:\/\/shop_images\/Kopie_von_HELLO_SUMMER_29_x_12_cm_29_x_20_cm_Praesentation_169_11.png"
+          }
+        },
+        "16571166496456b663-1": {
+          "type": "gallery_image",
+          "disabled": true,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "16571166496456b663-0",
+        "16571166496456b663-1"
+      ],
+      "settings": {
+        "show_nav_arrows": true,
+        "color_style": "white",
+        "transition": "fade",
+        "autoplay": true,
+        "duration": 4,
+        "show_margins": false,
+        "slide_height": "five-fifty-height-hero",
+        "slide_image_position": "right",
+        "slide_image_width": "med_s12|med_s12",
+        "subheading": "SOCIAL MEDIA",
+        "title": "Kathi",
+        "content": "<p>Bringt ihren kreativen Geist in unsere Social Media Welt ein und sorgt für schönen Content auf Instagram & TikTok<br\/><br\/><strong>Strickniveau: <\/strong>Schnellste Stricknadel Österreichs<\/p>",
+        "cta": "",
+        "link": "",
+        "button_style": "primary"
+      }
+    },
+    "16540002542a1af012": {
+      "type": "image-with-text",
+      "blocks": {
+        "16540002545e2643b6-0": {
+          "type": "gallery_image",
+          "settings": {
+            "slide": "shopify:\/\/shop_images\/HELLO_SUMMER_29_x_12_cm_2048_x_1152_px_1.png"
+          }
+        },
+        "16540002545e2643b6-1": {
+          "type": "gallery_image",
+          "disabled": true,
+          "settings": {
+            "slide": "shopify:\/\/shop_images\/947A5DC3-A975-447B-887A-2A0FE2CC1007-5651-0000015B689CF107.jpg"
+          }
+        },
+        "62014164-6b43-484a-86b9-c9dd788b5ddf": {
+          "type": "gallery_image",
+          "disabled": true,
+          "settings": {
+            "slide": "shopify:\/\/shop_images\/7027FE0E-038E-4857-B02F-8BD4EE82127E.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "16540002545e2643b6-0",
+        "16540002545e2643b6-1",
+        "62014164-6b43-484a-86b9-c9dd788b5ddf"
+      ],
+      "settings": {
+        "show_nav_arrows": true,
+        "color_style": "white",
+        "transition": "fade",
+        "autoplay": true,
+        "duration": 4,
+        "show_margins": false,
+        "slide_height": "sixty-fifty-height-hero",
+        "slide_image_position": "left",
+        "slide_image_width": "med_s12|med_s12",
+        "subheading": "We love what we do",
+        "title": "Von der Leidenschaft zur Idee",
+        "content": "<p>Wir lieben Stricken- vor allem das Stricken von tollen Designs<\/p><p><br\/>Das Problem? <\/p><p>Das mühselige Zusammen-Suchen von passendem Garn und dann noch die die falsche Nadelstärke zur Hand. <br\/><br\/>Ein Problem das wir lösen wollten<br\/>Deshalb haben wir begonnen ausgewählte Garne und Designs zusammenzustellen und zu kuratieren <\/p><p><\/p><p>Das Ergebnis: OONIQUE<\/p>",
+        "cta": "",
+        "link": "",
+        "button_style": "primary"
+      }
+    },
+    "1654006742b71de83b": {
+      "type": "mosaic",
+      "blocks": {
+        "1654006742bbaf96e5-0": {
+          "type": "text",
+          "settings": {
+            "title": "Entdecke unsere Stricksets",
+            "subheading": "Let's start being OONIQUE",
+            "text": "",
+            "button_label": "Zu den Sets",
+            "button_link": "https:\/\/oonique.com\/collections\/alle-stricksets",
+            "button_style": "primary"
+          }
+        },
+        "1654006742bbaf96e5-1": {
+          "type": "product",
+          "settings": {
+            "product": "kleiner-vorne-gekreuzter-pullover-stickset",
+            "overlay_color": "#333333",
+            "overlay_opacity": 0
+          }
+        },
+        "1654006742bbaf96e5-2": {
+          "type": "product",
+          "settings": {
+            "product": "raglanjacke-mit-aufgesetzten-taschen-silkhair-strickset",
+            "overlay_color": "#333333",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "1654006742bbaf96e5-0",
+        "1654006742bbaf96e5-1",
+        "1654006742bbaf96e5-2"
+      ],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/hw2021-about-berlin-10-m05-lana-grossa_01_2.jpg",
+        "image_position": "right",
+        "hide_image_mobile": false,
+        "overlay_color": "#333333",
+        "overlay_opacity": 0,
+        "image_text": "",
+        "image_link": "",
+        "blocks_height": "default-height",
+        "blocks_layout": "offset",
+        "text_color": "white"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "1654000156c40a36da",
+    "1654001568bc7f186a",
+    "165400054671e048d6",
+    "16540037099a01c30c",
+    "1654003748a6109f40",
+    "1654004113d67a0699",
+    "1654004552122fa3be",
+    "1654073458bafdd20c",
+    "16571166491c97cfda",
+    "16540002542a1af012",
+    "1654006742b71de83b"
+  ]
+}

@@ -1,0 +1,68 @@
+{%- comment -%} FAQ section {%- endcomment -%}
+
+<div data-section-id="{{ section.id }}" data-section-type="faq-section">
+	{%- render 'faq' -%}
+</div>
+
+{% schema %}
+{
+	"name": "FAQ",
+	"class": "shopify-section--faq",
+	"settings": [
+		{
+			"type": "text",
+			"id": "title",
+			"label": "Heading",
+			"default": "FAQ"
+		},
+		{
+			"type": "text",
+			"id": "subheading",
+			"label": "Subheading",
+			"default": "Questions and Answers"
+		},
+		{
+			"type": "header",
+			"content": "FAQ tabs",
+			"info": "Tabs are required for FAQ page template. You can add them as blocks in order to edit or reorder."
+		}
+	],
+	"blocks": [
+		{
+			"name": "Item",
+			"type": "item",
+			"settings": [
+				{
+					"type": "text",
+					"id": "title",
+					"label": "Question",
+					"default": "Question"
+				},
+				{
+					"type": "richtext",
+					"id": "answer",
+					"label": "Answer",
+					"default": "<p>Use this answer block to discuss some commonly asked questions you've discovered from your customers interactions. You could discuss product details, size fit, shipping policies, or anything you think would help merchants make an informed decision about your product or collection. This section will appear across all products.</p>"
+				}
+			]
+		}
+	],
+	"presets": [
+		{
+			"category": "Text",
+			"name": "FAQ",
+			"blocks": [
+				{
+					"type": "item"
+				},
+				{
+					"type": "item"
+				},
+				{
+					"type": "item"
+				}
+			]
+		}
+	]
+}
+{% endschema %}

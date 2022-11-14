@@ -1,0 +1,106 @@
+{%- assign globo_search = true -%}
+{%- assign home_filter = false -%}
+{%- assign has_form = false -%}
+{%- if request.page_type != 'index' -%}{%- assign home_filter = false -%}{%- endif -%}
+{%- if globo_search or request.page_type == 'collection' or request.page_type == 'search' or home_filter -%}
+{%- assign assets_url = 'product-1.png' | asset_img_url: '50x' | split: 'product-1_50x.png' -%}
+{%- assign files_url  = 'product-1.png' | file_img_url: '50x' | split: 'product-1_50x.png' -%}
+{%- assign primary_locale = 'null' -%}
+{%- for locale in shop.published_locales -%}{%- if locale.primary -%}{%- assign primary_locale = locale.iso_code | json -%}{%- endif -%}{%- endfor -%}
+<style>.spf-filter-loading #gf-products > *:not(.spf-product--skeleton){visibility: hidden; opacity: 0}</style>
+<script>
+  document.getElementsByTagName('html')[0].classList.add('spf-filter-loading');
+  window.addEventListener("globoFilterRenderCompleted",function(e){document.getElementsByTagName('html')[0].classList.remove('spf-filter-loading')})
+  window.sortByRelevance = false;
+  window.moneyFormat = "{{ shop.money_format | replace: '"', "'" }}";
+  window.GloboMoneyFormat = "{{ shop.money_format | replace: '"', "'" }}";
+  window.GloboMoneyWithCurrencyFormat = "{{ shop.money_with_currency_format | replace: '"', "'" }}";
+  window.filterPriceRate = 1;
+  window.filterPriceAdjustment = 1;
+
+  window.shopCurrency = {{shop.currency | json}};
+  window.currentCurrency = {{cart.currency.iso_code | json}};
+
+  window.isMultiCurrency = {% assign enabled_currencies_size = shop.enabled_currencies | size %}{% if enabled_currencies_size > 1 and false %}true{% else %}false{% endif %};
+  window.assetsUrl = '{{ assets_url[0] }}';
+  window.filesUrl = '{{ files_url[0] }}';
+  var page_id = {% if request.page_type contains 'collection' %}{% if collection.id %}{{collection.id | default: 1}}{% else %}1{% endif %}{% elsif request.page_type contains 'search' %}2{% else %}0{% endif %};
+  var GloboFilterConfig = {
+    api: {
+      filterUrl: "https://filter-v6.globosoftware.net/filter",
+      searchUrl: "https://filter-v6.globosoftware.net/search",
+      url: "https://filter-v6.globosoftware.net",
+    },
+    shop: {
+      name: "{{ shop.name | escape }}",
+      url: "{{ shop.url }}",
+      domain: "{{ shop.permanent_domain }}",
+      is_multicurrency: {% assign is_multicurrency = shop.enabled_currencies | size %}{% if is_multicurrency > 1 and false and false %}true{% else %}false{% endif %},
+      currency: {{shop.currency | json}},
+      cur_currency: {{cart.currency.iso_code | json}},
+      cur_locale: {{request.locale.iso_code | json}},
+      locale: {{primary_locale}},
+      root_url: "{%- if routes.root_url != "/" -%}{{ routes.root_url }}{%- endif -%}",
+      country_code: {{shop.address.country_code | json}},
+      product_image: {width: 360, height: 504},
+      no_image_url: "https://cdn.shopify.com/s/images/themes/product-1.png",
+      themeStoreId: 849,
+      swatches:  {{ shop.metafields.globo.swatches | json }},
+      newUrlStruct: false,
+      translation: {"default":{"search":{"suggestions":"H\u00e4ufig gesucht","collections":"Kollektionen","pages":"Pages","product":"Produkt","products":"Produkte","view_all":"Suchen nach","view_all_products":"Alle Produkte anzeigen","not_found":"Sorry, leider keine Suchergebnisse","product_not_found":"Keine Produkte gefunden","no_result_keywords_suggestions_title":"H\u00e4ufige Suchen","no_result_products_suggestions_title":"Dir k\u00f6nnte Folgendes gefallen","zero_character_keywords_suggestions_title":"Vorschl\u00e4ge","zero_character_popular_searches_title":"Beliebte Suchen","zero_character_products_suggestions_title":"Trending products"},"form":{"title":"Search Products","submit":"Search"},"filter":{"filter_by":"Filtern","clear_all":"Filter zur\u00fccksetzen","view":"View","clear":"Zur\u00fccksetzen","in_stock":"Verf\u00fcgbar","out_of_stock":"Ausverkauft","ready_to_ship":"Ready to ship","search":"Suchoptionen"},"sort":{"sort_by":"Sortieren","manually":"Featured","availability_in_stock_first":"Verf\u00fcgbarkeit","relevance":"Relevanz","best_selling":"Bestseller","alphabetically_a_z":"A-Z","alphabetically_z_a":"Z-A","price_low_to_high":"Preis (aufsteigend)","price_high_to_low":"Preis (absteigend)","date_new_to_old":"Neues bis Altes","date_old_to_new":"Date, old to new","sale_off":"% Sale off"},"product":{"add_to_cart":"Add to cart","unavailable":"Unavailable","sold_out":"Sold out","sale":"Sale","load_more":"Load more","limit":"Show","search":"Search products","no_results":"Sorry, there are no products in this collection"},"labels":{"408140":"Preisspanne","408261":"Strickniveau","408262":"Gr\u00f6\u00dfe","408266":"Farbe","408271":"Garne","408279":"Technik","408280":"Material","408281":"Marke","408282":"Altersempfehlung","408283":"Nadelst\u00e4rke","408284":"Laufl\u00e4nge","408285":"Seill\u00e4nge","408286":"Strickmagazin"}},"de":{"search":{"suggestions":"H\u00e4ufig gesucht","collections":"Kollektionen","pages":"Seiten","product":"Produkt","products":"Produkte","view_all":"Suchen nach","view_all_products":"Alle Produkte anzeigen","not_found":"Sorry, leider keine Suchergebnisse","product_not_found":"Keine Produkte gefunden","no_result_keywords_suggestions_title":"H\u00e4ufige Suchen","no_result_products_suggestions_title":"Dir k\u00f6nnte Folgendes gefallen","zero_character_keywords_suggestions_title":"Vorschl\u00e4ge","zero_character_popular_searches_title":"Beliebte Suchen","zero_character_products_suggestions_title":"Trending products"},"form":{"title":"Search Products","submit":"Search"},"filter":{"filter_by":"Filtern","clear_all":"Filter zur\u00fccksetzen","view":"View","clear":"Zur\u00fccksetzen","in_stock":"Verf\u00fcgbar","out_of_stock":"Ausverkauft","ready_to_ship":"Ready to ship","search":"Suchoptionen"},"sort":{"sort_by":"Sortieren","manually":"Featured","availability_in_stock_first":"Verf\u00fcgbarkeit","relevance":"Relevanz","best_selling":"Bestseller","alphabetically_a_z":"A-Z","alphabetically_z_a":"Z-A","price_low_to_high":"Preis (aufsteigend)","price_high_to_low":"Preis (absteigend)","date_new_to_old":"Neuheiten","date_old_to_new":"Date, old to new","sale_off":"% Sale off"},"product":{"add_to_cart":"Add to cart","unavailable":"Unavailable","sold_out":"Sold out","sale":"Sale","load_more":"Load more","limit":"Show","search":"Search products","no_results":"Sorry, there are no products in this collection"},"labels":{"408140":"Preisspanne","408261":"Strickniveau","408262":"Gr\u00f6\u00dfe","408266":"Farbe","408271":"Garne","408279":"Technik","408280":"Material","408281":"Marke","408282":"Altersempfehlung","408283":"Nadelst\u00e4rke","408284":"Laufl\u00e4nge","408285":"Seill\u00e4nge","408286":"Strickmagazin"}}},
+      redirects: {{ shop.metafields.globo.redirects | json }},
+      images: ["1-loden.jpg","32-camel.jpg","beige.jpg","blau.jpg","braun.jpg","dsc0417.jpg","farbe-schwarz.jpg","gelb.jpg","grau.jpg","grun.jpg","hw2020-unternehmensphilosophie-lana-grossa.jpg","lila.jpg","mehrfarbig.jpg","no-image-for-this-collection.png","oliv.jpg","OONIQUE_gutschein.png","orange.jpg","password.jpg","pink.jpg","promonatale.jpg","rot.jpg","rot.png","weiss.jpg"],
+      settings: {{ settings | json }},
+      home_filter: {{home_filter}},
+      page: {{request.page_type | json}},
+      layout: "theme"
+    },
+    taxes: null,
+    special_countries: null,
+    adjustments: null,
+
+    year_make_model: {
+      id: null
+    },
+    filter: {
+      id: {"default":39383,"274418106541":39868,"269086261421":39929}[page_id] || {"default":39383,"274418106541":39868,"269086261421":39929}['default'] || 0,
+      layout: 2,
+      showCount: 0,
+      isLoadMore: 0,
+      filter_on_search_page: true
+    },
+    search:{
+      enable: {{globo_search}},
+      zero_character_suggestion: false,
+      layout: 3,
+    },
+    collection: {
+      id: {%- if request.page_type == 'collection' -%}{{ collection.id | default: 0 }}{%- else -%}0{%- endif -%},
+      handle: {%- if request.page_type == 'collection' -%}'{{ collection.handle }}'{%- else -%}''{%- endif -%},
+      sort: {% if request.page_type contains 'search' %}'relevance'{% else %}'created-descending'{% endif %},
+      tags: {% if current_tags %}[{% for tag in current_tags %}{{ tag | json }},{{ tag | handle | json }}{% unless forloop.last %},{% endunless %}{% endfor %}]{% else %}null{% endif %},
+      vendor: {{ collection.current_vendor | json }},
+      type: {{ collection.current_type | json }},
+      term: {{ search.terms | escape | json }},
+      limit: 32,
+      products_count: {{collection.products_count | default: 0}},
+      excludeTags: null
+    },
+    customer: {% if customer %}{id: {{customer.id}}, tags: {{customer.tags | json}}}{% else %}false{% endif %},
+    selector: {
+      sortBy: '.collection-sorting',
+      pagination: '.pagination:first, .paginate:first, .pagination-custom:first, #pagination:first, #gf_pagination_wrap',
+      products: '.grid.grid-collage'
+    }
+  };
+
+</script>
+<script defer src="{{ 'v5.globo.filter.lib.js' | asset_url }}"></script>
+{% if request.page_type == 'collection' or request.page_type == 'search' or home_filter or has_form %}<link rel="preload stylesheet" href="{{ 'v5.globo.filter.css' | asset_url }}" as="style">
+{% endif %}
+{% if globo_search %}<link rel="preload stylesheet" href="{{ 'v5.globo.search.css' | asset_url }}" as="style">
+{% endif %}
+{% endif %}
+
+
+

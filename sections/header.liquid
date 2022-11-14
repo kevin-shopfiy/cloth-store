@@ -1,0 +1,355 @@
+{% comment %} Settings {% endcomment %}
+{%- assign logo_position = section.settings.logo_position -%}
+{%- assign links_position = section.settings.links_position -%}
+{%- assign logo_width = section.settings.logo_max_width | append: 'px' -%}
+{%- assign logo = section.settings.logo -%}
+{%- assign logo_other = section.settings.logo_other -%}
+{%- assign shop_name = shop.name | escape -%}
+{%- assign show_shop_name = section.settings.show_site_name -%}
+
+{%- assign transparent_header = false -%}
+{%- if settings.color_header_bg_home == 'rgba(0,0,0,0)' -%}
+	{%- assign transparent_header = true -%}
+{%- endif -%}
+
+<style>
+  .logo__image-link { max-width: {{ logo_width }}; }
+  @media screen and (max-width: 549px) {
+	  .logo__image-link { width: {{ logo_width }}; max-width: 100%; }
+  }
+</style>
+ 
+{%- comment -%} Check if there is only one logo set and show it always {%- endcomment -%}
+{%- assign single_logo = false -%}
+{%- if logo and logo_other == blank -%}
+	{%- assign single_logo = true -%}
+{%- elsif logo == blank and logo_other -%}
+	{%- assign single_logo = true -%}
+{%- endif -%}
+
+{%- capture logo_not_home -%}
+	{%- assign image = logo_other -%}
+	{%- if image != blank -%}
+		{%- assign image_url_pattern = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+		{%- assign image_widths = "[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048, 2450, 2700, 3000, 3350, 3750, 4100]" -%}
+
+		<img
+			class="logo__image logo__image--other{% if single_logo %} logo__image--single{% endif %} lazyload"
+			src="{{ 'blank.gif' | asset_img_url: '1x1' }}"
+			data-src="{{ image_url_pattern }}"
+			data-widths= "{{ image_widths }}"
+			data-aspectratio="{{ image.aspect_ratio }}"
+			data-sizes="auto"
+			loading="lazy"
+			width="{{ logo_width }}"
+			height="{{ logo_width | divided_by: image.aspect_ratio }}"
+			alt="{{ image.alt | escape }}">
+		<noscript>
+			<img data-swift-lazy="1" loading="lazy" src="{{ image | img_url: '500x' }}" class="logo__image" alt="{{ image.alt | escape }}">
+		</noscript>
+	{%- endif -%}
+{%- endcapture -%} 
+
+{%- capture logo_home -%}
+	{%- assign image = logo -%}
+	{%- if image != blank -%}
+		{%- assign image_url_pattern = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+		{%- assign image_widths = "[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048, 2450, 2700, 3000, 3350, 3750, 4100]" -%}
+
+		<img
+			class="logo__image logo__image--home{% if single_logo %} logo__image--single{% endif %} lazyload"
+			src="{{ 'blank.gif' | asset_img_url: '1x1' }}"
+			data-src="{{ image_url_pattern }}"
+			data-widths= "{{ image_widths }}"
+			data-aspectratio="{{ image.aspect_ratio }}"
+			data-sizes="auto"
+			loading="lazy"
+			width="{{ logo_width }}"
+			height="{{ logo_width | divided_by: image.aspect_ratio }}"
+			alt="{{ image.alt | escape }}">
+		<noscript>
+			<img data-swift-lazy="1" loading="lazy" src="{{ image | img_url: '500x' }}" class="logo__image" alt="{{ image.alt | escape }}">
+		</noscript>
+	{%- endif -%}
+{%- endcapture -%}
+
+{%- capture headerClass -%}site-header header--no-bg header--is-standard  header--{{ logo_position }}_{{ links_position }} header--standard {% unless logo or logo_other or show_shop_name %}header--no-logo{% endunless %}{%- endcapture -%}
+
+<header class="{{ headerClass }}" data-section-type="header" id="header" data-transparent="{{ transparent_header }}" data-scroll-lock-fill-gap>
+	<div class="container">
+		<div class="row">
+          <div class="header_top">
+			{%- if logo or logo_other or show_shop_name -%}
+				<h1 class="col-6 nav-item logo logo-sm {% unless logo or logo_other %}logo--text-only{% endunless %}">
+					{%- if logo or logo_other -%}
+						<a href="{{ routes.root_url }}" class="logo__image-link visible-nav-link" data-width="{{ section.settings.logo_max_width }}" aria-label="{{ shop_name }}">
+							{%- if logo -%}
+								{{- logo_home -}}
+							{%- endif -%}
+
+							{%- if logo_other -%}
+								{{- logo_not_home -}}
+							{%- endif -%}
+						</a>
+					{%- endif -%}
+
+					{%- if show_shop_name -%}
+						<a id="shopName" class="logo__text" href="{{ routes.root_url }}">{{ shop_name }}</a>
+					{%- endif -%}
+				</h1>
+			{%- endif -%}
+
+			{%- render 'nav-search-sm' -%}
+
+          <div class="header-icons header-icons-sm">
+
+            <div class="custom_search">
+              <form action="{{ routes.search_url }}" method="get" class="search-form" role="search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" maxlength="250">
+                <div class="inputGroup">
+                  <input type="search" name="q" class="nav-search-input" tabindex="-1" id="search-field" placeholder="{{ 'general.slide_out_navigation.search_placeholder' | t }}" value="" />
+                  <input type="hidden" name="type" value="{{ settings.search_type }}" />
+                  <input type="hidden" name="options[prefix]" class="nav-search-options" value="last" />
+                  <label for="search-field" class="icon-search">
+                    {%- render 'icon-search' -%}
+                    <span class="accessible-label">{{ 'general.slide_out_navigation.search_label' | t }}</span>
+                  </label>
+                </div> 
+              </form>
+            </div>
+
+            <a href="#menu" class="js-menuToggle menuToggle menuToggle-sm" data-target="nav" aria-expanded="false" aria-label="{{ 'general.accessibility.menu_toggle' | t }}">
+              <div id="hamburger-menu" class="icon-menu">
+                <div class="diamond-bar"></div>
+                <div id="hamburger-bar" class="icon-bar"></div>
+              </div>
+            </a>
+            {% render 'wishlisthero-header-icon.liquid' %}
+            {%- if shop.customer_accounts_enabled -%}
+            <a href="{{ routes.account_url }}" class="nav-item nav-item-fixed nav-account-link{% unless settings.show_search %} nav-account-link--no-search{% endunless %}" aria-label="{{ 'general.accessibility.account' | t }}">
+              {%- render 'icon-user' -%}
+            </a>
+            {%- endif -%}
+            {% comment %}
+            {%- if settings.show_search -%}
+            <a href="#" class="hide nav-item searchToggle js-searchToggle js-searchToggle--open" data-search-nav=".nav-standard" aria-expanded="false" aria-label="{{ 'general.accessibility.search' | t }}">
+              {%- render 'icon-search' -%}
+            </a>
+            {%- endif -%}
+            {% endcomment %}
+            <a id="cartTotal" href="{{ routes.cart_url }}" aria-label="{{ 'cart.labels.items_added' | t }}" class="nav-item nav-item-fixed js-cartToggle cartToggle{% if cart.item_count == 0 %} cartToggle--empty{% endif %}" aria-expanded="false" aria-label="{{ 'general.accessibility.cart' | t }}">
+              {%- if settings.cart_icon == 'cart' -%}
+              {%- render 'icon-cart' -%}
+              <div id="cartProductCount" class="cartToggle-items cartToggle-items-value"></div>
+              {%- else -%}
+              {%- render 'icon-circle' -%}
+              <div id="CartToggleItemCount" class="cartToggle-items">{{ cart.item_count }}</div>
+              {%- endif -%}
+            </a>
+          </div>
+         </div>
+				 
+          <nav role="navigation" class="nav-standard nav-main">
+            {%- render 'navigation', is_hamburger_nav: false -%}
+
+            {%- if settings.show_search -%}
+            {%- render 'nav-search' -%}
+            {%- endif -%}
+          </nav>
+		</div> 
+	</div>
+
+	{%- render 'cart-popover' -%}
+</header>
+
+{% comment %} Site Navigation {% endcomment %}
+<nav role="navigation" class="nav-hamburger nav-main">
+	<button class="nav-mobile-close js-menuToggle" aria-expanded="false" aria-label="{{ 'general.accessibility.menu_toggle' | t }}">
+		{%- render 'icon-close' -%}
+	</button>
+	<div class="nav-inner">
+		<div class="nav-inner-wrapper">
+			{%- render 'navigation', is_hamburger_nav: true -%}
+		</div>
+	</div>
+</nav>
+
+{%- unless template == 'cart' -%}
+  <div class="cart-drawer">
+	{%- render 'site-cart' -%}
+  </div>
+{%- endunless -%}
+
+<script>
+	(async function() {
+		var cartProductCount = document.getElementById("cartProductCount");
+		var response = await fetch("/cart.js");
+		var body = await response.json();
+
+		if (body.items.length > 0) {
+            cartProductCount.style.display="flex";
+			cartProductCount.innerHTML = body.items.length;
+		};
+	})();
+</script>
+
+<script type="application/ld+json">
+{
+	"@context": "http://schema.org",
+	"@type": "Organization",
+	"name": {{ shop.name | json }},
+	{%- if section.settings.logo or section.settings.logo_other -%}
+		{%- if section.settings.logo -%}
+			{%- assign logo = section.settings.logo -%}
+		{%- elsif section.settings.logo_other -%}
+			{%- assign logo = section.settings.logo_other -%}
+		{%- endif -%}
+		{%- assign image_size = logo.width | append:'x' -%}
+
+		"logo": {{ logo | img_url: image_size | prepend: "https:" | json }},
+	{%- endif -%}
+	"sameAs": [
+		{{ settings.instagram_link | json }},
+		{{ settings.facebook_link | json }},
+		{{ settings.twitter_link | json }},
+		{{ settings.youtube_link | json }},
+		{{ settings.vimeo_link | json }},
+		{{ settings.pinterest_link | json }},
+		{{ settings.tumblr_link | json }}
+	],
+	"url": {{ shop.url | append: page.url | json }}
+}
+</script> 
+
+{%- if template.name == 'index' -%}
+	{%- assign potential_action_target = shop.url | append: routes.search_url | append: "?q={search_term_string}" -%}
+	<script type="application/ld+json">
+		{
+			"@context": "http://schema.org",
+			"@type": "WebSite",
+			"name": {{ shop.name | json }},
+			"potentialAction": {
+				"@type": "SearchAction",
+				"target": {{ potential_action_target | json }},
+				"query-input": "required name=search_term_string"
+			},
+			"url": {{ shop.url | append: page.url | json }}
+		}
+	</script> 
+{%- endif -%}
+
+{% schema %}
+{
+	"name": "Header",
+	"class": "shopify-section-header",
+	"settings": [
+		{
+			"type": "image_picker",
+			"id": "logo",
+			"label": "Custom logo (Home page)",
+			"info": "400px width recommended"
+		},
+		{
+			"type": "image_picker",
+			"id": "logo_other",
+			"label": "Custom logo (All other pages)",
+			"info": "400px width recommended"
+		},
+		{
+			"type": "range",
+			"id": "logo_max_width",
+			"label": "Custom logo width (in pixels)",
+			"info": "Max logo height is 100px",
+			"min": 50,
+			"max": 400,
+			"default": 100,
+			"step": 5,
+			"unit": "px"
+		},
+		{
+			"type": "checkbox",
+			"id": "show_site_name",
+			"label": "Show site name",
+			"default": true
+		},
+		{
+			"type": "header",
+			"content": "Menus"
+		},
+		{
+			"type": "link_list",
+			"id": "menu_list",
+			"label": "Primary menu"
+		},
+		{
+			"type":"header",
+			"content":"Navigation settings"
+		},
+		{
+			"type": "select",
+			"id": "links_position",
+			"label": "Links position",
+			"default": "links_center",
+			"options": [
+				{
+					"value": "links_left",
+					"label": "Left"
+				},
+				{
+					"value": "links_right",
+					"label": "Right"
+				},
+				{
+					"value": "links_center",
+					"label": "Center"
+				}
+			]
+		},
+		{
+			"type": "select",
+			"id": "logo_position",
+			"label": "Logo position",
+			"default": "logo_left",
+			"options": [
+				{
+					"value": "logo_left",
+					"label": "Left"
+				},
+				{
+					"value": "logo_center",
+					"label": "Center"
+				}
+			]
+		},
+		{
+			"type":"header",
+			"content":"Mega menu"
+		},
+		{
+			"type": "image_picker",
+			"id": "meganav_image",
+			"label": "Image",
+			"info": "Recommended size: 500 x 800 px"
+		},
+		{
+			"type": "range",
+			"id": "image_aspect_ratio",
+			"label": "Image aspect ratio",
+			"min": 0.5,
+			"max": 1.5,
+			"step": 0.1,
+			"unit": ":1",
+			"default": 1
+		},
+		{
+			"type": "text",
+			"id": "meganav_image_heading",
+			"label": "Heading"
+		},
+		{
+			"type": "url",
+			"id": "meganav_image_link",
+			"label": "Link"
+		}
+	]
+}
+{% endschema %}

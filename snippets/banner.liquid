@@ -1,0 +1,65 @@
+{% comment %} Banner Settings {% endcomment %}
+{%- assign image = block.settings.image -%}
+{%- assign height = block.settings.height -%}
+{%- assign subheading = block.settings.subheading -%}
+{%- assign heading = block.settings.title -%}
+{%- assign text = block.settings.text -%}
+{%- assign text_position = block.settings.text_position -%}
+{%- assign color_text = block.settings.color_text -%}
+{%- assign color_overlay = block.settings.color_overlay -%}
+{%- assign overlay_opacity = block.settings.overlay_opacity | times: 0.01 | round: 2 -%}
+
+<style>
+	.banner--{{ block.id }} .page-title { color: {{ color_text }}; }
+	.banner--{{ block.id }} .page-title h1 { color: {{ color_text }} !important; }
+	.banner--{{ block.id }} .page-title::before { background-color: {{ color_overlay }}; opacity: {{ overlay_opacity }}; }
+</style>
+
+<div class="banner-inner banner-padded banner-padded--{{ height }} banner--text-{{ text_position }}">
+	{%- unless height == 'original-height' -%}
+		{%- unless image == blank -%}
+			<div class="banner-img lazyload" data-bgset="{% render 'bgset', image: image %}" data-sizes="auto" data-parent-fit="cover"></div>
+			<noscript>
+				<div class="banner-img" style="background-image:url('{{ image | img_url: '1024x' }}');"></div>
+			</noscript>
+		{%- else -%}
+			<div class="banner-img banner-img--placeholder svg-placeholder">
+				{{- 'lifestyle-1' | placeholder_svg_tag -}}
+			</div>
+		{%- endunless -%}
+	{%- else -%}
+		{%- assign image_widths = '[295,394,590,700,800,1000,1200,1500,1800,2000,2400]' -%}
+		{%- assign image_url_pattern = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+		<div class="banner-img__container" style="padding-top: {{ 100 | divided_by: image.aspect_ratio | append: '%' }}">
+			<img data-swift-lazy="1" loading="lazy" class="banner-img--original lazyload"
+				src="{{ 'blank.gif' | asset_img_url: '1x1' }}"
+				data-src="{{ image_url_pattern }}"
+				data-widths="{{ image_widths }}"
+				data-aspectratio="{{ image.aspect_ratio }}"
+				data-sizes="auto"
+				alt="{{ image.alt }}">
+			<noscript>
+				<img data-swift-lazy="1" loading="lazy" src="{{ image | img_url: '2048x' }}" alt="{{ image.alt | escape }}" class="banner-img--original no-js-image">
+			</noscript>
+		</div>
+	{%- endunless -%}
+
+	{%- unless heading == blank and subheading == blank and text == blank -%}
+		<div class="page-title">
+			<div class="container">
+				<div class="row row-sm">
+					{%- if subheading != blank -%}
+						<p class="page-title__subheading subheading-text">{{ subheading }}</p>
+					{%- endif -%}
+					{%- if heading != blank -%}
+						<h1 class="page-title__heading">{{ heading }}</h1>
+					{%- endif -%}
+					{%- if text != blank -%}
+						<div class="page-title__text">{{ text }}</div>
+					{%- endif -%}
+				</div>
+			</div>
+		</div>
+	{%- endunless -%}
+</div>

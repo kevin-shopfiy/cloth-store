@@ -1,0 +1,61 @@
+.video-hero video{
+    object-fit: cover;
+}
+.video-hero .banner__box{
+    -webkit-animation-duration: 4s;
+    animation-duration: 4s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+.fadeIn {
+    -webkit-animation-name: fadeIn;
+    animation: fadeIn .8s forwards;
+}
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;} 
+ } 
+@media only screen and (max-width:749px){
+    .mobile__btn-align--center{
+        justify-content: center;
+    }
+    .mobile__btn-align--left{
+        justify-content: flex-start;
+    }
+    .mobile__btn-align--right{
+        justify-content: flex-end;
+    }
+    .banner--mobile--small{
+        height: 34rem;
+    }
+    .banner--mobile--medium{
+        height: 38rem;
+    }
+    .banner--mobile--large{
+        height: 42rem;
+    }
+    .banner--mobile--small:not(.banner--mobile-bottom):not(.banner--adapt) .banner__content {
+        min-height: 34rem !important;
+    }
+    .banner--mobile--medium:not(.banner--mobile-bottom):not(.banner--adapt) .banner__content {
+        min-height: 38rem !important;
+    }
+    
+    .banner--mobile--large:not(.banner--mobile-bottom):not(.banner--adapt) .banner__content {
+        min-height: 42rem !important;
+    }
+  
+}
+
+
+.mobile__btn-align--left .button {
+    margin-left: 0 !important;
+}
+
+.mobile__btn-align--center .button {
+    margin: 0 !important;
+}
+
+.mobile__btn-align--right .button {
+   margin: unset !important;
+}

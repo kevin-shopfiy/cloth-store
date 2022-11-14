@@ -1,0 +1,103 @@
+<div class="custom-fields-section">
+  
+    {% if resource_type == "products" %}
+    <div class="custom-fields-section__products">
+      {% for block in blocks %}
+      {% if block.type contains "cf_" %}
+      <div class="custom-fields-section__item custom-fields-section__item--{{ block.type }} custom-fields-section__item--{{ block.type }}--{{ block.settings.key }}" {{ block.shopify_attributes }}>
+        {% case block.settings.key %}
+        
+          {% when "care_bleach_image" %}
+            {% render "custom_fields.products.care_bleach_image" %}
+        
+          {% when "care_bleach_text" %}
+            {% render "custom_fields.products.care_bleach_text" %}
+        
+          {% when "care_chem_image" %}
+            {% render "custom_fields.products.care_chem_image" %}
+        
+          {% when "care_chem_text" %}
+            {% render "custom_fields.products.care_chem_text" %}
+        
+          {% when "care_drying_image" %}
+            {% render "custom_fields.products.care_drying_image" %}
+        
+          {% when "care_drying_text" %}
+            {% render "custom_fields.products.care_drying_text" %}
+        
+          {% when "care_iron_image" %}
+            {% render "custom_fields.products.care_iron_image" %}
+        
+          {% when "care_iron_text" %}
+            {% render "custom_fields.products.care_iron_text" %}
+        
+          {% when "care_wash_image" %}
+            {% render "custom_fields.products.care_wash_image" %}
+        
+          {% when "care_wash_text" %}
+            {% render "custom_fields.products.care_wash_text" %}
+        
+          {% when "difficulty" %}
+            {% render "custom_fields.products.difficulty" %}
+        
+          {% when "enthaltene_garne" %}
+            {% render "custom_fields.products.enthaltene_garne" %}
+        
+          {% when "garn_set" %}
+            {% render "custom_fields.products.garn_set" %}
+        
+          {% when "items_included" %}
+            {% render "custom_fields.products.items_included" %}
+        
+          {% when "lauflnge_cm" %}
+            {% render "custom_fields.products.lauflnge_cm" %}
+        
+          {% when "lauflnge_g" %}
+            {% render "custom_fields.products.lauflnge_g" %}
+        
+          {% when "maschenprobe" %}
+            {% render "custom_fields.products.maschenprobe" %}
+        
+          {% when "nadelstrke" %}
+            {% render "custom_fields.products.nadelstrke" %}
+        
+          {% when "properties" %}
+            {% render "custom_fields.products.properties" %}
+        
+          {% when "schwierigkeit" %}
+            {% render "custom_fields.products.schwierigkeit" %}
+        
+          {% when "verbauch" %}
+            {% render "custom_fields.products.verbauch" %}
+        
+          {% when "zoom_image_url" %}
+            {% render "custom_fields.products.zoom_image_url" %}
+        
+          {% when "zusammensetzung" %}
+            {% render "custom_fields.products.zusammensetzung" %}
+        
+        {% endcase %}
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+  
+    {% if resource_type == "collections" %}
+    <div class="custom-fields-section__collections">
+      {% for block in blocks %}
+      {% if block.type contains "cf_" %}
+      <div class="custom-fields-section__item custom-fields-section__item--{{ block.type }} custom-fields-section__item--{{ block.type }}--{{ block.settings.key }}" {{ block.shopify_attributes }}>
+        {% case block.settings.key %}
+        
+          {% when "collection_text" %}
+            {% render "custom_fields.collections.collection_text" %}
+        
+        {% endcase %}
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+  
+</div>

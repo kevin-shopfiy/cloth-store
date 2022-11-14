@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "swym-template",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

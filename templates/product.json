@@ -1,0 +1,46 @@
+{
+  "sections": {
+    "main": {
+      "type": "product-template",
+      "settings": {
+        "product_layout": "slideshow",
+        "image_size": "large",
+        "add_cart_position": "top",
+        "lightbox": true,
+        "show_vendor": true,
+        "show_quantity": true,
+        "show_cart_bar": true,
+        "enable_payment_button": true,
+        "show_newsletter": true,
+        "text_newsletter": "<p>Benachrichtige mich, wenn dieses Produkt wieder verfügbar ist<\/p>",
+        "enable_tabs_h6": true,
+        "page_tab_1": "",
+        "page_tab_2": "",
+        "page_tab_3": "",
+        "product_slideshow_dots": false,
+        "product_slideshow_arrows": true,
+        "enable_video_looping": false
+      }
+    },
+    "faq_section": {
+      "type": "faq-section__product",
+      "disabled": true,
+      "settings": {
+        "title": "",
+        "subheading": ""
+      }
+    },
+    "related_products": {
+      "type": "related-products",
+      "settings": {
+        "related_products_enable": true,
+        "product_recommendations_heading": "Das könnte dir auch gefallen"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "faq_section",
+    "related_products"
+  ]
+}

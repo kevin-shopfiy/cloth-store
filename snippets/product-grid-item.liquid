@@ -1,0 +1,375 @@
+{%- if full_product -%}
+{%- assign variable_first_variant = product -%}
+{%- else -%}
+{%- assign variable_first_variant = product.variants | first -%}
+{%- endif -%}
+
+{%- if full_product -%}
+{%- assign product_id = full_product.id -%}
+{%- else -%}
+{%- assign product_id = product.id -%}
+{%- endif -%}
+  
+{%- if full_product -%}
+{%- assign variable_price_min = product.price -%}
+{%- else -%}
+{%- assign variable_price_min = product.price_min -%}
+{%- endif -%}
+
+{%- if product.options_with_values -%}
+{%- assign variable_options_with_values = product.options_with_values -%}
+{%- else -%}
+{%- assign variable_options_with_values = full_product.options_with_values -%}
+{%- endif -%}
+
+{%- if product.media -%}
+{%- assign variable_media = product.media -%}
+{%- else -%}
+{%- assign variable_media = full_product.media -%}
+{%- endif -%}
+{% if full_product %}
+{% assign media_cursor = 0 %}
+{% if product.featured_image == null %}
+{% assign media_cursor = 1 %}
+{% else %}
+{% for media in variable_media %}
+{% if media == product.featured_image.src %}{% assign media_cursor = forloop.index %}{% break %}{% endif %}
+{% endfor %}
+{% endif %}
+{% assign prev_cursor = media_cursor | minus: 2 %}
+{% assign second_media = variable_media[media_cursor] | default: variable_media[prev_cursor] %}
+{% else %}
+{% assign second_media = variable_media[1] %}
+{% endif %}
+{%- if product.featured_media -%}
+{%- assign variable_featured_media = product.featured_media -%}
+{%- else -%}
+{%- assign variable_featured_media = full_product.featured_media -%}
+{%- endif -%}
+
+{%- if full_product == null -%}
+{%- assign variable_product_first_variant = product.selected_or_first_available_variant -%}
+{%- else -%}
+{%- if full_product.id == product.id or product.title == 'Default Title' -%}
+{%- assign variable_product_first_variant = full_product.selected_or_first_available_variant -%}
+{%- else -%}
+{%- assign variable_product_first_variant = product -%}
+{%- endif -%}
+{%- endif -%}
+
+{%- comment -%} Fill product rows if there is Featured image or product {%- endcomment -%}
+{%- assign first_variant = variable_product_first_variant -%}
+
+{%- comment -%} Review stars {%- endcomment -%}
+{%- assign show_reviews = settings.show_reviews -%}
+{%- assign show_review_stars = settings.show_review_stars -%}
+{%- assign enable_yotpo = settings.enable_yotpo -%}
+{%- assign yotpo_ID = settings.yotpo_ID -%}
+{%- assign price_swatches_hover = settings.price_swatches_hover -%}
+
+{%- unless fallback -%}
+{%- assign on_sale = false -%}
+{%- if product.compare_at_price > product.price -%}
+{%- assign on_sale = true -%}
+{%- assign on_sale_class = ' is-sale' -%}
+{%- endif -%}
+
+{%- assign sold_out = true -%}
+{%- if product.available -%}
+{%- assign sold_out = false -%}
+{%- endif -%}
+
+
+{% if sold_out %}  
+ 
+{% else %}
+<div class="  collectionBlock js-collectionBlock block {{ collection_block_size }} {{ collection_block_size_mobile }} {{ last_element_class }}{% if settings.transition_grid_items %} will-animate{% endif %}{% if index == 1 %} is-visible{% endif %}"
+     {% if settings.transition_grid_items %}
+     data-animation="moFadeInUp"
+     {% endif %}
+     data-enable-payment-button="{{ settings.enable_payment_button }}"
+     data-collection-block>
+  <div
+       class="collectionBlock-image lazyload{% if second_media.preview_image != blank and settings.hover_image == true %} has-second-image{% endif %}"
+       aria-label="{{ product.title | escape }}"
+       title="{% if product.object_type == 'product' %}{{ variable_featured_media.alt | escape }}{% elsif product.object_type == 'article' %}{{ product.title | escape }}{% endif %}"
+       data-bgset="{% render 'bgset', image: variable_featured_media.preview_image %}"
+       data-sizes="auto"
+       data-parent-fit="cover"
+       data-aspectratio="{{ variable_featured_media.preview_image.aspect_ratio }}"
+       style="padding-top:{{ 1 | divided_by: variable_featured_media.preview_image.aspect_ratio | times: 100}}%;">
+
+    <div class="custom_wishlist_data">
+      {% render 'wishlisthero-collection-product' with product: product %}	
+    </div>
+    <a href="{{ product.url | within: collection }}" class="collectionBlock-image__link" aria-label="{{ product.title | handle }}">
+      {%- if second_media.preview_image != blank and settings.hover_image == true -%}
+      <div class="collectionBlock-hover">
+        <span class="collectionBlock-hover__image lazyload" data-bgset="{% render 'bgset', image: second_media.preview_image %}" data-sizes="auto"></span>
+      </div>
+      {%- endif -%}
+
+      {%- if product.object_type == 'product' -%}
+      {%- if on_sale or sold_out -%}
+      <span class="product-status-flag product-status-flag--{{ settings.product_badge_style }}{% if sold_out %} is-sold-out{% endif %}{{ on_sale_class }}">
+        {%- if settings.product_badge_style == 'rectangle' -%}
+        {%- if sold_out -%}
+        {{- 'products.labels.sold_out' | t -}}
+        {%- elsif on_sale -%}
+        {{- 'products.labels.on_sale' | t -}}
+        {%- endif -%}
+        {%- else -%}
+        {%- if sold_out -%}
+        {{- 'products.labels.sold_out' | t | replace: ' ', '<br>' -}}
+        {%- elsif on_sale -%}
+        {{- 'products.labels.on_sale' | t | replace: ' ', '<br>' -}}
+        {%- endif -%}
+        {%- endif -%}
+      </span>
+      {%- endif -%}
+      {%- endif -%}
+    </a>
+
+    {%- if product.object_type == 'product' and settings.show_quick_view and template != 'search' -%}
+    <div class="collectionBlock-image-inner">
+      <a href="{{ product.url | within: collection }}" class="js-quickView-button quickView-button button">{{ 'collections.grid.quick_view' | t }}</a>
+    </div>
+    {%- endif -%}
+  </div>
+  <noscript>
+    <div aria-label="{{ product.title | escape }}" title="{% if product.object_type == 'product' %}{{ variable_featured_media.alt | escape }}{% elsif product.object_type == 'article' %}{{ product.title | escape}}{% endif%}" class="collectionBlock-image" style="background-image:url('{{ variable_featured_media.preview_image | img_url: '1024x' }}');">
+      <a href="{{ product.url | within: collection }}" class="collectionBlock-image__link" aria-label="{{ product.title | handle }}">
+        {%- if second_media.preview_image != blank and settings.hover_image -%}
+        <div class="collectionBlock-hover">
+          <span class="collectionBlock-hover__image" style="background-image: url( {{ second_media.preview_image | img_url: '1024x' }} )"></span>
+        </div>
+        {%- endif -%}
+
+        {%- if product.object_type == 'product' -%}
+        {%- if on_sale or sold_out -%}
+        <span class="product-status-flag product-status-flag--{{ settings.product_badge_style }}{% if sold_out %} is-sold-out{% endif %}{{on_sale_class}}">
+          {%- if sold_out -%}
+          {{- 'products.labels.sold_out' | t | replace: ' ', '<br>' -}}
+          {%- else if on_sale -%}
+          {{- 'products.labels.on_sale' | t | replace: ' ', '<br>' -}}
+          {%- else if on_sale and sold_out -%}
+          {{- 'products.labels.sold_out' | t | replace: ' ', '<br>' -}}
+          {%- endif -%}
+        </span>
+        {%- endif -%}
+        {%- endif -%}
+      </a>
+    </div>
+  </noscript>
+  <div class="collectionBlock-info collectionBlock-info--{{ settings.product_title_position }}">
+    <div class="collectionBlock__price">
+      {%- if product.price_varies -%}
+      <p class="price {% if price_swatches_hover %}price--hover{% endif %}">{{ 'products.labels.price_from' | t }} {{ variable_price_min | money }}</p>
+      {%- else -%}
+      {%- if on_sale -%}
+      <p class="price sale {% if price_swatches_hover %}price--hover{% endif %}">
+        <strike>{{ product.compare_at_price | money }}</strike>
+        {{ product.price | money }}
+      </p>
+      {%- else -%}
+      <p class="price {% if price_swatches_hover %}price--hover{% endif %}">{{ product.price | money }}</p>
+      {%- endif -%}
+      {%- endif -%}
+
+      {%- render 'collection-product-price', product: product -%}
+    </div>
+
+    <h3 class="collectionBlock__title"><a href="{{ product.url | within: collection }}">{{ product.title | escape }}</a></h3>
+
+    {%- if show_review_stars -%}
+    {%- if show_reviews or enable_yotpo and yotpo_ID != '' -%}
+    {%- if enable_yotpo and yotpo_ID != '' -%}
+    <div class="product__badge product__badge--yotpo">
+      <div class="yotpo bottomLine" data-product-id="{{ product_id }}"></div>
+    </div>
+    {%- elsif show_reviews -%}
+    <div class="product__badge">
+      <span class="shopify-product-reviews-badge" data-id="{{ product_id }}"></span>
+    </div>
+    {%- endif -%}
+    {%- endif -%}
+    {%- endif -%}
+
+    {%- for option in variable_options_with_values -%}
+    {%- if option.name != 'Title' -%}
+    <div class="variant-wrapper variant-wrapper__collections variant-wrapper--color" data-option="option{{ option.position }}">
+      <fieldset
+                id="SingleOptionSelector-{{ forloop.index0 }}-{{ product_id }}"
+                class="variant-input-wrap"
+                data-index="option{{ option.position }}">
+        <div class="swatch{% if settings.color_swatches_style == 'square' %} swatch--square{% endif %}">
+          {%- for value in option.values -%}
+          {%- for variant in product.variants -%}
+          {%- if variant.title == value  -%}
+          {%- assign background_url = variant.image.src | img_url -%}
+          {%- assign background_color = 'transparent' -%}
+
+          {% if variant.metafields.custom_fields != blank %}
+          {%- assign background_url = variant.metafields.custom_fields.zoom_image_url -%}
+          {%- endif -%}	
+
+          {% if variant.image.src == blank and variant.metafields.custom_fields == blank %}
+          {%- assign background_color = '#ddd' -%}
+          {%- endif -%}	
+
+          {%- if variant.available  -%}
+          <div data-value="{{ value | escape }}" class="swatch__element">
+            <label class="variant__button-label--color swatch__label swatch__label__collections">
+
+              <span
+                    class="swatch__color swatch__color__collections swatch__color--{{ value | handle }}"
+                    style="background-color: {{ background_color }}; background-image: url({{ background_url }})">
+              </span>
+              <span class="accessible-label">{{ value }}</span>
+            </label>
+          </div>
+          {%- endif -%}
+          {%- endif -%}
+          {%- endfor -%}
+          {%- endfor -%}
+
+          {%- for value in option.values -%}
+          {%- for variant in product.variants -%}
+          {%- if variant.option2 == value and option_value != value -%}
+          {%- assign background_url = variant.image.src | img_url -%}
+          {%- assign background_color = 'transparent' -%}
+
+          {% if variant.metafields.custom_fields != blank %}
+          {%- assign background_url = variant.metafields.custom_fields.zoom_image_url -%}
+          {%- endif -%}	
+
+          {% if variant.image.src == blank and variant.metafields.custom_fields == blank %}
+          {%- assign background_color = '#ddd' -%}
+          {%- endif -%}
+
+          {%- assign option_value = value -%}
+
+          {%- if variant.available  -%}
+          <div data-value="{{ value | escape }}" class="swatch__element">
+            <label class="variant__button-label--color swatch__label swatch__label__collections">
+
+              <span
+                    class="swatch__color swatch__color__collections swatch__color--{{ value | handle }}"
+                    style="background-color: {{ background_color }}; background-image: url({{ background_url }})">
+              </span>
+              <span class="accessible-label">{{ value }}</span>
+            </label>
+          </div>
+          {%- endif -%}
+          {%- endif -%}
+          {%- endfor -%}
+          {%- endfor -%}
+        </div>
+      </fieldset>
+    </div>
+    {%- endif -%}
+    {%- endfor -%}
+
+    {%- if product.variants.size > 1 and settings.enable_color_swatches -%}
+    {%- comment -%} /partials/product-swatch--grid.liquid {%- endcomment -%}
+
+    {%- assign file_extension = 'png' -%}
+    {%- unless product.has_only_default_variant -%}
+    <!-- <div class="product__swatch{% if price_swatches_hover %} product__swatch--hover{% endif %}">
+{%- for option in variable_options_with_values -%}
+{%- assign color_label = 'color,colour,couleur,colore,farbe,색,色,färg,farve' | split: ',' -%}
+{%- assign downcased_option = option.name | downcase -%}
+
+{%- if color_label contains downcased_option -%}
+{%- assign option_index = forloop.index0 -%}
+<div class="swatch{% if settings.color_swatches_style == 'square' %} swatch--square{% endif %}">
+{%- for value in option.values -%}
+<div data-value="{{ value | escape }}" class="swatch__element">
+<div class="swatch__label">
+<span class="swatch__color swatch__color--{{ value | handle }}" style="background-color: {{ value | split: ' ' | last | handle }}; background-image: url({{ value | handle | append: '.' | append: file_extension | asset_url }})"></span>
+</div>
+
+{%- comment -%} Use flag to prevent displaying multiple links {%- endcomment -%}
+{%- assign link_found = false -%}
+{%- for variant in product.variants -%}
+{%- if variant.options[option_index] == value -%}
+{%- unless link_found -%}
+<a href="{{ variant.url }}" class="swatch__link">{{ value }}</a>
+{%- assign link_found = true -%}
+{%- endunless -%}
+{%- endif -%}
+{%- endfor -%}
+</div>
+{%- endfor -%}
+</div>
+{%- endif -%}
+{%- endfor -%}
+</div> -->
+    {%- endunless -%}
+    {%- endif -%}
+  </div>
+</div>
+{% endif %}
+
+{%- else -%}
+<div class="QQQQQ collectionBlock js-collectionBlock block {{ collection_block_size }} {{ collection_block_size_mobile }} {{ last_element_class }}{% if settings.transition_grid_items %} will-animate{% endif %}{% if index == 1 %} is-visible{% endif %}" data-animation="moFadeInUp">
+  <div class="collectionBlock-image svg-placeholder">
+    {%- capture current -%}{% cycle 1, 2, 3, 4, 5, 6 %}{%- endcapture -%}
+    {{ 'product-' | append: current | placeholder_svg_tag }}
+
+    {%- if settings.hover_image -%}
+    {% capture current_next %}{% cycle 5, 6, 1, 2, 3, 4 %}{% endcapture %}
+    <span class="collectionBlock-hover collectionBlock-hover--placeholder svg-placeholder">{{ 'product-' | append: current_next | placeholder_svg_tag }}</span>
+    {%- endif -%}
+
+    {%- if settings.show_quick_view -%}
+    <div class="collectionBlock-image-inner">
+      <div class="quickView-button button">{{ 'collections.grid.quick_view' | t }}</div>
+    </div>
+    {%- endif -%}
+  </div>
+  <div class="collectionBlock-info collectionBlock-info--{{ settings.product_title_position }}">
+    <div class="collectionBlock__price">
+      <p class="price {% if price_swatches_hover %}price--hover{% endif %}"><span class="money">{{ '9900' | money}}</span></p>
+    </div>
+
+    <h3 class="collectionBlock__title">{{ 'onboarding.product_title' | t }}</h3>
+
+    {%- if show_review_stars -%}
+    {%- if show_reviews or enable_yotpo and yotpo_ID != '' -%}
+    <div class="product__badge">
+      <span class="spr-badge" data-rating="0.0">
+        <span class="spr-starrating spr-badge-starrating">
+          <i class="spr-icon spr-icon-star-empty"></i>
+          <i class="spr-icon spr-icon-star-empty"></i>
+          <i class="spr-icon spr-icon-star-empty"></i>
+          <i class="spr-icon spr-icon-star-empty"></i>
+          <i class="spr-icon spr-icon-star-empty"></i>
+        </span>
+      </span>
+    </div>
+    {%- endif -%}
+    {%- endif -%}
+
+    {%- if settings.enable_color_swatches -%}
+    {%- assign white = 'onboarding.colors.white' | t -%}
+    {%- assign grey = 'onboarding.colors.grey' | t -%}
+    {%- assign black = 'onboarding.colors.black' | t -%}
+
+    <div class="product__swatch">
+      <div class="swatch{% if settings.color_swatches_style == 'square' %} swatch--square{% endif %}">
+        {%- for i in (1..3) -%}
+        {%- capture value -%}{%- cycle white, grey, black -%}{%- endcapture -%}
+        <div data-value="{{ value | escape }}" class="swatch__element">
+          <div class="swatch__label">
+            <span class="swatch__color swatch__color--{{ value | handle }}" style="background-color: {{ value | split: ' ' | last | handle }}; background-image: url({{ value | handle | append: '.' | append: file_extension | asset_url }})"></span>
+          </div>
+          <a href="#!" class="swatch__link">{{ value }}</a>
+        </div>
+        {%- endfor -%}
+      </div>
+    </div>
+    {%- endif -%}
+  </div>
+</div>
+{%- endunless -%}

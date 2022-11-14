@@ -1,0 +1,146 @@
+{%- assign enable_tabs_h6 = section.settings.enable_tabs_h6 -%}
+{%- assign tab_1 = section.settings.page_tab_1 -%}
+{%- assign tab_2 = section.settings.page_tab_2 -%}
+{%- assign tab_3 = section.settings.page_tab_3 -%}
+{%- assign is_first_tab_heading = true -%}
+{%- assign is_first_tab_content = true -%}
+{%- assign tabs_count = 0 -%}
+
+{%- if enable_tabs_h6 -%}
+	{%- assign tab_headings = "" -%}
+	{%- assign tab_contents = "" -%}
+
+	{%- assign product_description_split = product.description | replace: '<p>[split]</p>', '[split]' | replace: '[split]', '' | replace: '<h6></h6>', '' -%}
+	{%- assign product_description_split = product_description_split | replace: '<h6>', '[!ヽ(´ー｀)/!]' |  replace: '</h6>', '[!ヽ(´ー｀)/!]' | split: '[!ヽ(´ー｀)/!]' -%}
+
+		{%- for item in product_description_split -%}
+			{% comment %}
+				The zero item is the product description, after that tab headings are odd and contents are even.
+			{% endcomment %}
+			{%- assign odd_mod = forloop.index0 | modulo:2 -%}
+			{%- if odd_mod == 0 -%}
+				{%- unless forloop.index0 == 0 -%}
+					{%- assign tab_contents = tab_contents | append: item | append: '[!ヽ(´ー｀)/!]' -%}
+				{%- endunless -%}
+			{%- endif -%}
+			{%- if odd_mod == 1 -%}
+				{%- assign tab_headings = tab_headings | append: item | append: '[!ヽ(´ー｀)/!]' -%}
+			{%- endif -%}
+		{%- endfor -%}
+
+		{%- assign tab_headings = tab_headings | split: '[!ヽ(´ー｀)/!]' -%}
+	{%- assign tab_contents = tab_contents | split: '[!ヽ(´ー｀)/!]' -%}
+
+	{%- assign tabs_limit = tab_headings.size | minus: 1 -%}
+
+	{%- capture tabs_h6_headings -%}
+		{%- for i in (0..tabs_limit) -%}
+			<button class="product-tab-title{% if is_first_tab_heading %} is-active{% endif %}">
+				{{- tab_headings[i] -}}
+				<span class="button-toggle">
+	{%- render 'icon-plus' -%}
+	{%- render 'icon-minus' -%}
+</span>
+			</button>
+			{%- if is_first_tab_heading -%}
+				{%- assign is_first_tab_heading = false -%}
+			{%- endif -%}
+		{%- endfor -%}
+	{%- endcapture -%}
+
+	{%- capture tabs_h6_contents -%}
+		{%- for i in (0..tabs_limit) -%}
+			<div class="product-tab-content rte{% if is_first_tab_content %} is-active{% endif %}">{{ tab_contents[i] }}</div>
+			{%- if is_first_tab_content -%}
+				{%- assign is_first_tab_content = false -%}
+			{%- endif -%}
+		{%- endfor -%}
+	{%- endcapture -%}
+{%- endif -%}
+
+{%- if tab_1 != blank -%}
+	{%- assign tabs_count = tabs_count | plus: 1 -%}
+{%- endif -%}
+{%- if tab_2 != blank -%}
+	{%- assign tabs_count = tabs_count | plus: 1 -%}
+{%- endif -%}
+{%- if tab_3 != blank -%}
+	{%- assign tabs_count = tabs_count | plus: 1 -%}
+{%- endif -%}
+{%- if tabs_h6_headings != blank -%}
+	{%- assign tabs_count = tabs_count | plus: 1 -%}
+{%- endif -%}
+
+{%- if tab_1 != blank or tab_2 != blank or tab_3 != blank or tabs_h6_headings != blank -%}
+	<div class="product__tabs">
+		<div class="container">
+			<div class="product-tabs js-product-tabs{% if tabs_count == 1 %} product-tabs--single{% endif %}">
+				<div class="product-tabs-nav">
+					{%- if tabs_h6_headings != blank -%}
+						{{ tabs_h6_headings }}
+					{%- endif -%}
+					{%- if tab_1 != blank -%}
+						<button class="product-tab-title{% if is_first_tab_heading %} is-active{% endif %}">
+							{{- pages[tab_1].title -}}
+							<span class="button-toggle">
+	{%- render 'icon-plus' -%}
+	{%- render 'icon-minus' -%}
+</span>
+						</button>
+						{%- if is_first_tab_heading -%}
+							{%- assign is_first_tab_heading = false -%}
+						{%- endif -%}
+					{%- endif -%}
+					{%- if tab_2 != blank -%}
+						<button class="product-tab-title{% if is_first_tab_heading %} is-active{% endif %}">
+							{{- pages[tab_2].title -}}
+							<span class="button-toggle">
+	{%- render 'icon-plus' -%}
+	{%- render 'icon-minus' -%}
+</span>
+						</button>
+						{%- if is_first_tab_heading -%}
+							{%- assign is_first_tab_heading = false -%}
+						{%- endif -%}
+					{%- endif -%}
+					{%- if tab_3 != blank -%}
+						<button class="product-tab-title{% if is_first_tab_heading %} is-active{% endif %}">
+							{{- pages[tab_3].title -}}
+							<span class="button-toggle">
+	{%- render 'icon-plus' -%}
+	{%- render 'icon-minus' -%}
+</span>
+						</button>
+						{%- if is_first_tab_heading -%}
+							{%- assign is_first_tab_heading = false -%}
+						{%- endif -%}
+					{%- endif -%}
+				</div>
+
+				<div class="product-tabs-contents">
+					{%- if tabs_h6_contents != blank -%}
+						{{- tabs_h6_contents -}}
+					{%- endif -%}
+					{%- if tab_1 != blank -%}
+						<div class="product-tab-content rte{% if is_first_tab_content %} is-active{% endif %}">{{ pages[tab_1].content }}</div>
+						{%- if is_first_tab_content -%}
+							{%- assign is_first_tab_content = false -%}
+						{%- endif -%}
+					{%- endif -%}
+					{%- if tab_2 != blank -%}
+						<div class="product-tab-content rte{% if is_first_tab_content %} is-active{% endif %}">{{ pages[tab_2].content }}</div>
+						{%- if is_first_tab_content -%}
+							{%- assign is_first_tab_content = false -%}
+						{%- endif -%}
+					{%- endif -%}
+					{%- if tab_3 != blank -%}
+						<div class="product-tab-content rte{% if is_first_tab_content %} is-active{% endif %}">{{ pages[tab_3].content }}</div>
+						{%- if is_first_tab_content -%}
+							{%- assign is_first_tab_content = false -%}
+						{%- endif -%}
+					{%- endif -%}
+				</div>
+			</div>
+		</div>
+	</div>
+{%- endif -%}

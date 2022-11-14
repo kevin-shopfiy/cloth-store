@@ -1,0 +1,32 @@
+{%- assign first_variant = product.selected_or_first_available_variant -%}
+{%- assign on_sale = false -%}
+{%- if product.compare_at_price > product.price -%}
+	{%- assign on_sale = true -%}
+	{%- assign on_sale_class = ' is-sale' -%}
+{%- endif -%}
+
+<div class="collection-product-price product-price" data-price-wrapper>
+	<!-- {%- if first_variant.compare_at_price -%}
+		<s class="product-price__sale" data-compare-price>{{ first_variant.compare_at_price | money }}</s>
+	{%- endif -%} -->
+
+	{%- if first_variant.unit_price_measurement -%}
+		{%- capture unit_price_separator -%}
+			<span aria-hidden="true">/</span><span class="visually-hidden">{{ 'general.accessibility.unit_price_separator' | t }}&nbsp;</span>
+		{%- endcapture -%}
+		<div class="product-unit-price" data-unit-wrapper>
+			<span data-unit-price>
+				{{ first_variant.unit_price | money }} pro&nbsp;
+				{%- if first_variant.unit_price_measurement.reference_value != 1 -%}
+					{{- first_variant.unit_price_measurement.reference_value -}}
+				{%- endif -%}
+			</span>
+			<!-- {{ unit_price_separator }} -->
+			<span data-unit-base>{{ first_variant.unit_price_measurement.reference_unit }}</span>
+		</div>
+	{%- endif -%}
+
+	<div class="product-unit-price">
+		<span>{{ product.vendor }}</span>
+	</div>
+</div>

@@ -1,0 +1,86 @@
+{
+  "sections": {
+    "1651749686dd046486": {
+      "type": "slideshow",
+      "disabled": true,
+      "blocks": {
+        "1651749686e0b0483f-0": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/7027FE0E-038E-4857-B02F-8BD4EE82127E.jpg",
+            "image_position": "center-center",
+            "alignment": "center",
+            "color_style": "white",
+            "subheading": "",
+            "title": "",
+            "text": "",
+            "cta": "",
+            "link": "",
+            "cta_primary_btn_style": "primary",
+            "cta_2": "",
+            "link_2": "",
+            "cta_secondary_btn_style": "secondary",
+            "overlay_color": "#333333",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "1651749686e0b0483f-0"
+      ],
+      "settings": {
+        "showNavArrows": true,
+        "show_arrow_down": false,
+        "autoplay": true,
+        "duration": 4,
+        "transition": "slide",
+        "dots_position": "center",
+        "slide_height": "four-fifty-height-hero",
+        "button_size": "normal"
+      }
+    },
+    "main": {
+      "type": "collection-template",
+      "settings": {
+        "test": "",
+        "show_title": true,
+        "show_sort_filter": false,
+        "filter_mode": "tag",
+        "position_filters": "left",
+        "show_banner": false,
+        "banner_height": "small",
+        "banner_subheading": "",
+        "banner_text_position": "center",
+        "banner_color_text": "#ffffff",
+        "banner_color_overlay": "#333333",
+        "banner_overlay_opacity": 0,
+        "show_featured_image": false,
+        "featured_heading": "Use this image showcase promotional content.",
+        "featured_text": "<p>Elaborate on it with rich text<\/p>",
+        "featured_button_text": "Learn More",
+        "featured_button_link": "",
+        "featured_button_style": "primary",
+        "featured_color_text": "#ffffff",
+        "featured_color_overlay": "#333333",
+        "featured_overlay_opacity": 30
+      }
+    },
+    "16582277505ed12333": {
+      "type": "rich-text",
+      "settings": {
+        "layout": "default",
+        "subheading": "SANDNES GARNE",
+        "title": "Qualität aus Norwegen mit SANDNES",
+        "content": "<p><\/p><p><strong>Das<br\/>Besondere an SANDNES<\/strong> <br\/><br\/>SANDNES ist mehr als herkömmliche Wolle - Das norwegische Garn ist nicht nur<br\/>sehr hochwertig, sondern auch mulesing free und nachhaltig produziert. Setzen<br\/>Sie auf die tierleidfreie Wolle des führenden skandinavischen Herstellers zur<br\/>Herstellung langlebiger Strickstücke. Die hochwertige Wolle ist dabei in vielen<br\/>unterschiedlichen Farbtönen sowie Kollektionen erhältlich. So finden Sie für<br\/>jedes Projekt genau die passende Wolle.<br\/><br\/><br\/><br\/><strong>Passende Strickanleitungen für SANDNES Garne<\/strong><br\/><br\/>Strickanleitungen, die mit SANDNES Wolle umgesetzt werden könne, finden Sie<br\/>unter anderem bei Petite Knit. Die Anleitungen sind in mehreren Sprachen<br\/>verfügbar und übersichtlich strukturiert So finden Sie SANDES Garne<br\/>Strickanleitungen für jeden Anlass zum kleinen Preis. Sowohl Anfänger als auch<br\/>Fortgeschrittene werden hier fündig. So können Sie nach Ihrer OONIQUE<br\/>Bestellung sofort loslegen.<br\/><br\/><br\/><br\/><strong>Skandinavisch klassisch<\/strong> <br\/><br\/>OONIQUE bietet Ihnen eine hohe Qualität für modische Stücke aus skandinavischer<br\/>Wolle. Vereinen Sie die Prinzipien skandinavischer Mode in Ihren Strickstücken:<br\/>Qualität, Nachhaltigkeit, Langlebigkeit und klassische Schlichtheit. Gedeckte<br\/>Farben und angenehme, atmungsaktive Materialien sind ebenfalls klassische<br\/>Bestandteile des skandinavischen Stils. Bleiben Sie im Winter warm mit<br\/>gemütlichen und herrlich weichen skandinavischen Stücken aus OONIQUE Wolle oder<br\/>kreieren Sie Zubehör wie Beutel oder eine Babydecke.<br\/><br\/><br\/><br\/><strong>Die SANDNES Kollektionen - Das passende Garn für Ihr Projekt<\/strong><br\/><br\/><br\/><br\/><a href=\"https:\/\/oonique.com\/products\/mandarine-petit\">Mandarin<br\/>Petite<\/a>: Die Kollektion Mandarin Petit zeichnet sich vor allem durch<br\/>seine angenehme weiche Haptik aus. Das Baumwollgarn ist bei 60°C waschbar und<br\/>eignet sich so besonders gut für Gebrauchsgegenstände wie Handtücher oder<br\/>Topflappen.<br\/><br\/><br\/><br\/><a href=\"https:\/\/oonique.com\/collections\/sandnes-wolle\/products\/tynn-line?variant=42654619599069\">Tynn Line<\/a>: Das Mischgarn Tynn Line enthält<br\/>Viskose und Leinen, was es sowohl saugfähig als auch kühl macht. Das Garn<br\/>eignet sich eher weniger für stark beanspruchte Gebrauchsgegenstände, da es<br\/>schonend gewaschen werden muss, ist allerdings perfekt für Zubehör geeignet.<br\/><br\/><br\/><br\/><a href=\"https:\/\/oonique.com\/collections\/sandnes-wolle\/products\/double-sunday?variant=42654617764061\">Double Sunday<\/a>: Double Sunday ist ein besonders<br\/>dickes SANDNES Garn aus 100% Merinowolle. Das macht es besonders<br\/>wärmeisolierend. Da es zugleich Feuchtigkeit ableitet, ist es hervorragend für<br\/>Socken und Winterkleidung geeignet.<br\/><br\/><br\/><br\/><a href=\"https:\/\/oonique.com\/collections\/sandnes-wolle\/products\/tynn-silk-mohair?variant=42654615994589\">Tynn Silk Mohair<\/a>: Das dünne Tynn Silk Mohair Garn<br\/>ist eine weiche Mischung aus Mohair, Seide und Schurwolle. Es eignet sich<br\/>perfekt für dünne und luftige Strickstücke.<br\/><br\/><br\/><br\/><a href=\"https:\/\/oonique.com\/collections\/sandnes-wolle\/products\/alpakka-1?variant=42654613897437\">Alpakka<\/a>: Das weiche Alpaka Garn der Alpakka<br\/>SANDNES Kollektion ist besonders warm und atmungsaktiv. Dazu kommt die<br\/>besonders hohe Qualität, welche dieses Garn zu einem absoluten Luxusprodukt<br\/>macht.<br\/><br\/><br\/><br\/><a href=\"https:\/\/oonique.com\/collections\/sandnes-wolle\/products\/kos?variant=42654611570909\">Kos<\/a>: Wenn Sie ein weiches, leichtes und luftiges<br\/>Garn suchen, ist Kos eine gute Wahl. Durch den Alpaka-Anteil ist es dabei zwar<br\/>warm, aber atmungsaktiv. Der Woll-Anteil sorgt darüber hinaus für eine<br\/>besonders gute Reißfestigkeit.<br\/><br\/><br\/><br\/><a href=\"https:\/\/oonique.com\/collections\/sandnes-wolle\/products\/sunday?variant=42654609244381\">Sunday<\/a>: Sunday von SANDNES bestehen zu 100&<br\/>aus Merinowolle und sind daher besonders wärmeisolierend. Besonders für Stücke,<br\/>die bei hoher Luftfeuchtigkeit getragen werden, eigenen sich Sunday Garne hervorragend.<br\/><br\/><br\/><br\/><strong>Deine Vorteile bei OONIQUE<\/strong> <br\/><br\/>Deine Bestellung bei OONIQE bietet dir viele Vorteile: Profitiere von der<br\/>schnellen Lieferung sowie den beiliegenden Strickanleitung für das bestellte<br\/>Garn. So können Sie schnell mit Ihrem Projekt beginnen. Auch die passenden<br\/>Stricknadeln sowie das benötigte Zubehör kann bei OONIQUE bestellt werden.<br\/>Selbstverständlich verpacken wir plastikfrei für eine umweltfreundlichere<br\/>Lieferung.<\/p><p> <\/p>",
+        "button_text": "",
+        "button_link": "",
+        "button_style": "primary"
+      }
+    }
+  },
+  "order": [
+    "1651749686dd046486",
+    "main",
+    "16582277505ed12333"
+  ]
+}

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html class="no-js no-touch" lang="{{ shop.locale }}" fontify-lang="{{ shop.locale }}">
+
+<head>
+{% include "load-metafields" %}
+
+	<meta charset="utf-8">
+	<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">
+	<link rel="canonical" href="{{ canonical_url }}">
+	<link rel="prefetch" as="document" href="{{ shop.url }}">
+	<link rel="preload" as="style" href="{{ 'theme.css' | asset_url }}">
+	<link rel="preload" as="font" href="{{ settings.general_font_picker | font_url }}" type="font/woff2" crossorigin>
+	<link rel="preload" as="font" href="{{ settings.header_font_picker | font_url }}" type="font/woff2" crossorigin>
+	<link rel="preload" as="image" href="{{ 'loader.svg' | asset_url }}">
+	<link rel="preload" as="script" href="{{ 'lazysizes.min.js' | asset_url }}">
+	<link rel="preload" as="script" href="{{ 'shop.js' | asset_url }}">
+	<link rel="dns-prefetch" href="https://cdn.shopify.com">
+	<link rel="dns-prefetch" href="https://v.shopify.com">
+	<link rel="dns-prefetch" href="https://fonts.googleapis.com" crossorigin>
+	<link rel="dns-prefetch" href="https://cdn.shopifycloud.com">
+	<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+	<link rel="dns-prefetch" href="https://www.google-analytics.com">
+	<link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+	<link rel="preconnect" href="https://ajax.googleapis.com">
+	<link rel="preconnect" href="https://customjs.s.asaplabs.io">
+	<link rel="dns-prefetch" href="https://maps.googleapis.com">
+	<link rel="dns-prefetch" href="https://maps.gstatic.com">
+	<link rel="dns-prefetch" href="https://monorail-edge.shopifysvc.com">
+
+	{%- if settings.show_reviews -%}
+		<link rel="dns-prefetch" href="https://productreviews.shopifycdn.com">
+	{%- endif -%}
+
+	<title>{{ page_title }}{% if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif %}{% if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}</title>
+
+	{%- if settings.favicon != blank -%}
+		<link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+	{%- endif -%}
+
+	{%- if page_description -%}
+		<meta name="description" content="{{ page_description | escape }}">
+	{%- endif -%}
+
+	{%- render 'css-variables' -%}
+
+	{{- 'theme.css' | asset_url | stylesheet_tag -}}
+	{{- 'custom.css' | asset_url | stylesheet_tag -}}
+	<noscript>
+		{{- 'no-js.css' | asset_url | stylesheet_tag -}}
+	</noscript>
+
+	{{- 'custom.js' | asset_url | script_tag -}}
+
+	{%- render 'scripts' -%}
+
+	<script src="https://kit.fontawesome.com/91e5a3ce58.js" crossorigin="anonymous"></script>
+
+	<!-- starapps_scripts_start -->
+<!-- This code is automatically managed by StarApps Studio -->
+<!-- Please contact support@starapps.studio for any help -->
+{% include "starapps-language-meta" %}
+<!-- starapps_scripts_end -->
+{% include 'globo.filter.script' %}{{ content_for_header }} 
+ {{ shop.metafields.fontify.stylesheets }}
+ 
+{% include 'pagefly-header' %}
+ 
+<!-- GSSTART Show variants. Do not change -->
+{% if request.path contains "/products/" %}{% else %}{% endif %}
+<!-- Show variants code end. Do not change GSEND -->
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){
+        w[l]=w[l]||[];
+        w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+        var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),
+            dl=l!='dataLayer'?'&l='+l:'';
+        j.async=true;
+        j.src='//www.googletagmanager.com/gtag/js?id='+i+dl;
+        f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','AW-473995095');
+</script>
+<!-- End Google Tag Manager -->
+  
+ {% include 'variable-products-head-template' %}
+ {% render 'hs-cart-drawer' %}
+
+<!--begin-boost-pfs-filter-css-->
+  {% render 'boost-pfs-style' %}
+<!--end-boost-pfs-filter-css-->
+
+<!--exclude-boost-reference-collection-from-google-search-->
+  {% if handle contains 'boost-all' %}
+	<meta name="robots" content="noindex">
+  {% endif %}
+<!--end-exclude-boost-reference-collection-from-google-search-->
+
+{% include 'swift_core' %} 
+ 
+{% include 'swift_preload_font' with settings.type_header_family %}
+{% include 'swift_preload_font' with settings.type_base_family %}
+ 
+ {% include 'wiser' %}{% include 'wiser_popup' %}</head> 
+
+{%- capture body_class -%}is-page-loading template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}{% if customer %} customer-logged-in{% endif %}{% if settings.transition_text %} allow-text-animations{% endif %}{% if settings.transition_grid_items %} allow-grid-animations{% endif %}{% if settings.transition_images_fade %} allow-image-animations{% endif %} no-outline{%- endcapture -%}
+
+<body id="{{ page_title | handle }}" class="{{ body_class }}">
+	<a class="in-page-link skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
+	{%- section 'popup' -%}
+
+	<div class="pageWrap">
+		{%- section 'announcement' -%}
+		{%- section 'header' -%}
+
+		<div class="bodyWrap">
+
+			<main class="main-content js-focus-hidden" id="MainContent" role="main" tabindex="-1">
+				{{ content_for_layout }}
+			</main>
+
+			{%- section 'footer' -%}
+		</div>{%- comment -%} END bodyWrap {%- endcomment -%}
+	</div>{%- comment -%} END pageWrap {%- endcomment -%}
+
+	{%- comment -%} AJAX Mustache Templates {%- endcomment -%}
+	{%- render 'ajax-cart' -%}
+
+{% include "bc_banner" %}
+
+<!-- GSSTART Show variants BODY. Do not change -->{% if collection.products %}
+<div style="display: none !important;">
+  {% paginate collection.products by 50 %}{% for product in collection.products %}{% assign imagescount = product.images | size %}{% if imagescount > 1 %}
+  <div style="display: none !important;" class="gsProductVariants" gsProductHandler="{{ product.handle }}" >{% assign variantImgsUsedStr = "" %} {% assign variantBySizeUsedStr = "" %}{% assign sizeoptionnr = 0 %}
+{% for option in product.options %}{% capture optioncaseins %}{{option | downcase}}{% endcapture %}{% if optioncaseins contains "size" or optioncaseins contains "ru00f6sse" or optioncaseins contains "u0627u0644u0645u0642u0627u0633" or optioncaseins contains "eden" or optioncaseins contains "gru00f6u00dfe" or optioncaseins contains "torlek" or optioncaseins contains "alla" or optioncaseins contains "amau00f1o" or optioncaseins contains "u05d2u05d5u05d3u05dc" or optioncaseins contains "taille" or optioncaseins contains "aat" or optioncaseins contains "tamanho" or optioncaseins contains "rrelse" or optioncaseins contains "siza" %}{% assign sizeoptionnr = forloop.index %}{% if product.options.size == 1 %}{% assign sizeoptionnr = 0 %}{% endif %}{% if optioncaseins contains "color" or optioncaseins contains "colour" or optioncaseins contains "farge"  %}{% assign sizeoptionnr = 0 %}{% endif %}{% endif %}{% endfor %}
+    {% for variant in product.variants %}{% assign featuredImageSize = variant.featured_image | size %}{% if featuredImageSize > 0  %}{% if variantImgsUsedStr contains "IGNOREGS" %}{% else %}{% assign variantImgsUsedStr = variantImgsUsedStr | append: variant.featured_image %}{% assign canAddVariant = true %}{% if sizeoptionnr == 1 %}{% assign optionCheckVal = ";" | append: variant.option2 | append: variant.option3 | append: ";" %}{% if variantBySizeUsedStr contains optionCheckVal %}{% assign canAddVariant = true %}{% else %}{% assign variantBySizeUsedStr = variantBySizeUsedStr | append: ";" | append: variant.option2 | append: variant.option3 | append: ";" %}{% endif %}{% endif %}
+    {% if sizeoptionnr == 2 %}{% assign optionCheckVal = ";" | append: variant.option1 | append: variant.option3 | append: ";" %}{% if variantBySizeUsedStr contains optionCheckVal %}
+                {% assign canAddVariant = true %}{% else %}{% assign variantBySizeUsedStr = variantBySizeUsedStr | append: ";" | append: variant.option1 | append: variant.option3 | append: ";" %}{% endif %}{% endif %} {% if sizeoptionnr == 3 %}{% assign optionCheckVal = ";" | append: variant.option1 | append: variant.option2 | append: ";" %}{% if variantBySizeUsedStr contains optionCheckVal %}
+                {% assign canAddVariant = true %}{% else %}{% assign variantBySizeUsedStr = variantBySizeUsedStr | append: ";" | append: variant.option1 | append: variant.option2 | append: ";" %}{% endif %}{% endif %} {% if canAddVariant == true %}
+    <p vavailable="{{ variant.available }}" variantpriceid="{{ variant.id }}" originalprice='{{ product.price | money_without_trailing_zeros }}' minprice='{{ product.price_min | money_without_trailing_zeros }}' comparePrice='{{ variant.compare_at_price | money_without_trailing_zeros }}' variantPrice='{{ variant.price | money_without_trailing_zeros }}'></p>
+    <p varianttitleid="{{ variant.id }}" sizeoptionnr="{{ sizeoptionnr }}" optionuidtwo="{{ product.id }}{{ variant.option2 | escape }}" optiontwo="{{ variant.option2 | escape }}" originaltitle="{{ product.title | escape }}" variantTitle="{{ variant.title | escape }}" optionuid="{{ product.id }}{{ variant.option1 | escape }}"></p>
+       <span variantid="{{ variant.id }}" gsvariantimage="{{ variant.featured_image | img_url: '256x' }}"></span>
+    {% endif %}{% endif %}{% endif %}{% endfor %}
+  </div>{% endif %}{% endfor %}{% endpaginate %}{% endif %}
+  {% if collection.products %}
+        <div style="display: none !important;" class="gsProductImages" >
+        {% paginate collection.products by 50 %}{% for product in collection.products %} {% assign imagescount = product.images | size %}{% if imagescount > 1 %}{% for image in product.images  limit:1 %}
+                                        <span gsProductHandle="{{ product.handle }}" firstImage="{{ image | img_url: '256x' }}"></span>
+                                {% endfor %}{% endif %}{% endfor %}{% endpaginate %}
+  </div>
+  </div>
+    {% endif %} <!-- Show variants code end BODY. Do not change GSEND -->{% render 'hs-cart-drawer-subscriptions' %}
+
+<!--begin-boost-pfs-js-->
+  {% render 'boost-pfs' %}
+<!--end-boost-pfs-js-->
+
+	{% include 'globo.filter.action' %}
+	</body>
+</html>

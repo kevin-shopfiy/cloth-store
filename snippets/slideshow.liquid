@@ -1,0 +1,240 @@
+{% comment %} Settings {% endcomment %}
+{%- assign show_text_animations = settings.transition_text -%}
+{%- assign dots_style = settings.dots_style -%}
+{%- if dots_style == 'hidden' -%}
+	{%- assign showNavDots = false -%}
+{%- else -%}
+	{%- assign showNavDots = true -%}
+{%- endif -%}
+{%- assign showNavArrows = section.settings.showNavArrows -%}
+{%- assign transition = section.settings.transition -%}
+{%- assign autoplay = section.settings.autoplay -%}
+{%- assign hover = true -%}
+{%- assign speed = 400 -%}
+{%- assign fadeMode = true -%}
+{%- if transition == 'slide' -%}
+	{%- assign fadeMode = false -%}
+{%- endif -%}
+{%- assign duration = section.settings.duration | times: 1000 -%}
+{%- assign dots_position = section.settings.dots_position -%}
+{%- assign show_arrow_down = section.settings.show_arrow_down -%}
+
+{%- comment -%} Check if Image Height setting is selected {%- endcomment -%}
+{%- assign original_height = false -%}
+{%- if section.settings.slide_height == 'original-height' -%}
+{%- assign original_height = true -%}
+{%- endif -%}
+
+{%- comment -%} Layout {%- endcomment -%}
+{%- assign alignment = section.settings.alignment -%}
+
+{%- comment -%} Capture slideshow class {%- endcomment -%}
+{%- capture slideshow_class -%}hero hero-slider js-hero-slider hero--is-loading hero--dots-{{ dots_position }} {{ section.settings.slide_height }} container-wrap{% if transition == 'zoom-out' %} hero--zoom-out{% endif %}{%- endcapture -%}
+
+{%- comment %} Section {% endcomment %}
+<section id="hero--{{ section.id }}"
+	class="{{ slideshow_class }}"
+	data-section-type="slideshow"
+	data-slick="{ 'arrows':{{ showNavArrows }}, 'dots':{{ showNavDots }}, 'dotsClass':'slick-dots hero-dots-row row', 'autoplaySpeed':{{duration}}, 'speed':{{ speed }}, 'adaptiveHeight':{{ original_height }}, 'pauseOnHover':{{ hover }}, 'fade':{{ fadeMode }}, 'infinite':true }"
+	data-image-height="{{ section.settings.slide_height }}"
+	data-autoplay="{{ autoplay }}"
+	data-dots-style="{{ dots_style }}"
+	data-down-arrow="{{ show_arrow_down }}">
+
+	{%- for block in section.blocks -%}
+
+		{%- comment -%} Layout {%- endcomment -%}
+		{%- assign alignment = block.settings.alignment -%}
+		{%- assign animation_delay = 250 -%}
+
+		{%- comment -%} Colors {%- endcomment -%}
+		{%- unless block.settings.overlay_color == blank -%}
+			{%- assign overlayColor = block.settings.overlay_color  -%}
+		{%- else -%}
+			{%- assign overlayColor = 'none' -%}
+		{%- endunless -%}
+		{%- assign overlayOpacity = block.settings.overlay_opacity | times: 0.01 | round: 2 -%}
+
+		{%- assign color_style = block.settings.color_style -%}
+
+		{%- assign buttonPrimaryStyle = block.settings.cta_primary_btn_style -%}
+		{%- assign buttonSecondaryStyle = block.settings.cta_secondary_btn_style -%}
+
+		{%- comment -%} Content {%- endcomment -%}
+		{%- assign heading = block.settings.title  -%}
+		{%- assign subheading = block.settings.subheading  -%}
+		{%- assign text = block.settings.text -%}
+		{%- assign cta = block.settings.cta -%}
+		{%- assign link = block.settings.link -%}
+		{%- assign cta_2 = block.settings.cta_2 -%}
+		{%- assign link_2 = block.settings.link_2 -%}
+		{%- assign image = block.settings.image -%}
+		{%- assign image_mobile = block.settings.image_mobile -%}
+
+		{%- if block.settings.image or block.settings.image_mobile -%}
+			{%- assign has_bg = true -%}
+		{%- else -%}
+			{%- assign has_bg = false -%}
+		{%- endif -%}
+
+		{%- comment -%} Make the whole slide clickable if link set but no button text {%- endcomment -%}
+		{%- assign image_link = false -%}
+		{%- if link != blank and cta == blank and cta_2 == blank -%}
+			{%- assign image_link = true -%}
+		{%- endif -%}
+
+		{%- capture slide_class -%}hero-slide js-slide hero-slide--{{ alignment }} hero-slide--style-{{ color_style }}{% if forloop.index == 1 %} initial-slide{% endif %}{% if image == blank %} slide--onboarding{% endif %}{%- endcapture -%}
+
+		{%- if image_link -%}
+			<a href="{{ link }}" class="{{ slide_class }}" {{ block.shopify_attributes }} data-block="slide" data-slick-index="{{ forloop.index }}" data-style="{{ color_style }}">
+		{%- else -%}
+			<div class="{{ slide_class }}" {{ block.shopify_attributes }} data-block="slide" data-slick-index="{{ forloop.index }}" data-style="{{ color_style }}">
+		{%- endif -%}
+				<div class="overlay" data-overlay-opacity="{{ overlayOpacity }}" style="background-color: {{ overlayColor }}; opacity: {{ overlayOpacity }};"></div>
+				<div class="slide-inner">
+					{%- unless heading == blank and subheading == blank and text == blank and cta == blank -%}
+						{%- if original_height -%}
+						<div class="slide-text">
+						{%- endif -%}
+							<div class="container">
+								<div class="row">
+									<div class="slide-content {% unless has_bg %}no-background{% endunless %}">
+										{%- if subheading != blank -%}
+											<p class="slide-content__subheading subheading-text"{% if show_text_animations %} data-animation="moPopUp" data-animation-delay="{{ animation_delay }}"{% endif %}>{{ subheading }}</p>
+											{%- assign animation_delay = animation_delay | plus: 250 -%}
+										{%- endif -%}
+
+										{%- if heading != blank -%}
+											<h1 class="slide-content__heading"{% if show_text_animations %} data-animation="moPopUp" data-animation-delay="{{ animation_delay }}"{% endif %}>{{ heading }}</h1>
+											{%- assign animation_delay = animation_delay | plus: 250 -%}
+										{%- endif -%}
+
+										{%- if text != blank -%}
+											<div class="slide-content__text"{% if show_text_animations %} data-animation="moPopUp" data-animation-delay="{{ animation_delay }}"{% endif %}>{{ text }}</div>
+											{%- assign animation_delay = animation_delay | plus: 250 -%}
+										{%- endif -%}
+
+										{%- if cta != blank or cta_2 != blank -%}
+											<div class="slide-content__buttons"{% if show_text_animations %} data-animation="moPopUp" data-animation-delay="{{ animation_delay }}"{% endif %}>
+												{%- if cta != blank -%}
+													<a tabindex="0" {% if link != blank %}href="{{ link }}"{% endif %} class="slide-content__button button button--{{ section.settings.button_size }} button--{{ buttonPrimaryStyle }}" aria-label="{{ cta }}" title="{{ cta }}">{{ cta }}</a>
+												{%- endif -%}
+
+												{%- if cta_2 != blank -%}
+													<a tabindex="0" {% if link_2 != blank %}href="{{ link_2 }}"{% endif %} class="slide-content__button button button--{{ section.settings.button_size }} button--{{ buttonSecondaryStyle }}" aria-label="{{ cta_2 }}" title="{{ cta_2 }}">{{ cta_2 }}</a>
+												{%- endif -%}
+											</div>
+										{%- endif -%}
+									</div>
+								</div>
+							</div>
+						{%- if original_height -%}
+						</div>
+						{%- endif -%}
+					{%- endunless -%}
+
+					{%- if original_height -%}
+						<div class="slide-image-container{% if image_mobile != blank %} slide-image--has-mobile{% endif %}"{% if transition == 'zoom-out' %} data-animation="moZoomOut"{% endif %}>
+							{%- if image != blank -%}
+								<div class="slide-image slide-image--desktop">
+									{%- assign image = block.settings.image -%}
+									{%- assign image_widths = '[295,394,590,700,800,1000,1200,1500,1800,2000,2400]' -%}
+									{%- assign image_url_pattern = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+									<div class="slide-image__container" style="padding-top: {{ 100 | divided_by: image.aspect_ratio | append: '%' }}">
+										<img
+											class="lazyload"
+											src="{{ 'blank.gif' | asset_img_url: '1x1' }}"
+											data-src="{{ image_url_pattern }}"
+											data-widths= "{{ image_widths }}"
+											data-aspectratio="{{ image.aspect_ratio }}"
+											data-sizes="auto"
+											loading="lazy"
+											alt="{{ image.alt | escape }}">
+										<noscript>
+											<img data-swift-lazy="1" loading="lazy" src="{{ image | img_url: '2048x' }}" alt="{{ image.alt | escape }}">
+										</noscript>
+									</div>
+								</div>
+							{%- else -%}
+								<div class="slide-image slide-image--desktop">
+									{%- capture current -%}{% cycle 1, 2 %}{%- endcapture -%}
+									<div class = "slide-image--blank">
+										{{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+									</div>
+								</div>
+							{%- endif -%}
+
+							{%- if image_mobile != blank -%}
+								<div class="slide-image slide-image--mobile">
+									{%- assign image = block.settings.image_mobile -%}
+									{%- assign image_widths = '[295,394,590,700,800,1000,1200,1500,1800,2000,2400]' -%}
+									{%- assign image_url_pattern = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+									<div class="slide-image__container" style="padding-top: {{ 100 | divided_by: image.aspect_ratio | append: '%' }}">
+										<img data-swift-lazy="1" loading="lazy"
+											class="lazyload"
+											src="{{ 'blank.gif' | asset_img_url: '1x1' }}"
+											data-src="{{ image_url_pattern }}"
+											data-widths= "{{ image_widths }}"
+											data-aspectratio="{{ image.aspect_ratio }}"
+											data-sizes="auto"
+											alt="{{ image.alt | escape }}">
+										<noscript>
+											<img data-swift-lazy="1" loading="lazy" src="{{ image | img_url: '2048x' }}" alt="{{ image.alt | escape }}">
+										</noscript>
+									</div>
+								</div>
+							{%- endif -%}
+						</div>
+					{%- else -%}
+						<div class="slide-background-container{% if mobile_image != blank %} slide-background--has-mobile{% endif %}" {% if transition == 'zoom-out' %}data-animation="moZoomOut"{% endif %}>
+							{%- if image != blank -%}
+								<div class="slide-background slide-background--desktop slide-background--{{ block.settings.image_position }} lazyload"
+									data-bgset="{% render 'bgset' image: image %}"
+									data-sizes="auto"
+									data-parent-fit="cover"
+								>
+								</div>
+								<noscript>
+									<div class="slide-background slide-background--desktop slide-background--{{ block.settings.image_position }}"
+									style="background-image:url('{{ block.settings.image | img_url: '2048x' }}');"
+									></div>
+								</noscript>
+							{%- else -%}
+								<div class="slide-background slide-background--desktop slide-background--placeholder">
+									{%- capture current -%}{% cycle 1, 2 %}{%- endcapture -%}
+									<div class = "slide-background--blank">
+										{{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+									</div>
+								</div>
+							{%- endif -%}
+
+							{%- if image_mobile != blank -%}
+								{%- assign image = block.settings.image_mobile -%}
+								<div class="slide-background slide-background--mobile slide-background--{{ block.settings.image_position }} lazyload"
+									data-bgset="{% render 'bgset', image: image %}"
+									data-sizes="auto"
+									data-parent-fit="cover"
+								>
+								</div>
+								<noscript>
+									<div class="slide-background slide-background--mobile slide-background--{{ block.settings.image_position }}"
+									style="background-image:url('{{ block.settings.image | img_url: '2048x' }}');"
+									></div>
+								</noscript>
+							{%- endif -%}
+						</div>
+					{%- endif -%}
+				</div>
+		{%- if image_link -%}
+			</a>
+		{%- else -%}
+			</div>
+		{%- endif -%}
+	{%- endfor -%}
+</section>
+
+{%- if show_arrow_down -%}
+	<a href="#" class="hero-scroll-down js-scroll-down" title="{{ 'slideshow.scroll_down' | t }}" aria-label="{{ 'slideshow.scroll_down' | t }}">
+		{%- render 'icon-arrow-slider' -%}
+	</a>
+{%- endif -%}

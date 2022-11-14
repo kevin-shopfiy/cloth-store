@@ -1,0 +1,144 @@
+{%- assign position_filters = section.settings.position_filters -%}
+
+{%- capture filter_tags -%}
+	{%- assign tags_list = '' -%}
+
+	{%- case filter_mode -%}
+		{%- when 'tag' -%}
+			{%- for tag in collection.all_tags -%}
+				{%- unless tags_list contains tag or tag contains 'badge' or tag contains '__tab' -%}
+					{%- capture temp_list -%}{{ tags_list | append: tag | append: ' ' }}{%- endcapture -%}
+					{%- assign tags_list = tempList -%}
+					<li class="collection__filter-tag collection__filter-tag--default {% if current_tags contains tag %}is-active{% endif %}" data-collection-filter-tag>
+						<button class="collection__filter-tag-btn" data-tag="{{ tag | handleize }}" data-collection-filter-tag-button>
+							{{- tag -}}
+							{%- render 'icon-check' -%}
+						</button>
+					</li>
+				{%- endunless -%}
+			{%- endfor -%}
+
+		{%- when 'group' -%}
+			{%- assign all_groups = '' -%}
+			{%- assign groups = '' -%}
+
+			{%- for tag in collection.all_tags -%}
+				{%- assign tag_parts = tag | split: '_' -%}
+				{%- if tag_parts.size == 2 -%}
+
+					{% unless all_groups contains tag_parts.first %}
+						{%- assign groups = groups | append: tag_parts.first | append: ',' -%}
+						{%- assign all_groups = all_groups | append: groups -%}
+					{%- endunless -%}
+
+				{%- endif -%}
+			{%- endfor -%}
+
+			{%- assign groups = groups | split: ',' | compact | uniq -%}
+			{%- assign color_label = 'color,colour,couleur,colore,farbe,색,色,färg,farve' | split: ',' -%}
+
+			{%- for group in groups -%}
+				{%- assign group_label = group | downcase -%}
+
+				{%- comment -%} Don't show "badge" as a filter {%- endcomment -%}
+				{%- unless group_label == 'badge' -%}
+
+					{%- if color_label contains group_label and settings.enable_color_swatches -%}
+						{%- assign is_color_swatch = true -%}
+					{%- else -%}
+						{%- assign is_color_swatch = false -%}
+					{%- endif -%}
+
+					<div class="collection__filter collection__filter--accordion-expanded" data-collection-filter>
+						<button class="collection__filter-title" tabindex="0" data-collection-filter-title>
+							<span>{{ group }}</span>
+							{%- render 'icon-arrow' -%}
+						</button>
+						<div class="collection__filter-container">
+							<ul class="collection__filter-tags {% if is_color_swatch %}collection__filter-tags--swatches{% endif %}">
+								{%- for tag in collection.all_tags -%}
+									{%- assign tag_parts = tag | split: '_' -%}
+									{%- assign group_tag = tag_parts.last -%}
+
+									{%- if tag_parts.first == group -%}
+										{%- if is_color_swatch -%}
+											<li class="collection__filter-tag collection__filter-tag--swatch swatch{% if current_tags contains tag %} is-active{% endif %}"
+												data-collection-filter-tag>
+												<button
+													class="swatch__element swatch__element--{{ group_tag | handle }} collection__filter-tag-btn"
+													data-value="{{ group_tag }}"
+													data-tag="{{ tag | handleize }}"
+													data-collection-filter-tag-button>
+													<div class="swatch__label">
+														<span class="swatch__color swatch__color--{{ group_tag | handle }}" style="background-color: {{ group_tag | split: ' ' | last | handle }}; background-image: url({{ value | handle | append: '.' | append: file_extension | asset_url }})"></span>
+														<span class="swatch__color-name">{{ group_tag }}</span>
+													</div>
+												</button>
+											</li>
+										{%- else -%}
+
+											{% comment %} Check if the tag value is a number {% endcomment %}
+											{%- capture tag_value -%}{{ group_tag | abs }}{%- endcapture -%}
+
+											{%- if tag_value == group_tag -%}
+												{%- assign is_number = true -%}
+											{%- else -%}
+												{%- assign is_number = false -%}
+											{%- endif -%}
+
+											<li class="collection__filter-tag {% if is_number %}collection__filter-tag--number{% else %}collection__filter-tag--default{% endif %} {% if current_tags contains tag %}is-active{% endif %}"
+												data-collection-filter-tag>
+												<button data-tag="{{ tag | handleize }}" class="collection__filter-tag-btn" data-collection-filter-tag-button>
+													{{- group_tag -}}
+													{%- unless is_number -%}
+														{%- render 'icon-check' -%}
+													{%- endunless -%}
+												</button>
+											</li>
+										{%- endif -%}
+									{%- endif -%}
+								{%- endfor -%}
+							</ul>
+						</div>
+					</div>
+
+				{%- endunless -%}
+			{%- endfor -%}
+
+	{%- endcase -%}
+{%- endcapture -%}
+
+{%- if filter_tags != blank -%}
+	<div class="collection__filters collection__filters--{{ position_filters }} {% if current_tags != blank %}collection__filters--has-tags-selected{% endif %}" data-collection-filters>
+		<div class="container">
+			<div class="collection__filters-list">
+				<div class="collection__filters-reset">
+					<button class="collection__filters-reset-btn {% if current_tags != blank %}is-visible{% endif %}" {% if current_tags == blank %}style="display: none;"{% endif %} data-collection-filters-reset-button>
+						{%- render 'icon-close' -%}
+						<span class="collection__filters-reset-btn-text">
+							{{ 'collections.tag_filtering.reset' | t }}
+							<span class="products-found" data-products-found-label>- {{ 'collections.products_with_count' | t: count: collection.products_count }}</span>
+						</span>
+					</button>
+				</div>
+
+				{%- case filter_mode -%}
+				{%- when 'tag' -%}
+					<div class="collection__filter collection__filter--accordion-expanded" data-collection-filter>
+						<button class="collection__filter-title" data-collection-filter-title>
+							<span>{{ 'collections.tag_filtering.filters' | t }}</span>
+							{%- render 'icon-arrow' -%}
+						</button>
+						<div class="collection__filter-container">
+							<ul class="collection__filter-tags">
+								{{- filter_tags -}}
+							</ul>
+						</div>
+					</div>
+				{%- when 'group' -%}
+					{{- filter_tags -}}
+				{%- endcase -%}
+			</div>
+		</div>
+	</div>
+{%- endif -%}

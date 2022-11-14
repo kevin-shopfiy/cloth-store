@@ -1,0 +1,43 @@
+{%- comment -%} Section {%- endcomment -%}
+{%- assign type = block.type -%}
+{%- assign product_usp_one_icon = block.settings.product-usp-one-icon -%}
+{%- assign product_usp_one_details = block.settings.product-usp-one-details -%}
+{%- assign product_usp_two_icon = block.settings.product-usp-two-icon -%}
+{%- assign product_usp_two_details = block.settings.product-usp-two-details -%}
+{%- assign product_usp_three_icon = block.settings.product-usp-three-icon -%}
+{%- assign product_usp_three_details = block.settings.product-usp-three-details -%}
+
+<ul>
+	{%- if product_usp_one_details != blank -%}
+		<li>{{ product_usp_one_details }}</li>
+	{%- endif -%}	
+
+	{%- if product_usp_two_details != blank -%}
+		<li>{{ product_usp_two_details }}</li>
+	{%- endif -%}	
+
+	{%- if product_usp_three_details != blank -%}
+		<li>{{ product_usp_three_details }}</li>
+	{%- endif -%}	
+</ul>
+
+<!-- {%- if product_usp_one_icon != blank and product_usp_one_details != blank -%}
+<div>
+	<i class="fa {{ product_usp_one_icon }}"></i>
+	<p>{{ product_usp_one_details }}</p>
+</div>
+{%- endif -%}
+
+{%- if product_usp_two_icon != blank and product_usp_two_details != blank -%}
+<div>
+	<i class="fa {{ product_usp_two_icon }}"></i>
+	<p>{{ product_usp_two_details }}</p>
+</div>
+{%- endif -%}
+
+{%- if product_usp_three_icon != blank and product_usp_three_details != blank -%}
+<div>
+	<i class="fa {{ product_usp_three_icon }}"></i>
+	<p>{{ product_usp_three_details }}</p>
+</div>
+{%- endif -%} -->

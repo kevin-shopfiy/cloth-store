@@ -1,0 +1,6 @@
+<script type="application/json" sa-language-info="true" data-no-instant="true">
+    {
+        "current_language":{{ shop.locale | json }},{{ newline }}
+        "default_language":{%- for locale in shop.published_locales -%}{%- if locale.primary -%}{{ locale.iso_code | json }}{%- endif -%}{%- endfor -%}{{ newline }}
+    }
+    </script>

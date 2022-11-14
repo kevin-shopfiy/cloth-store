@@ -1,0 +1,48 @@
+<script id="ProductQuickViewTemplate--{{ section.id }}" type="text/x-template">
+	<div class="quickView">
+		<div class="quickView-wrap">
+			<div class="quickView-inner-wrap">
+				<div class="container">
+					<div class="row">
+						<div class="quickView-img block">
+							<div class="productImgSlider{% raw %}{{ @if (it.isProductMediaSingle) }} productImgSlider--single{{ /if }}{% endraw %}" data-product-single-media-group>
+								<div class="js-productImgSlider js-productImgContainer" data-gallery="none" data-dots="false" data-arrows="false" data-product-single-media-slider id="js-productImgSlider--{{ section.id }}">
+									{% raw %}{{* it.productMediaSlider }}{% endraw %}
+								</div>
+							</div>
+							{% raw %}
+								{{ @if (it.productMediaThumbs) }}
+								<div class="productImgSlider-nav js-productImgSlider-nav" data-product-single-media-thumbs>
+									{{* it.productMediaThumbs }}
+								</div>
+								{{ /if }}
+							{% endraw %}
+						</div>
+						<div class="quickView-info block">
+							<a href="#" class="quickView-close js-quickView-close" aria-label="{{ 'general.accessibility.close' | t }}">
+								{%- render 'icon-close' -%}
+							</a>
+							<div class="product-info">
+								<div class="quickView-info-container">
+									{% raw %}
+									<div class="product-title__wrapper block s1">
+										{{* it.productTitle }}
+									</div>
+									<div class="product-form block s1">
+										{{* it.productForm }}
+									</div>
+									<div class="product-description rte">
+										{{* it.productDescription }}
+									</div>
+									{% endraw %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="application/json" id="ModelJson-product-template" hidden>{% raw %}{{* it.productMediaJson }}{% endraw %}</script>
+
+</script>

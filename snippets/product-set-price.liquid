@@ -1,0 +1,33 @@
+{%- assign first_variant = product.selected_or_first_available_variant -%}
+{%- assign on_sale = false -%}
+{%- if product.compare_at_price > product.price -%}
+	{%- assign on_sale = true -%}
+	{%- assign on_sale_class = ' is-sale' -%}
+{%- endif -%}
+
+<div class="product-price" data-price-wrapper>
+	<span class="product-price-value" data-product-price><strong>{{ first_variant.price | money }}</strong></span>
+	{%- if first_variant.compare_at_price -%}
+		<s class="product-price__sale" data-compare-price>{{ first_variant.compare_at_price | money }}</s>
+  {%- endif -%}
+  
+  <div class="product-unit-price">
+    <span>Inkl. MwSt. zzgl. <a href="/policies/shipping-policy">Versandkosten</a></span>
+  </div>
+
+	{%- if first_variant.unit_price_measurement -%}
+		{%- capture unit_price_separator -%}
+			<span aria-hidden="true">/</span><span class="visually-hidden">{{ 'general.accessibility.unit_price_separator' | t }}&nbsp;</span>
+		{%- endcapture -%}
+		<div class="product-unit-price" data-unit-wrapper>
+			<span data-unit-price>
+				{{ first_variant.unit_price | money }} pro&nbsp;
+				{%- if first_variant.unit_price_measurement.reference_value != 1 -%}
+					{{- first_variant.unit_price_measurement.reference_value -}}
+				{%- endif -%}
+			</span>
+			<!-- {{ unit_price_separator }} -->
+			<span data-unit-base>{{ first_variant.unit_price_measurement.reference_unit }}</span> | <span>Inkl. MwSt. zzgl. <a href="/policies/shipping-policy">Versandkosten</a></span>
+		</div>
+	{%- endif -%}
+</div>

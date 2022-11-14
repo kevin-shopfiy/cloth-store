@@ -1,0 +1,95 @@
+<script type="lazyload2">
+    document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+</script>
+<script >
+    window.theme = {
+        info: {
+            name: 'Modular'
+        },
+        version: '1.9.7',
+        routes: {
+            root_url: {{ routes.root_url | json }},
+            search_url: {{ routes.search_url | json }},
+            product_recommendations_url: {{ routes.product_recommendations_url | json }}
+        },
+        translations: {
+            add_to_cart: {{ "products.form.submit" | t | json }},
+            load_more: {{ "collections.pagination.load_more" | t | json }},
+            form_submit: {{ "products.form.submit" | t | json }},
+            form_submit_error: {{ "products.form.submit_error" | t | json }},
+            form_submit_error_details: {{ "products.form.submit_error_details" | t | json }},
+            cart_title: {{ "cart.labels.cart_title" | t | json }},
+            cart_empty: {{ "cart.labels.empty_cart" | t | json }},
+            cart_acceptance_error: {{ "cart.labels.accept_terms" | t | json }},
+            continue_shopping: {{ "cart.labels.continue_shopping" | t | json }},
+            on_sale: {{ "products.labels.on_sale" | t | json }},
+            unit_price_separator: {{ "products.labels.unit_price_separator" | t | json }},
+            sold_out: {{ "products.labels.sold_out" | t | json }},
+            unavailable: {{ "products.labels.unavailable" | t | json }},
+            results_products: {{ "search.content.results.products" | t | json }},
+            results_pages: {{ "search.content.results.pages" | t | json }},
+            results_articles: {{ "search.content.results.articles" | t | json }},
+            no_results: {{ "search.content.results.no_results" | t | json }},
+            previous: {{ "slideshow.previous" | t | json }},
+            next: {{ "slideshow.next" | t | json }},
+            view_all: {{ "search.content.results.view_all" | t | json }}
+        },
+        icons: {
+            arrow: '{% render "icon-arrow" %}',
+            arrowSlider: '{% render "icon-submit" %}',
+            arrowNavSlider: 'M0.0776563715,49.6974826 L0.0776563715,50.3266624 C0.0882978908,50.4524827 0.146435015,50.5626537 0.234305795,50.6407437 C0.234697028,50.7982538 0.39181593,50.7982538 0.39181593,50.9556075 C0.39181593,51.1129611 0.548934833,51.1127264 0.548934833,51.27008 C0.636101395,51.27008 0.706053735,51.3405018 0.706053735,51.4271989 L36.3981789,88.377449 C36.9898787,88.9427015 37.7935482,89.2908983 38.6778897,89.2908983 C39.5622313,89.2908983 40.3661354,88.9429363 40.9590089,88.3761189 C41.5534473,87.8297238 41.9253528,87.0464767 41.9253528,86.1759065 C41.9253528,85.3053363 41.5534473,84.5227934 40.9597131,83.9766331 L10.297036,52.0652206 L96.9330092,52.8421298 C98.6696895,52.8421298 100.077578,51.4342411 100.077578,49.6975608 C100.077578,47.9608805 98.6696895,46.5529919 96.9330092,46.5529919 L10.297036,46.5529919 L40.9578352,15.4206794 C41.4680804,14.8636428 41.7811445,14.1180323 41.7811445,13.299496 C41.7811445,12.4018526 41.4053267,11.5926276 40.8022812,11.0197852 C40.2533823,10.422843 39.4701352,10.0509375 38.599565,10.0509375 C37.7289948,10.0509375 36.9464519,10.422843 36.4002916,11.0165771 L36.3981007,11.018768 L0.863172638,47.1829542 C0.863172638,47.3400731 0.863172638,47.3400731 0.706053735,47.4974267 C0.618887173,47.4974267 0.548934833,47.5678485 0.548934833,47.6545456 C0.548934833,47.8116645 0.39181593,47.8116645 0.39181593,47.9690181 L0.234697028,47.9690181 L0.234697028,48.2834907 C0.146356768,48.3619719 0.0882196443,48.4723777 0.077578125,48.5964766 L0.077578125,49.6984215 L0.0776563715,49.6974826 Z',
+            arrowLong: '{% render "icon-arrow-long" %}',
+            check: '{% render "icon-check" %}',
+            close: '{% render "icon-close" %}',
+            plus: '{% render "icon-plus" %}',
+            minus: '{% render "icon-minus" %}',
+            blank: {{ 'blank.gif' | asset_img_url: '1x1' | json }}
+        },
+        settings: {
+            enableAcceptTerms: {{ settings.enable_accept_terms | json }},
+            enableAjaxCart: {{ settings.enable_ajax_cart | json }},
+            enableColorSwatches: {{ settings.enable_color_swatches | json }},
+            enablePaymentButton: {{ settings.enable_payment_button | json }},
+            enableVideoLooping: {{ settings.enable_video_looping | json }},
+            enableTextAnimations: {{ settings.transition_text | json }},
+            enableGridItemsAnimations: {{ settings.transition_grid_items | json }},
+            enableSearch: {{ settings.show_search | json }},
+            enableYotpo: {{ settings.enable_yotpo | json }},
+            showProductDescription: {{ settings.show_quick_view_description | json }},
+            showQuickView: {{ settings.show_quick_view | json }},
+            showQuantity: {{ settings.show_quantity | json }},
+            showReviews: {{ settings.show_reviews | json }},
+            yotpoId: {{ settings.yotpo_ID | json }},
+            imageAspectRatio: {{ settings.image_aspect_ratio | json }},
+            imageBackgroundSize: {{ settings.image_size | json }},
+            productBadgeStyle: {{ settings.product_badge_style | json }},
+            searchType: {{ settings.search_type | json }},
+            productTitlePosition: {{ settings.product_title_position | json }}
+        },
+        isTouch: false
+    }
+  </script>
+<script type="lazyload2">
+    window.moneyFormat = {{ shop.money_format | json }};
+    window.slate = window.slate || {};
+    window.lazySizesConfig = {
+        loadHidden: false,
+        hFac: 0.5,
+        expFactor: 2,
+        customMedia: {
+          '--phone': '(max-width: 640px)',
+          '--tablet': '(min-width: 641px) and (max-width: 1023px)',
+          '--lap': '(min-width: 1024px)'
+        }
+    }
+</script>
+<script link-src="{{ 'lazysizes.min.js' | asset_url }}" async></script>
+
+{%- if template contains 'customers' -%}
+    {{- 'shopify_common.js' | shopify_asset_url | script_tag -}}
+    {{- 'customer_area.js'  | shopify_asset_url | script_tag -}}
+{%- endif -%}
+
+{%- if settings.enable_yotpo and settings.yotpo_ID != '' -%}
+    <script type="text/javascript" defer>(function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/{{ settings.yotpo_ID }}/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();</script>
+{%- endif -%}

@@ -1,0 +1,13 @@
+{% comment %}
+  DO NOT MODIFY THIS FILE DIRECTLY. THIS FILE WILL BE OVERWRITTEN.
+  YOU CAN MODIFY THE LIQUID CODE FOR THIS CUSTOM FIELD HERE:
+  https://customfields.bonify.io/dashboard/oonique.myshopify.com/products/configure/232266/edit
+{% endcomment %}
+{% if product.metafields.custom_fields["enthaltene_garne"] != blank %}
+  <div class="custom-field custom-field__enthaltene-garne custom-field__type--text">
+    <h3 class="custom-field--title">Enthaltene Garne</h3>
+    <div class="custom-field--value">
+      {{ product.metafields.custom_fields["enthaltene_garne"] }}
+    </div>
+  </div>
+{% endif %}

@@ -1,0 +1,41 @@
+{%- comment -%} Colors {%- endcomment -%}
+{%- assign text_color = section.settings.text_color -%}
+{%- assign overlay_color = section.settings.overlay_color -%}
+{%- assign overlay_opacity = section.settings.overlay_opacity | times: 0.01 | round: 2 -%}
+
+<style>
+	#collection-module-{{ section.id }} .collection--has-image .collectionBlock-info { color: {{ text_color }}; }
+	#collection-module-{{ section.id }} .collection--has-image .collectionBlock-image:before { background-color: {{ overlay_color }}; opacity: {{ overlay_opacity }}; }
+</style>
+
+{%- comment -%} Section {%- endcomment -%}
+
+{%- paginate collections by 12 -%}
+<section class="collectionList container-wrap" id="collection-module-{{ section.id }}" data-section-type="collection-grid" data-section-id="{{ section.id }}">
+	<div class="collectionList-header row row-sm">
+		<div class="block s1">
+			<h1>{{ 'collections.listing_page.title' | t }}</h1>
+		</div>
+	</div>
+
+	<div class="collectionList-row row EndlessScroll">
+		{%- comment -%} Collection Block, contains .js-quickView {%- endcomment -%}
+
+		{%- for collection in collections -%}
+			{%- assign image = collection.image -%}
+			{%- render 'collectionList-block', collection: collection, image: image -%}
+		{%- endfor -%}
+
+		{%- comment -%} Spacers for inline-block based collectionList {%- endcomment -%}
+		<div class="gridSpacer item block s1 sm_s12 lg_s14"></div>
+		<div class="gridSpacer item block s1 sm_s12 lg_s14"></div>
+
+		{%- if paginate.next -%}
+			<div class="pagination u-center">
+				<a href="{{ paginate.next.url }}" class="loadMore visually-hidden">{{ 'collections.pagination.load_more' | t }}</a>
+				<div class="icon-load-more"></div>
+			</div>
+		{%- endif -%}
+	</div>
+</section>
+{%- endpaginate -%}
