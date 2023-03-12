@@ -1,0 +1,471 @@
+{%- assign first_variant = product.selected_or_first_available_variant -%}
+{%- assign variants_count = product.variants.size -%}
+{%- assign enable_color_swatches = settings.enable_color_swatches -%}
+{%- assign enable_variant_boxes = settings.enable_variant_boxes -%}
+
+{%- if first_variant.available -%}
+{%- assign sold_out = false -%}
+{%- else -%}
+{%- assign sold_out = true -%}
+{%- endif -%}
+
+{%- if product.selected_or_first_available_variant.inventory_quantity <= 0 -%}
+{%- assign product_availability = "<div class='product-availability red'><span></span> nicht verfügbar</div>" %}
+{%- elsif product.selected_or_first_available_variant.inventory_quantity < 10 -%}
+{%- assign product_availability = "<div class='product-availability orange'><span></span> nur noch wenige verfügbar</div>" %}
+{%- elsif product.selected_or_first_available_variant.inventory_quantity > 10 -%}
+{%- assign product_availability = "<div class='product-availability green'><span></span> verfügbar</div>" %}
+{%- endif -%}
+
+{%- assign variant_index = 0 -%}
+{%- assign variant_selector_index = 0 -%}
+
+{%- form 'product', product, class: 'productForm', data-enable-color-swatches: enable_color_swatches, data-product-id: product.id -%}
+<div class="productForm-block{% unless enable_variant_boxes %} productForm-block--options-inline{% endunless %}{% if enable_color_swatches %} productForm-block--swatches{% endif %}">
+  {%- unless product.has_only_default_variant -%}
+  {%- if enable_variant_boxes -%}
+  {%- assign color_label = 'color,colour,couleur,colore,Farbe,farbe,색,色,färg,farve' | split: ',' -%}
+  {%- for option in product.options_with_values -%}
+  {%- assign downcased_option = option.name | downcase -%}
+  {%- assign is_color = false -%}
+  {%- if color_label contains downcased_option -%}
+  {%- assign is_color = true -%}
+  {%- endif -%}
+
+  {%- if is_color and enable_color_swatches -%}
+  {%- comment -%} /partials/product-swatch.liquid {%- endcomment -%}
+
+  {%- assign file_extension = 'png' -%}
+
+  <div class="variant-wrapper  variant-wrapper--color" data-option="option{{ option.position }}">
+    <label class="variant-label--color" for="SingleOptionSelector-{{ forloop.index0 }}-{{ product.id }}">
+      {{- option.name -}}
+      <span class="variant-label__value" data-color-label></span>
+    </label>
+
+    <fieldset
+              id="SingleOptionSelector-{{ forloop.index0 }}-{{ product.id }}"
+              class="variant-input-wrap"
+              data-index="option{{ option.position }}">
+      <div class="swatch{% if settings.color_swatches_style == 'square' %} swatch--square{% endif %}">
+        {%- for value in option.values -%}
+        <div data-value="{{ value | escape }}" class="swatch__element">
+          <input
+                 id="option-{{ value | handle }}-{{ forloop.index0 }}-{{ section.id }}"
+                 class="swatch__input"
+                 type="radio"
+                 name="{{ option.name }}"
+                 value="{{ value | escape }}"
+                 data-color-swatch
+                 data-single-option-selector
+                 data-index="option{{ option.position }}"
+                 {% if option.selected_value == value %}checked="checked"{% endif %}>
+          <label class="variant__button-label--color swatch__label" for="option-{{ value | handle }}-{{ forloop.index0 }}-{{ section.id }}">
+            <span class="swatch__color swatch__color--{{ value | handle }}" style="background-color: {{ value | split: ' ' | last | handle }}; background-image: url({{ value | handle | append: '.' | append: file_extension | asset_url }})"></span>
+            <span class="accessible-label">{{ value }}</span>
+          </label>
+        </div>
+        {%- endfor -%}
+      </div>
+    </fieldset>
+  </div>
+
+  {%- else -%}
+  <div class="variant-wrapper{% if enable_variant_boxes %} variant-wrapper--boxes{% endif %}" data-option="option{{ option.position }}">
+    <label class="variant-label" for="SingleOptionSelector-{{ forloop.index0 }}-{{ product.id }}">
+      {{- option.name -}}
+    </label>
+
+    <fieldset
+              id="SingleOptionSelector-{{ forloop.index0 }}-{{product.id}}"
+              class="variant-input-wrap variant-input-wrap--boxes"
+              data-index="option{{ option.position }}">
+      {%- for value in option.values -%}
+      <div class="variant-field">
+        <input
+               id="option-{{ value }}-{{ forloop.index0 }}"
+               class="visually-hidden variant-input"
+               type="radio"
+               name="{{ option.name }}"
+               value="{{ value | escape }}"
+               data-single-option-selector
+               data-index="option{{ option.position }}"
+               {% if option.selected_value == value %}checked="checked"{% endif %}>
+        <label class="variant__button-label" for="option-{{ value }}-{{ forloop.index0 }}">
+          {{- value -}}
+        </label>
+      </div>
+      {%- endfor -%}
+    </fieldset>
+  </div>
+  {%- endif -%}
+  {%- endfor -%}
+  {%- else -%}
+  {%- for option in product.options_with_values -%}
+  {%- if enable_color_swatches -%}
+  {%- assign color_label = 'color,colour,couleur,colore,Farbe,farbe,색,色,färg,farve' | split: ',' -%}
+  {%- assign downcased_option = option.name | downcase -%}
+  {%- if color_label contains downcased_option -%}
+  {%- comment -%} /partials/product-swatch.liquid {%- endcomment -%}
+
+  {%- assign file_extension = 'png' -%}
+
+  <div
+       class="color-variant-selector__wrapper variant-wrapper__pdp"
+       onClick="toggleColorVariantOptions(event)"
+       >
+    <span class="color-variant-selector__selected">Farbe: {{ option.selected_value }}</span>
+    <div
+         class="color-variant-selector__options__item__preview color-variant-selector__options__item__preview__selected"
+         style="background-image: url('{{ product.selected_or_first_available_variant.metafields.custom_fields.zoom_image_url }}');"
+         ></div>
+
+    <div class="color-variant-selector__chevron">
+      {%- render 'icon-arrow' -%}
+    </div>
+
+    <select
+            id="colorVariantSelector"
+            onClick="updateVariantMetafieldIncludedItems()"		
+            class="color-variant-selector"
+            >
+      {%- for value in option.values -%}
+      {%- for variant in product.variants -%}
+      {%- if variant.option2 == value and option_value != value -%}
+      {%- assign option_value = value -%}
+      <option
+              value="{{ value | escape }}"
+              {% if option.selected_value == value %}selected="selected"{% endif %}>
+        {{ value }}
+      </option>
+      {%- endif -%}
+      {%- endfor -%}
+      {%- endfor -%}
+    </select>
+
+    <div class="color-variant-selector__options">
+      {%- for value in option.values -%}
+      {%- for variant in product.variants -%}
+      {%- if variant.option1 == value and option_value != value -%}
+      {%- assign option_value = value -%}
+      {%- assign variant_selector_index = variant_selector_index | plus: 1 -%}
+
+      {% if variant.metafields.custom_fields != blank %}
+      {%- assign background_url = variant.metafields.custom_fields.zoom_image_url -%}
+      {%- endif -%}	
+
+      {% if variant.image.src == blank and variant.metafields.custom_fields == blank %}
+      {%- assign background_color = '#ddd' -%}
+      {%- endif -%}
+
+      {% if variant_selector_index == 1 %}
+      <div
+           class="color-variant-selector__options__item"
+           onClick="updateColorVariant('{{ value | escape }}', '{{ variant.id }}', '{{ background_url }}', '{{ variant.featured_media.id }}')"
+           value="{{ value | escape }}"
+           {% if option.selected_value == value %}selected="selected"{% endif %}>
+
+        <p>{{ value }} {%- if variant.available == false -%} (ausverkauft) {% endif %}</p>
+
+        <div
+             class="color-variant-selector__options__item__preview"
+             style="background-image: url('{{ background_url }}'); {%- if variant.available == false -%} opacity: 0.75; {% endif %} "
+             ></div>
+
+      </div>
+      {% else %}
+      {%- if variant.available -%}
+      <div
+           class="color-variant-selector__options__item"
+           onClick="updateColorVariant('{{ value | escape }}', '{{ variant.id }}', '{{ background_url }}', '{{ variant.featured_media.id }}')"
+           value="{{ value | escape }}"
+           {% if option.selected_value == value %}selected="selected"{% endif %}>
+
+        <p>{{ value }}</p>
+
+        <div
+             class="color-variant-selector__options__item__preview"
+             style="background-image: url('{{ background_url }}');"
+             ></div>
+
+      </div>
+      {%- endif -%}
+      {%- endif -%}
+
+      {%- endif -%}
+      {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+<style>
+
+.display{
+  display:none;
+}
+.display:nth-child(1){
+    display:block;
+}
+.variant-wrapper--color .swatch__element {
+    margin: 0 5px 10px 0!important;
+    display: inline-block;
+}
+.color-variant-selector__wrapper.variant-wrapper__pdp {
+    display: none;
+}
+@media screen and (max-width: 600px){
+    .variant-label--color {
+    width: auto !important;
+    text-align: left !important;
+}
+}
+</style>
+  <script>
+    window.addEventListener("click", function (event) {
+      const colorVariantSelector = document.querySelector(".color-variant-selector__wrapper");
+
+      if (!colorVariantSelector.contains(event.target)) {
+        const colorVariantSelectorOptions = document.querySelector(".color-variant-selector__options");
+        colorVariantSelectorOptions.classList.remove("active");
+      };
+    });
+
+    function toggleColorVariantOptions (event) {
+      event.preventDefault();
+
+      document.querySelector(".color-variant-selector__wrapper").scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+        inline: "center"
+      });
+
+      const colorVariantSelectorOptions = document.querySelector(".color-variant-selector__options");
+
+      if (colorVariantSelectorOptions.classList.contains("active")) {
+        colorVariantSelectorOptions.classList.toggle("active", false);
+      } else {
+        colorVariantSelectorOptions.classList.toggle("active", true);
+      };
+    };
+
+    function updateColorVariant (value, id, backgroundURL, featuredMediaId,priceValue) {
+      const product = document.getElementById("product-select--{{ section.id }}");
+                                              product.value = id;
+
+                                              const shopBar = document.getElementById("ShopBar-SingleOptionSelector-{{- forloop.index0 -}}-{{- product.id -}}");
+                                              shopBar.value = value;
+
+                                              const selectedColorVariant = document.querySelector(".variant-label--color");
+      selectedColorVariant.innerHTML = "Farbe: " + value;
+    const price = document.querySelector(".product-price-value");
+      price.innerHTML = priceValue;
+   
+      const selectedColorVariantPreview = document.querySelector(".color-variant-selector__options__item__preview__selected");
+      selectedColorVariantPreview.style.backgroundImage = "url('" + backgroundURL + "')";
+
+      const slider = document.getElementsByClassName("flickity-slider")
+      const sliderSlides = slider[0].children
+      let sliderIndex;
+
+      for (let i = 0; i < sliderSlides.length; i++) {
+        if (sliderSlides[i].getAttribute("data-id") === featuredMediaId) {
+          sliderIndex = i;
+        }
+      }
+
+      const flkty = new Flickity('.js-productImgSlider');
+      flkty.select(sliderIndex);
+
+    };
+  </script>
+
+  <div class="variant-wrapper variant-wrapper--color" data-option="option{{ option.position }}">
+    <label class="variant-label--color" for="SingleOptionSelector-{{ forloop.index0 }}-{{ product.id }}">
+      {{- option.name -}}
+      <span id="defaultSelectedVariant" class="variant-label__value" data-color-label></span>
+    </label>
+
+    <fieldset
+              id="SingleOptionSelector-{{ forloop.index0 }}-{{ product.id }}"
+              class="variant-input-wrap"
+              data-index="option{{ option.position }}">
+      <div class="swatch{% if settings.color_swatches_style == 'square' %} swatch--square{% endif %}">
+        {%- for variant in product.variants -%}
+        {%- if variant.available -%}
+        <div data-value="{{ variant.title | escape }}" class="swatch__element">
+          <input
+                 id="option-{{ variant.title | handle }}-{{ forloop.index0 }}-{{ section.id }}"
+                 class="swatch__input"
+                 type="radio"
+                 name="{{ option.name }}"
+                 value="{{ variant.title | escape }}"
+                 data-color-swatch
+                 data-single-option-selector
+                 data-index="option{{ option.position }}"
+                 {% if option.selected_value == variant.title %}checked="checked"{% endif %}>
+          <label
+                 class="variant__button-label--color swatch__label" for="option-{{ variant.title | handle }}-{{ forloop.index0 }}-{{ section.id }}"
+                 >
+
+            {%- assign background_url = variant.image.src | img_url -%}
+            {%- assign background_color = 'transparent' -%}
+
+            {% if variant.metafields.custom_fields != blank %}
+            {%- assign background_url = variant.metafields.custom_fields.zoom_image_url -%}
+            {%- endif -%}	
+
+            {% if variant.image.src == blank and variant.metafields.custom_fields == blank %}
+            {%- assign background_color = '#ddd' -%}
+            {%- endif -%}	
+
+            <span onClick="updateColorVariant('{{ variant.title }}', '{{ variant.id }}', '{{ background_url }}', '{{ variant.featured_media.id }}','{{ variant.price | money }}')"
+                  class="swatch__color swatch__color__product swatch__color--{{ value | handle }}"
+                  style="background-color: {{ background_color }}; background-image: url({{ background_url }})">
+              <div
+                   class="swatch__color-available"
+                   style="top: {% if option.selected_value == variant.title %} 1px {% else %} 0px {% endif %}; left: {% if option.selected_value == variant.title %} 1px {% else %} 0px {% endif %}; bottom: {% if option.selected_value == variant.title %} 1px {% else %} 0px {% endif %}; right: {% if option.selected_value == variant.title %} 1px {% else %} 0px {% endif %}; opacity: {% if variant.inventory_quantity > 0 %} 0 {% else %} 0.75 {% endif %}"></div>
+            </span>
+            <span class="accessible-label">{{ variant.title }}</span>
+          </label>
+        </div>
+        {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </fieldset>
+  </div>
+
+  {%- else -%}
+  {%- comment -%} /partials/product-option.liquid {%- endcomment -%}
+  {%- capture selector_id -%}
+  {%- if shop_bar -%}
+  ShopBar-
+  {%- else -%}
+  Product-
+  {%- endif -%}
+  SingleOptionSelector-{{- forloop.index0 -}}-{{- product.id -}}
+  {%- endcapture -%}
+
+  <div class="selector-wrapper" data-option="option{{ option.position }}">
+    <label for="{{ selector_id }}">
+      {{- option.name -}}
+    </label>
+
+    <select
+            id="{{ selector_id }}"
+            data-single-option-selector
+            data-index="option{{ option.position }}">
+      {%- for value in option.values -%}
+      <option
+              value="{{ value | escape }}"
+              {% if option.selected_value == value %}selected="selected"{% endif %}>
+        {{- value -}}
+      </option>
+      {%- endfor -%}
+    </select>
+    {%- render 'icon-arrow' -%}
+  </div>
+  {%- endif -%}
+  {%- else -%}
+  {%- comment -%} /partials/product-option.liquid {%- endcomment -%}
+  {%- capture selector_id -%}
+  {%- if shop_bar -%}
+  ShopBar-
+  {%- else -%}
+  Product-
+  {%- endif -%}
+  SingleOptionSelector-{{- forloop.index0 -}}-{{- product.id -}}
+  {%- endcapture -%}
+
+  <div class="selector-wrapper" data-option="option{{ option.position }}">
+    <label for="{{ selector_id }}">
+      {{- option.name -}}
+    </label>
+
+    <select
+            id="{{ selector_id }}"
+            data-single-option-selector
+            data-index="option{{ option.position }}">
+      {%- for value in option.values -%}
+      <option
+              value="{{ value | escape }}"
+              {% if option.selected_value == value %}selected="selected"{% endif %}>
+        {{- value -}}
+      </option>
+      {%- endfor -%}
+    </select>
+    {%- render 'icon-arrow' -%}
+  </div>
+  {%- endif -%}
+  {%- endfor -%}
+  {%- endif -%}
+  {%- endunless -%}
+
+  <label for="product-select--{{ section.id }}" class="accessible-label">{{ 'general.accessibility.select_variant' | t }}</label>
+  {%- if variants_count > 1 -%}
+  <select
+          name="id"
+          id="product-select--{{ section.id }}"
+          class="product-single__variants"
+          data-product-id="{{ product.id }}"
+          data-product-select>
+    {%- for variant in product.variants -%}
+    {%- if variant.available -%}
+    <option
+            {% if variant == first_variant %} selected="selected" {% endif %}
+            data-sku="{{ variant.sku }}"
+            value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
+    {%- else -%}
+    <option disabled="disabled">{{ variant.title }} - {{ 'products.labels.sold_out' | t }}</option>
+    {%- endif -%}
+    {%- endfor -%}
+  </select>
+  {%- else -%}
+  <input name="id" id="product-select--{{ section.id }}" data-product-id="{{ product.id }}" type="hidden" value="{{ first_variant.id }}">
+  {%- endif -%}
+</div>
+
+<script>
+  (function() {
+    document.getElementById("defaultSelectedVariant").innerHTML = "{{ product.selected_or_first_available_variant.title }}";
+  })();
+</script>
+
+{%- render 'product-price' -%}
+
+<div class="productForm-block">
+  <div class="qty__adjust">
+    <input type="number" class="qty__adjust-input" name="quantity" id="quantity--{{ section.id }}" value="1" min="1">
+    <button type="button" class="qty__adjust-btn js-qty__adjust-btn decrease" aria-label="{{ 'general.accessibility.decrease' | t }}">{% render 'icon-minus' %}</button>
+    <button type="button" class="qty__adjust-btn js-qty__adjust-btn increase" aria-label="{{ 'general.accessibility.increase' | t }}">{% render 'icon-plus' %}</button>
+  </div>
+
+  <div class="productForm-buttons{% if settings.color_button_primary_bg == settings.color_background_new %} productForm-buttons--alt{% endif %}">
+    <!-- <button class="productForm-submit{% if section.settings.enable_payment_button and settings.enable_accept_terms == false %} button--alt{% endif %}" data-ajax="{{ settings.enable_ajax_cart }}" type="submit" data-handle="{{product.handle}}" {% if sold_out %}disabled{% endif %} data-add-to-cart> -->
+    <button class="productForm-submit{% if section.settings.enable_payment_button and settings.enable_accept_terms == false %} button--alt{% endif %}" data-ajax="{{ settings.enable_ajax_cart }}" type="submit" data-handle="{{product.handle}}" data-add-to-cart>
+      <span data-add-to-cart-text>
+        {%- unless sold_out -%}
+        {{- 'products.form.submit' | t -}}
+        {% else %}
+        {{- 'products.form.sold_out' | t -}}
+        {%- endunless -%}
+      </span>
+    </button>
+  </div>
+
+  {%- unless settings.enable_accept_terms -%}
+  {%- comment -%} Show payment button if section level setting is true or the global setting for Quick view is true {%- endcomment -%}
+  {%- if section.settings.enable_payment_button or settings.enable_payment_button -%}
+  <div class="productForm-buttons{% if settings.color_button_primary_bg == settings.color_background_new %} productForm-buttons--alt{% endif %}" data-payment-button="{{ section.settings.enable_payment_button }}" data-payment-button-quickview="{{ settings.enable_payment_button }}">
+    {{- form | payment_button -}}
+  </div>
+  {%- endif -%}
+  {%- endunless -%}
+</div>
+
+<div class="custom_html_sectuion">
+  <div class="product_visible">{{ product_availability }}</div>
+  <div class="AA custom_wishlist_data">
+
+    {% render 'wishlisthero-custom-button.liquid' %}
+  </div>	
+</div>
+{%- endform -%}

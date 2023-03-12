@@ -1,0 +1,13 @@
+{% comment %}
+  DO NOT MODIFY THIS FILE DIRECTLY. THIS FILE WILL BE OVERWRITTEN.
+  YOU CAN MODIFY THE LIQUID CODE FOR THIS CUSTOM FIELD HERE:
+  https://customfields.bonify.io/dashboard/oonique.myshopify.com/products/configure/240845/edit
+{% endcomment %}
+{% if product.metafields.custom_fields["zoom_image_url"] != blank %}
+  <div class="custom-field custom-field__zoom-image-url custom-field__type--text">
+    <h3 class="custom-field--title">zoom_image_url</h3>
+    <div class="custom-field--value">
+      {{ product.metafields.custom_fields["zoom_image_url"] }}
+    </div>
+  </div>
+{% endif %}

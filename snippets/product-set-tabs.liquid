@@ -1,0 +1,71 @@
+{%- if product.metafields.custom_fields.garn_set != blank -%}
+	<div class="product__tabs">
+		<div class="container">
+			<div class="product-tabs js-product-tabs product-tabs--single">
+				<div class="product-tabs-nav">
+					<button class="product-tab-title is-active">
+						Enthaltene Garne
+					</button>
+				</div>
+
+				<div class="product-tabs-contents">
+					<div class="product-tab-content rte is-active">
+						{%- assign handles = product.metafields.custom_fields.garn_set | split: '|' -%}
+						{% for handle in handles %}
+							{%- assign updated_handle = handle | strip -%}
+							<a class="product-handle" href="/collections/alle-garne/products/{{handle}}">
+								<h2>{{ all_products[updated_handle].title }}</h2>
+							</a>
+							<p>{{ all_products[updated_handle].metafields.custom_fields.properties }}</p>
+							<!-- <h3>Beschreibung:</h3> -->
+							<p>{{ all_products[updated_handle].description }}</p>
+							<div class="product-care">
+                              	{%- if all_products[updated_handle].metafields.custom_fields.care_wash_image != blank and all_products[updated_handle].metafields.custom_fields.care_wash_text != blank -%}
+									<div>
+										<img data-swift-lazy="1" loading="lazy" src="{{ all_products[updated_handle].metafields.custom_fields.care_wash_image }}" />
+										{{ all_products[updated_handle].metafields.custom_fields.care_wash_text }}
+									</div>
+								{%- endif -%}
+                              
+								{%- if all_products[updated_handle].metafields.custom_fields.care_dryer_image != blank and all_products[updated_handle].metafields.custom_fields.care_dryer_text != blank -%}
+									<div>
+										<img data-swift-lazy="1" loading="lazy" src="{{ all_products[updated_handle].metafields.custom_fields.care_dryer_image }}" />
+										{{ all_products[updated_handle].metafields.custom_fields.care_dryer_text }}
+									</div>
+								{%- endif -%}
+
+								{%- if all_products[updated_handle].metafields.custom_fields.care_drying_image != blank and all_products[updated_handle].metafields.custom_fields.care_drying_text != blank -%}
+									<div>
+										<img data-swift-lazy="1" loading="lazy" src="{{ all_products[updated_handle].metafields.custom_fields.care_drying_image }}" />
+										{{ all_products[updated_handle].metafields.custom_fields.care_drying_text }}
+									</div>
+								{%- endif -%}
+                              
+                              	{%- if all_products[updated_handle].metafields.custom_fields.care_iron_image != blank and all_products[updated_handle].metafields.custom_fields.care_iron_text != blank -%}
+									<div>
+										<img data-swift-lazy="1" loading="lazy" src="{{ all_products[updated_handle].metafields.custom_fields.care_iron_image }}" />
+										{{ all_products[updated_handle].metafields.custom_fields.care_iron_text }}
+									</div>
+								{%- endif -%}
+
+								{%- if all_products[updated_handle].metafields.custom_fields.care_bleach_image != blank and all_products[updated_handle].metafields.custom_fields.care_bleach_text != blank -%}
+									<div>
+										<img data-swift-lazy="1" loading="lazy" src="{{ all_products[updated_handle].metafields.custom_fields.care_bleach_image }}" />
+										{{ all_products[updated_handle].metafields.custom_fields.care_bleach_text }}
+									</div>
+								{%- endif -%}
+
+								{%- if all_products[updated_handle].metafields.custom_fields.care_chem_image != blank and all_products[updated_handle].metafields.custom_fields.care_chem_text != blank -%}
+									<div>
+										<img data-swift-lazy="1" loading="lazy" src="{{ all_products[updated_handle].metafields.custom_fields.care_chem_image }}" />
+										{{ all_products[updated_handle].metafields.custom_fields.care_chem_text }}
+									</div>
+								{%- endif -%}
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{%- endif -%}

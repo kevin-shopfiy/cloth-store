@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "1654082729c3a64a78": {
+      "type": "slideshow",
+      "blocks": {
+        "1654082729a86e95ab-0": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/fs2022-tuecher-06-lana-grossa_9230861_M14_MF4.jpg",
+            "image_position": "center-center",
+            "alignment": "right",
+            "color_style": "white",
+            "subheading": "",
+            "title": "Wir sind für Dich da",
+            "text": "<p>Wir freuen uns von Dir zu hören<\/p>",
+            "cta": "",
+            "link": "shopify:\/\/collections\/all",
+            "cta_primary_btn_style": "primary",
+            "cta_2": "",
+            "link_2": "",
+            "cta_secondary_btn_style": "secondary",
+            "overlay_color": "#333333",
+            "overlay_opacity": 0
+          }
+        },
+        "1654082729a86e95ab-1": {
+          "type": "image",
+          "disabled": true,
+          "settings": {
+            "image_position": "center-center",
+            "alignment": "center",
+            "color_style": "white",
+            "subheading": "",
+            "title": "Welcome to Modular",
+            "text": "<p>A unique layout with a striking design<\/p>",
+            "cta": "Shop Now",
+            "link": "shopify:\/\/collections\/all",
+            "cta_primary_btn_style": "primary",
+            "cta_2": "",
+            "link_2": "",
+            "cta_secondary_btn_style": "secondary",
+            "overlay_color": "#333333",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "1654082729a86e95ab-0",
+        "1654082729a86e95ab-1"
+      ],
+      "settings": {
+        "showNavArrows": true,
+        "show_arrow_down": false,
+        "autoplay": true,
+        "duration": 4,
+        "transition": "slide",
+        "dots_position": "center",
+        "slide_height": "seven-fifty-height-hero",
+        "button_size": "normal"
+      }
+    },
+    "main": {
+      "type": "contact-template",
+      "settings": {
+        "show_page_title": false,
+        "banner_height": "small",
+        "banner_subheading": "",
+        "banner_text": "",
+        "banner_text_position": "center",
+        "banner_color_text": "#ffffff",
+        "banner_color_overlay": "#333333",
+        "banner_overlay_opacity": 0,
+        "form_heading": "Wir freuen uns auf deine Nachricht"
+      }
+    }
+  },
+  "order": [
+    "1654082729c3a64a78",
+    "main"
+  ]
+}

@@ -1,0 +1,240 @@
+{% comment %} Settings {% endcomment %}
+{%- assign show_blog_name = section.settings.show_blog_name -%}
+{%- assign show_RSS = section.settings.show_rss -%}
+{%- assign show_comments = section.settings.show_comments -%}
+{%- assign show_author = section.settings.author -%}
+{%- assign show_date = section.settings.date -%}
+{%- assign show_featured = section.settings.show_featured_post -%}
+{%- assign article_columns = section.settings.article_columns | plus: 0 -%}
+{%- assign article_rows = section.settings.article_rows -%}
+{%- assign article_limit = article_columns | times: article_rows -%}
+{%- assign enable_infinity_scroll = settings.enable_infinity_scroll -%}
+
+<div
+	id="blog-template"
+	class="blogModule blogModule--template container-wrap"
+	data-section-id="{{ section.id }}"
+	data-section-type="blog-template"
+	data-featured="{{ show_featured }}"
+	data-blog-container>
+
+	{%- if show_blog_name or show_RSS -%}
+		<section class="page-title container-wrap">
+			<div class="container">
+				<div class="row inline u-center">
+					<h1 class="blog-title{% if show_RSS %} blog-title--has-rss{% endif %}">
+						{%- if show_blog_name -%}
+							<span>{{- blog.title -}}</span>
+						{%- endif -%}
+
+						{%- if show_RSS -%}
+							<div class="blog-rss">
+								<a href="{{ blog.title }}.atom" target="_blank">
+									{%- render 'icon-rss' -%}
+									<span class="blog-rss__label">{{ 'blog.blog_list_view.follow' | t }}</span>
+								</a>
+							</div>
+						{%- endif -%}
+					</h1>
+
+					{%- if current_tags -%}
+						<h4 class="tag-label">{{ 'blog.blog_list_view.posts_tagged' | t }}: {{ current_tags.first }}</h4>
+					{%- endif -%}
+				</div>
+			</div>
+		</section>
+	{%- endif -%}
+
+	<div class="container-wrap blog-listing">
+		{%- paginate blog.articles by article_limit -%}
+			{%- if show_featured -%}
+				{%- assign article = blog.articles[0] -%}
+
+				{%- unless article == blank -%}
+					<div class="container">
+						{%- if show_author and article.user.first_name != blank -%}
+							{%- assign show_author = true -%}
+							{%- capture author -%}{{ article.user.first_name }} {{ article.user.last_name }}{%- endcapture -%}
+						{%- else-%}
+							{%- assign show_author = false -%}
+						{%- endif-%}
+
+						{%- capture article_meta -%}
+							<p class="post-meta">
+								{%- if show_author -%}
+									<span class="post-meta__author">{{- 'blog.article.by_author' | t: author: author -}}</span>
+								{%- endif -%}
+								{%- if show_date -%}
+									<span class="post-meta__date"><time pubdate datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%B %d, %Y' }}</time></span>
+								{%- endif -%}
+								{%- if show_comments -%}
+									<span class="post-meta__comment-count">{{ 'blog.blog_list_view.comment_count' | t: count: article.comments_count }}</span>
+								{%- endif -%}
+							</p>
+						{%- endcapture -%}
+
+						{%- capture article_tags -%}
+							{%- if article.tags.size > 0 and section.settings.tags -%}
+								<div class="post-tags">
+									{%- for tag in article.tags -%}
+										<a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="post-tags__tag">{{ tag }}</a>
+									{%- endfor -%}
+								</div>
+							{%- endif -%}
+						{%- endcapture -%}
+
+						<div class="article article--featured {% if article.image == blank %}article--no-image{% else %}article--has-image{% endif %}">
+							{%- unless article.image == blank -%}
+								<div class="article__image-container">
+									<div class="article__image lazyload" data-bgset="{% render 'bgset', image: article.image %}" data-sizes="auto" data-parent-fit="cover">
+										<a href="{{ article.url }}" title="{{ article.title }}"></a>
+									</div>
+									<noscript>
+										<div class="article__image no-js-image" style="background-image:url('{{ article.image | img_url: '1024x' }}'); background-size: cover; background-position: center center; background-repeat: no-repeat;" title="{{article.title}}">
+											<a href="{{ article.url }}" title="{{ article.title }}"></a>
+										</div>
+									</noscript>
+									{{- article_meta -}}
+									{{- article_tags -}}
+								</div>
+							{%- else -%}
+								{{- article_tags -}}
+							{%- endunless -%}
+
+							<div class="article__content">
+								<h2 class="article__title"><a href="{{ article.url }}">{{ article.title }}</a></h2>
+
+								<div class="article__excerpt">
+									<p>{{ article.excerpt_or_content | strip_html | strip }}</p>
+								</div>
+
+								{%- if article.image == blank -%}
+									{{- article_meta -}}
+								{%- else -%}
+									{%- render 'accent-line' -%}
+								{%- endif -%}
+							</div>
+						</div>
+					</div>
+				{%- endunless -%}
+			{%- endif -%}
+
+			<!-- end article-featured -->
+			<div class="blogModule-posts__wrapper">
+				<div class="blogModule-posts{% if enable_infinity_scroll %} EndlessScroll{% endif %}">
+					{%- for article in blog.articles -%}
+						{%- unless show_featured and paginate.current_page == 1 and forloop.index == 1 -%}
+							{%- render 'blog-post', article: article, article_columns: article_columns, index: forloop.index -%}
+						{%- endunless -%}
+					{%- endfor -%}
+
+					{%- if enable_infinity_scroll -%}
+						{%- if paginate.next -%}
+							<div class="pagination u-center">
+								<a href="{{ paginate.next.url }}" class="loadMore visually-hidden">{{ 'collections.pagination.load_more' | t }}</a>
+								<div class="icon-load-more"></div>
+							</div>
+						{%- elsif paginate.next == blank and show_featured -%}
+							<div class="pagination u-center">
+								<a href="{{ paginate.next.url }}" class="loadMore loadMore--fake visually-hidden">{{ 'collections.pagination.load_more' | t }}</a>
+								<div class="icon-load-more"></div>
+							</div>
+						{%- endif -%}
+					{%- else -%}
+						{%- if paginate.pages > 1 -%}
+							{%- render 'pagination', paginate: paginate -%}
+						{%- endif -%}
+					{%- endif -%}
+				</div>
+			</div>
+		{%- endpaginate -%}
+	</div>
+
+	{%- if blog.articles_count == 0 -%}
+		<div class="u-center">
+			<div class="h4">{{ 'blog.blog_list_view.no_article' | t }}</div>
+		</div>
+	{%- endif -%}
+</div>
+
+{% schema %}
+	{
+		"name": "Blog pages",
+		"settings": [
+			{
+				"type": "header",
+				"content": "Settings"
+			},
+			{
+				"type": "checkbox",
+				"id": "show_blog_name",
+				"label": "Show blog name",
+				"default": false
+			},
+			{
+				"type": "checkbox",
+				"id": "show_rss",
+				"label": "Show RSS follow links",
+				"default": false
+			},
+			{
+				"type": "checkbox",
+				"id": "show_featured_post",
+				"label": "Show featured post",
+				"default": true
+			},
+			{
+				"type": "checkbox",
+				"id": "tags",
+				"label": "Show tags",
+				"default": true
+			},
+			{
+				"type": "checkbox",
+				"id": "author",
+				"label": "Show author",
+				"default": true
+			},
+			{
+				"type": "checkbox",
+				"id": "date",
+				"label": "Show date",
+				"default": true
+			},
+			{
+				"type": "checkbox",
+				"id": "show_comments",
+				"label": "Show comment count",
+				"default": true
+			},
+			{
+				"type": "range",
+				"id": "image_aspect_ratio",
+				"label": "Image aspect ratio",
+				"min": 0.5,
+				"max": 1.5,
+				"step": 0.1,
+				"unit": ":1",
+				"default": 1
+			},
+			{
+				"type": "range",
+				"id": "article_rows",
+				"label": "Posts rows",
+				"default": 4,
+				"min": 1,
+				"max": 4,
+				"step": 1
+			},
+			{
+				"type": "range",
+				"id": "article_columns",
+				"label": "Posts per row",
+				"default":4,
+				"min":1,
+				"max":5,
+				"step":1
+			}
+		]
+	}
+{% endschema %}

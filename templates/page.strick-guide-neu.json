@@ -1,0 +1,184 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-template",
+      "disabled": true,
+      "settings": {
+        "show_page_title": true
+      }
+    },
+    "16540836123c0cbf35": {
+      "type": "slideshow",
+      "blocks": {
+        "16540836127a8ab5b2-0": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/hw2021-about-berlin-10-m01-lana-grossa_04_686f9357-8aee-42ad-b708-1e54f7a434c6.jpg",
+            "image_mobile": "shopify:\/\/shop_images\/hw2021-about-berlin-10-m01-lana-grossa_04_686f9357-8aee-42ad-b708-1e54f7a434c6.jpg",
+            "image_position": "center-center",
+            "alignment": "right",
+            "color_style": "white",
+            "subheading": "",
+            "title": "Der OONIQUE Strick-Guide",
+            "text": "<p>You never knit alone<\/p>",
+            "cta": "",
+            "link": "",
+            "cta_primary_btn_style": "primary",
+            "cta_2": "",
+            "link_2": "",
+            "cta_secondary_btn_style": "secondary",
+            "overlay_color": "#333333",
+            "overlay_opacity": 0
+          }
+        },
+        "16540836127a8ab5b2-1": {
+          "type": "image",
+          "disabled": true,
+          "settings": {
+            "image_position": "center-center",
+            "alignment": "center",
+            "color_style": "white",
+            "subheading": "",
+            "title": "Welcome to Modular",
+            "text": "<p>A unique layout with a striking design<\/p>",
+            "cta": "Shop Now",
+            "link": "shopify:\/\/collections\/all",
+            "cta_primary_btn_style": "primary",
+            "cta_2": "",
+            "link_2": "",
+            "cta_secondary_btn_style": "secondary",
+            "overlay_color": "#333333",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "16540836127a8ab5b2-0",
+        "16540836127a8ab5b2-1"
+      ],
+      "settings": {
+        "showNavArrows": true,
+        "show_arrow_down": false,
+        "autoplay": true,
+        "duration": 4,
+        "transition": "slide",
+        "dots_position": "center",
+        "slide_height": "sixty-fifty-height-hero",
+        "button_size": "normal"
+      }
+    },
+    "1654089251c71891d4": {
+      "type": "rich-text",
+      "settings": {
+        "layout": "default",
+        "subheading": "YOUR KNITTING JOURNEY STARTS HERE",
+        "title": "Lerne Stricken mit OONIQUE",
+        "content": "<p>Stricke mit Muße und Geduld. Stricken ist ein Prozess und eine Form der Meditation. Sei achtsam und begib Dich auf Deine ganz persönliche Strick-Reise<\/p>",
+        "button_text": "",
+        "button_link": "",
+        "button_style": "primary"
+      }
+    },
+    "1654088845b99023fc": {
+      "type": "featured-video",
+      "settings": {
+        "title": "Maschen anschlagen",
+        "content": "<p>Der einfache Maschenanschlag<\/p>",
+        "ex_video_url": "https:\/\/www.youtube.com\/watch?v=oksmffTJ1FU&list=PL7k1BvHh7dMXJPMZd4ptTUfGGDfbxKLv7&index=2",
+        "logo": "shopify:\/\/shop_images\/Aufkleber_OO_letsstart_1.png",
+        "logo_max_width": 100,
+        "image": "shopify:\/\/shop_images\/foto_1500x1500_710a2af1-d811-4df7-ac74-14b30799f3da.webp",
+        "image_height": "five-fifty-height-hero",
+        "style": "light",
+        "overlay_color": "#333333",
+        "overlay_opacity": 0
+      }
+    },
+    "16540893868a6a7545": {
+      "type": "featured-video",
+      "settings": {
+        "title": "Rechte Maschen",
+        "content": "<p>Stricke rechte Maschen<\/p>",
+        "ex_video_url": "https:\/\/www.youtube.com\/watch?v=s2_iIuVZQWE&list=PL7k1BvHh7dMXJPMZd4ptTUfGGDfbxKLv7&index=3",
+        "logo": "shopify:\/\/shop_images\/Aufkleber_OO_letsstart_1.png",
+        "logo_max_width": 100,
+        "image": "shopify:\/\/shop_images\/a-persons-hands-knitting-with-white-wool.jpg",
+        "image_height": "five-fifty-height-hero",
+        "style": "light",
+        "overlay_color": "#333333",
+        "overlay_opacity": 0
+      }
+    },
+    "16540895815d71d8fd": {
+      "type": "featured-video",
+      "settings": {
+        "title": "Linke Maschen",
+        "content": "<p>Stricke linke Maschen<\/p>",
+        "ex_video_url": "https:\/\/www.youtube.com\/watch?v=H5lnDIV4Bd0&list=PL7k1BvHh7dMXJPMZd4ptTUfGGDfbxKLv7&index=8",
+        "logo": "shopify:\/\/shop_images\/Aufkleber_OO_letsstart_1.png",
+        "logo_max_width": 100,
+        "image": "shopify:\/\/shop_images\/coffee-in-a-tea-cup-and-wool-for-knitting.jpg",
+        "image_height": "five-fifty-height-hero",
+        "style": "light",
+        "overlay_color": "#333333",
+        "overlay_opacity": 0
+      }
+    },
+    "165408977322168dd3": {
+      "type": "featured-video",
+      "settings": {
+        "title": "Rechts verschränkte Maschen",
+        "content": "<p>Rechte Maschen durch den hinteren Faden<\/p>",
+        "ex_video_url": "https:\/\/www.youtube.com\/watch?v=yqqz4Oe8R9k&list=PL7k1BvHh7dMXJPMZd4ptTUfGGDfbxKLv7&index=6",
+        "logo": "shopify:\/\/shop_images\/Aufkleber_OO_letsstart_1.png",
+        "logo_max_width": 100,
+        "image": "shopify:\/\/shop_images\/knitwear-yarn-and-a-mug-of-coffee.jpg",
+        "image_height": "five-fifty-height-hero",
+        "style": "light",
+        "overlay_color": "#333333",
+        "overlay_opacity": 0
+      }
+    },
+    "1654089911574dce3a": {
+      "type": "featured-video",
+      "settings": {
+        "title": "Zwei Maschen rechts zusammen stricken",
+        "content": "<p>Lerne wie Du zwei Maschen rechts zusammen strickst<\/p>",
+        "ex_video_url": "https:\/\/www.youtube.com\/watch?v=7D6MxTBwGOI&list=PL7k1BvHh7dMXJPMZd4ptTUfGGDfbxKLv7&index=9",
+        "logo": "shopify:\/\/shop_images\/Aufkleber_OO_letsstart_1.png",
+        "logo_max_width": 100,
+        "image": "shopify:\/\/shop_images\/stitching-diy-flatlay.jpg",
+        "image_height": "five-fifty-height-hero",
+        "style": "light",
+        "overlay_color": "#333333",
+        "overlay_opacity": 0
+      }
+    },
+    "165455004407acd336": {
+      "type": "featured-video",
+      "settings": {
+        "title": "Zunahme aus dem Querfaden linkgeneigt",
+        "content": "<p>Nehme Maschen aus dem Querfaden zu<\/p>",
+        "ex_video_url": "https:\/\/www.youtube.com\/watch?v=B36jhMQMX6w&list=PL7k1BvHh7dMXJPMZd4ptTUfGGDfbxKLv7&index=4",
+        "logo": "shopify:\/\/shop_images\/Aufkleber_OO_letsstart_1.png",
+        "logo_max_width": 100,
+        "image": "shopify:\/\/shop_images\/a-coffee-a-book-yarn-and-needles-for-knitting.jpg",
+        "image_height": "five-fifty-height-hero",
+        "style": "light",
+        "overlay_color": "#333333",
+        "overlay_opacity": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "16540836123c0cbf35",
+    "1654089251c71891d4",
+    "1654088845b99023fc",
+    "16540893868a6a7545",
+    "16540895815d71d8fd",
+    "165408977322168dd3",
+    "1654089911574dce3a",
+    "165455004407acd336"
+  ]
+}

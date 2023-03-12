@@ -1,0 +1,47 @@
+{%- comment -%} Banner Settings {%- endcomment -%}
+{%- assign banner_text_position = section.settings.banner_text_position -%}
+{%- assign banner_height = section.settings.banner_height -%}
+{%- assign banner_color_text = section.settings.banner_color_text -%}
+{%- assign banner_color_overlay = section.settings.banner_color_overlay -%}
+{%- assign banner_overlay_opacity = section.settings.banner_overlay_opacity | times: 0.01 | round: 2 -%}
+
+<style>
+    [data-section-id="{{ section.id }}"] .banner .page-title { color: {{ banner_color_text }}; }
+    [data-section-id="{{ section.id }}"] .banner .page-title h1 { color: {{ banner_color_text }}; }
+    [data-section-id="{{ section.id }}"] .banner .page-title::before { background-color: {{ banner_color_overlay }}; opacity: {{ banner_overlay_opacity }}; }
+</style>
+
+<section class="banner banner--transparent-header" data-header-style="index">
+    <div class="banner-inner banner-padded banner-padded--{{ banner_height }} banner--text-{{ banner_text_position }}">
+        {%- unless section.settings.banner_height == 'original-height' -%}
+            <div class="{% if collection.metafields.my_fields.mobile_banner %}hide_sm{% endif %} banner-img lazyload" data-bgset="{% render 'bgset', image: banner_image %}" data-sizes="auto" data-parent-fit="cover"></div>
+      		{% if collection.metafields.my_fields.mobile_banner %}
+      		<div class="banner-mobimg lazyload"  style="background-image:url('{{ collection.metafields.my_fields.mobile_banner | img_url:'master'}}')"></div>
+      		{% endif %}
+      		<noscript>
+                <div class="banner-img" style="background-image:url('{{ banner_image | img_url: '1024x' }}');"></div>
+            </noscript>
+        {%- else -%}
+            {%- assign image = banner_image -%}
+            {%- assign image_widths = '[295,394,590,700,800,1000,1200,1500,1800,2000,2400]' -%}
+            {%- assign image_url_pattern = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+            <div class="banner-img__container" style="padding-top: {{ 100 | divided_by: image.aspect_ratio | append: '%' }}" data-collection-banner-image>
+                <img data-swift-lazy="1" loading="lazy" class="banner-img--original lazyload"
+                        src="{{ 'blank.gif' | asset_img_url: '1x1' }}"
+                        data-src="{{ image_url_pattern }}"
+                        data-widths="{{ image_widths }}"
+                        data-aspectratio="{{ image.aspect_ratio }}"
+                        data-sizes="auto"
+                        alt="{{ collection.title }}">
+                <noscript>
+                    <img data-swift-lazy="1" loading="lazy" src="{{ image | img_url: '2048x' }}" alt="{{ image.alt | escape }}" class="banner-img--original no-js-image">
+                </noscript>
+            </div>
+        {%- endunless -%} 
+        {% if banner_image == blank %}
+        	{{- page_title -}}
+        {% endif %}
+    </div>
+  
+</section>

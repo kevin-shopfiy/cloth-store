@@ -1,0 +1,62 @@
+<div class="collectionBlock js-collectionBlock block {{ collection_block_size }} {{ collection_block_size_mobile }}{% if settings.transition_grid_items %} will-animate{% endif %}{% if forloop.index == 1 %} is-visible{% endif %}"
+	{% if settings.transition_grid_items %}
+		data-animation="moFadeInUp"
+	{% endif %}>
+	{%- if item.object_type == 'product' -%}
+		{%- assign product = item -%}
+		{%- assign on_sale = false -%}
+		{%- if product.compare_at_price > product.price -%}
+			{%- assign on_sale = true -%}
+			{%- assign on_sale_class = ' is-sale' -%}
+		{%- endif -%}
+
+		{%- assign sold_out = true -%}
+		{%- if product.available -%}
+			{%- assign sold_out = false -%}
+		{%- endif -%}
+
+		{%- if product.featured_media.preview_image -%}
+			<div class="collectionBlock-image lazyload"
+				title="{{ product.featured_media.alt }}"
+				data-bgset="{% render 'bgset', image: product.featured_media.preview_image %}"
+				data-sizes="auto"
+				data-parent-fit="cover"
+				data-aspectratio="{{ product.featured_media.preview_image.aspect_ratio }}">
+				<a href="{{ product.url | within: collection }}" class="collectionBlock-image__link" aria-label="{{ product.title | handle }}">
+					{%- if on_sale or sold_out -%}
+						<span class="product-status-flag product-status-flag--{{ settings.product_badge_style }}{% if sold_out %} is-sold-out{% endif %}{{ on_sale_class }}">
+							{%- if settings.product_badge_style == 'rectangle' -%}
+								{%- if sold_out -%}
+									{{- 'products.labels.sold_out' | t -}}
+								{%- elsif on_sale -%}
+									{{- 'products.labels.on_sale' | t -}}
+								{%- endif -%}
+							{%- else -%}
+								{%- if sold_out -%}
+									{{- 'products.labels.sold_out' | t | replace: ' ', '<br>' -}}
+								{%- elsif on_sale -%}
+									{{- 'products.labels.on_sale' | t | replace: ' ', '<br>' -}}
+								{%- endif -%}
+							{%- endif -%}
+						</span>
+					{%- endif -%}
+				</a>
+			</div>
+		{%- endif -%}
+	{%- elsif item.object_type == 'article' -%}
+		{%- if item.image -%}
+			<div class="collectionBlock-image lazyload"
+				title="{{ item.title | escape }}"
+				data-bgset="{% render 'bgset', image: item.image %}"
+				data-sizes="auto"
+				data-parent-fit="cover"
+				data-aspectratio="{{ item.image.aspect_ratio }}">
+				<a href="{{ item.url }}" class="collectionBlock-image__link" aria-label="{{ item.title | handle }}"></a>
+			</div>
+		{%- endif -%}
+	{%- endif -%}
+
+	<div class="collectionBlock-info">
+		<h3 class="collectionBlock__title">{{ item.title | link_to: item.url }}</h3>
+	</div>
+</div>

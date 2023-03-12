@@ -1,0 +1,325 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-template",
+      "disabled": true,
+      "settings": {
+        "show_page_title": false
+      }
+    },
+    "16540773266f6c1e3e": {
+      "type": "slideshow",
+      "blocks": {
+        "16540773260d23c106-0": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/woman-deftly-knits-white-yarn.jpg",
+            "image_mobile": "shopify:\/\/shop_images\/woman-deftly-knits-white-yarn.jpg",
+            "image_position": "center-center",
+            "alignment": "right",
+            "color_style": "white",
+            "subheading": "",
+            "title": "UNSERE GARNE",
+            "text": "<p>Entdecke unsere Garn-Vielfalt<\/p>",
+            "cta": "Jetzt stöbern",
+            "link": "https:\/\/oonique.com\/collections\/alle-garne",
+            "cta_primary_btn_style": "primary",
+            "cta_2": "",
+            "link_2": "",
+            "cta_secondary_btn_style": "secondary",
+            "overlay_color": "#333333",
+            "overlay_opacity": 0
+          }
+        },
+        "16540773260d23c106-1": {
+          "type": "image",
+          "disabled": true,
+          "settings": {
+            "image_position": "center-center",
+            "alignment": "center",
+            "color_style": "white",
+            "subheading": "",
+            "title": "Welcome to Modular",
+            "text": "<p>A unique layout with a striking design<\/p>",
+            "cta": "Shop Now",
+            "link": "shopify:\/\/collections\/all",
+            "cta_primary_btn_style": "primary",
+            "cta_2": "",
+            "link_2": "",
+            "cta_secondary_btn_style": "secondary",
+            "overlay_color": "#333333",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "16540773260d23c106-0",
+        "16540773260d23c106-1"
+      ],
+      "settings": {
+        "showNavArrows": true,
+        "show_arrow_down": false,
+        "autoplay": true,
+        "duration": 4,
+        "transition": "slide",
+        "dots_position": "center",
+        "slide_height": "five-fifty-height-hero",
+        "button_size": "normal"
+      }
+    },
+    "1654079008fcfa2591": {
+      "type": "logo-list",
+      "blocks": {
+        "165407900747d366f1-0": {
+          "type": "item_logo",
+          "settings": {
+            "logo_image": "shopify:\/\/shop_images\/2021-logo-lana-grossa-knaeuel-black.png",
+            "logo_url": ""
+          }
+        },
+        "165407900747d366f1-1": {
+          "type": "item_logo",
+          "settings": {
+            "logo_image": "shopify:\/\/shop_images\/sg_org_logo_storwebadr_sort.jpg",
+            "logo_url": ""
+          }
+        },
+        "165407900747d366f1-2": {
+          "type": "item_logo",
+          "settings": {
+            "logo_image": "shopify:\/\/shop_images\/LANGYARNS.jpg",
+            "logo_url": ""
+          }
+        },
+        "165407900747d366f1-3": {
+          "type": "item_logo",
+          "disabled": true,
+          "settings": {
+            "logo_url": ""
+          }
+        },
+        "165407900747d366f1-4": {
+          "type": "item_logo",
+          "disabled": true,
+          "settings": {
+            "logo_url": ""
+          }
+        },
+        "165407900747d366f1-5": {
+          "type": "item_logo",
+          "disabled": true,
+          "settings": {
+            "logo_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "165407900747d366f1-0",
+        "165407900747d366f1-1",
+        "165407900747d366f1-2",
+        "165407900747d366f1-3",
+        "165407900747d366f1-4",
+        "165407900747d366f1-5"
+      ],
+      "settings": {
+        "color_logos_bg": ""
+      }
+    },
+    "16540790029c7ec3bd": {
+      "type": "rich-text",
+      "settings": {
+        "layout": "split",
+        "subheading": "Unsere Mission",
+        "title": "Gemeinsam für mehr Nachhaltigkeit",
+        "content": "<p>Wir legen gemeinsam mit unserne Lieferant:innen großen Wert auf <strong>Qualität<\/strong> und <strong>Nachhaltigkeit<\/strong> der Garne. Dies erreichen wir durch den verantwortungsvollen Umgang mit den benötigten Ressourcen. <strong>Das Tierwohl steht dabei an erster Stelle. <\/strong>Feine Merinowolle, seidig weicher Mohair, warmes Alpaka oder edles Cashmere - sie alle bilden die Grundlage für die hochwertige und angenehme Wolle. Bei allen Herkunftsländern achten wir auf dieselben Kriterien: <strong>keine Massentierhaltung, unbegrenzter Auslauf mit natürlichen Futterquellen und kein Mulesing<\/strong>.  <br\/><br\/><\/p>",
+        "button_text": "",
+        "button_link": "",
+        "button_style": "primary"
+      }
+    },
+    "16540773572be7301f": {
+      "type": "image-with-text",
+      "blocks": {
+        "1654077357dd84d484-0": {
+          "type": "gallery_image",
+          "settings": {
+            "slide": "shopify:\/\/shop_images\/Sandnes_Banner_gross_17.png"
+          }
+        },
+        "1654077357dd84d484-1": {
+          "type": "gallery_image",
+          "disabled": true,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "1654077357dd84d484-0",
+        "1654077357dd84d484-1"
+      ],
+      "settings": {
+        "show_nav_arrows": true,
+        "color_style": "white",
+        "transition": "fade",
+        "autoplay": true,
+        "duration": 4,
+        "show_margins": false,
+        "slide_height": "five-fifty-height-hero",
+        "slide_image_position": "left",
+        "slide_image_width": "med_s12|med_s12",
+        "subheading": "MAKE IT OONIQUE",
+        "title": "Jedes Garn ist einzigartig",
+        "content": "<p>Jedes Garn, das wir anbieten, hat eine eigenständige Aussage, eine besondere Struktur, ein modernes Erscheinungsbild oder eine einzigartige Funktionalität. So entstehen von Saison zu Saison kreative Designs und neue Kollektionen, die uns inspirieren. <br\/><\/p>",
+        "cta": "",
+        "link": "",
+        "button_style": "primary"
+      }
+    },
+    "1654079702a7fecec5": {
+      "type": "mosaic",
+      "blocks": {
+        "165407970253d0eabf-0": {
+          "type": "text",
+          "settings": {
+            "title": "SANDNES",
+            "subheading": "Unser Liebling aus Norwegen",
+            "text": "Sandnes Garn ist Skandinaviens größter Produzent von Handstrickgarn und hat eine der ältesten Spinnereien Norwegens",
+            "button_label": "Zu den SANDNES Garnen",
+            "button_link": "shopify:\/\/collections\/sandnes-wolle",
+            "button_style": "primary"
+          }
+        },
+        "165407970253d0eabf-1": {
+          "type": "product",
+          "settings": {
+            "product": "mandarine-petit",
+            "overlay_color": "#333333",
+            "overlay_opacity": 0
+          }
+        },
+        "165407970253d0eabf-2": {
+          "type": "product",
+          "settings": {
+            "product": "double-sunday",
+            "overlay_color": "#333333",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "165407970253d0eabf-0",
+        "165407970253d0eabf-1",
+        "165407970253d0eabf-2"
+      ],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/unnamed_9c1409ee-9482-47c7-ac44-d2f4a5d42cce.jpg",
+        "image_position": "right",
+        "hide_image_mobile": false,
+        "overlay_color": "#333333",
+        "overlay_opacity": 0,
+        "image_text": "",
+        "image_link": "shopify:\/\/collections\/sandnes-wolle",
+        "blocks_height": "full-height",
+        "blocks_layout": "offset",
+        "text_color": "white"
+      }
+    },
+    "1654080235f394735a": {
+      "type": "image-with-text",
+      "blocks": {
+        "165408023555aa5c8a-0": {
+          "type": "gallery_image",
+          "settings": {
+            "slide": "shopify:\/\/shop_images\/C8AFCB4E-885A-45A4-ABB5-5985C31A3704-5651-0000015D67E9B2D2.jpg"
+          }
+        },
+        "165408023555aa5c8a-1": {
+          "type": "gallery_image",
+          "disabled": true,
+          "settings": {
+            "slide": "shopify:\/\/shop_images\/619306FD-19BF-4DBA-911B-ED0E83109251_2_6015052e-9b8b-40e7-82dd-604bdb5620bd.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "165408023555aa5c8a-0",
+        "165408023555aa5c8a-1"
+      ],
+      "settings": {
+        "show_nav_arrows": true,
+        "color_style": "white",
+        "transition": "fade",
+        "autoplay": true,
+        "duration": 4,
+        "show_margins": false,
+        "slide_height": "five-fifty-height-hero",
+        "slide_image_position": "left",
+        "slide_image_width": "med_s12|med_s12",
+        "subheading": "Qualität aus Tradition",
+        "title": "LANG YARNS",
+        "content": "<p>LANG YARNS blickt auf eine 150-jährige Geschichte als Unternehmen der Textilindustrie zurück. Als Familienunternehmen in der 6. Generation gilt unsere Passion unseren Produkten, den Garnen und den daraus durch unsere Kunden hergestellten Strick- und Häkelteilen<\/p>",
+        "cta": "Zu den LANG YARNS Garnen",
+        "link": "https:\/\/oonique.com\/collections\/lang-yarns-wolle",
+        "button_style": "primary"
+      }
+    },
+    "165408024818809510": {
+      "type": "mosaic",
+      "blocks": {
+        "16540802489b5348e1-0": {
+          "type": "text",
+          "settings": {
+            "title": "LANA GROSSA",
+            "subheading": "Klassisch und Hochwertig",
+            "text": "Mit Lana Grossa haben wir einen der weltweit erfolgreichsten Garn-Spezialisten an unserer Seite",
+            "button_label": "Zu den LANA GROSSA Garnen",
+            "button_link": "https:\/\/oonique.com\/collections\/lana-grossa-wolle",
+            "button_style": "primary"
+          }
+        },
+        "16540802489b5348e1-1": {
+          "type": "product",
+          "settings": {
+            "product": "brigitte-no-2",
+            "overlay_color": "#333333",
+            "overlay_opacity": 0
+          }
+        },
+        "16540802489b5348e1-2": {
+          "type": "product",
+          "settings": {
+            "product": "landlust-winterwolle",
+            "overlay_color": "#333333",
+            "overlay_opacity": 40
+          }
+        }
+      },
+      "block_order": [
+        "16540802489b5348e1-0",
+        "16540802489b5348e1-1",
+        "16540802489b5348e1-2"
+      ],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/7B64DC62-0DDA-43E2-A8D2-F96F2FE068FE-3967-000001124FAA3D0F.jpg",
+        "image_position": "right",
+        "hide_image_mobile": false,
+        "overlay_color": "#333333",
+        "overlay_opacity": 0,
+        "image_text": "",
+        "image_link": "https:\/\/oonique.com\/collections\/lana-grossa-wolle",
+        "blocks_height": "full-height",
+        "blocks_layout": "offset",
+        "text_color": "white"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "16540773266f6c1e3e",
+    "1654079008fcfa2591",
+    "16540790029c7ec3bd",
+    "16540773572be7301f",
+    "1654079702a7fecec5",
+    "1654080235f394735a",
+    "165408024818809510"
+  ]
+}

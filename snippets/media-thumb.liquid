@@ -1,0 +1,29 @@
+{%- assign image = media.preview_image -%}
+{%- assign image_widths = '[180,360,540]' -%}
+{%- assign image_url_pattern = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+<div class="js-slide product-single__media-thumb {% if index == 1 %}active{% endif %}" data-id="{{ media.id }}">
+	<a href="{{ media.preview_image | img_url: product_image_zoom_size, scale: product_image_scale }}"
+		class="js-product-single__thumbnail product-single__thumbnail product-single__thumbnail--{{ section.id }}"
+		data-thumbnail-id="{{ section.id }}-{{ media.id }}">
+		<img data-swift-lazy="1" loading="lazy"
+			 class="product-single__thumbnail-img lazyload{% if index == 1 %} active{% endif %}"
+			 src="{{ 'blank.gif' | asset_img_url: '1x1' }}"
+			 data-src="{{ image_url_pattern }}"
+			 data-widths= "{{ image_widths }}"
+			 data-aspectratio="{{ media.preview_image.aspect_ratio }}"
+			 data-sizes="auto"
+			 data-object-fit="cover"
+			 alt="{{ media.alt | escape }}"
+		>
+		<noscript>
+			<img data-swift-lazy="1" loading="lazy" src="{{ media.preview_image | img_url: 'master' }}" class="product-single__thumbnail-img{% if index == 1 %} active{% endif %}" alt="{{ media.alt | escape }}">
+		</noscript>
+
+		{%- if media.media_type == 'video' or media.media_type == 'external_video' -%}
+			{%- render 'icon-media-video' -%}
+		{%- elsif media.media_type == 'model' -%}
+			{%- render 'icon-media-model' -%}
+		{%- endif -%}
+	</a>
+</div>

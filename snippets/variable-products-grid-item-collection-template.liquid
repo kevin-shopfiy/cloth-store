@@ -1,0 +1,103 @@
+{%- assign enable_variable = true -%}
+{%- assign collection_id_string = collection.id | downcase -%}
+
+{%- assign blacklisted_collections = '' | split: ',' -%}
+{%- if blacklisted_collections contains collection_id_string -%}{%- assign enable_variable = false -%}{%- endif -%}
+{%- assign whitelisted_collections = '' | split: ',' -%}
+{%- if whitelisted_collections contains collection_id_string -%}{%- assign enable_variable = true -%}{%- endif -%}
+
+
+{%- if enable_variable -%}
+  {%- assign condition_option_name = null -%}
+  {%- assign condition_option_value = null -%}
+  
+
+  {% paginate collection.products by products_limit %}
+    <main data-behavior="variable-products" style="display: none">
+      {%- assign variable_products = "[" -%}
+      {%- assign variable_products_arr = "" | split: "," -%}
+
+      {%- for full_product in collection.products -%}
+        {%- assign product = full_product -%}
+        {%- assign product_forloop = forloop -%}
+        {%- assign variable_product = '{"' | append:product.handle | append:'":{"id":"' | append:product.id -%}
+        {%- assign variable_product = variable_product | append:'","options":{' -%}
+
+        {%- assign options_exist = false -%}
+        {%- for product_option in product.options_with_values -%}
+          {%- assign values_exist = false -%}
+          {%- if options_exist == true -%}
+            {%- assign variable_product = variable_product | append:',' -%}
+          {%- endif -%}
+          {%- assign variable_product = variable_product | append:'"option' | append:product_option.position | append:'":{"values":[' -%}
+          {%- for value in product_option.values -%}
+            {%- if values_exist == true -%}
+              {%- assign variable_product = variable_product | append:',' -%}
+            {%- endif -%}
+            {%- assign variable_option_value = value | replace: '"', '' | replace: "'", '' -%}
+            {%- assign variable_product = variable_product | append:'"' | append:variable_option_value | append:'"' -%}
+            {%- assign values_exist = true -%}
+          {%- endfor -%}
+          {%- assign variable_product = variable_product | append:'], "name":"' | append:product_option.name | append: '"}' -%}
+          {%- assign options_exist = true -%}
+        {%- endfor -%}
+
+        {%- assign variable_product = variable_product | append:'},"variants":[' -%}
+        {%- assign variants_arr = "" | split: "," -%}
+        {%- assign show_products_without_variants = true -%}
+        {%- if product.has_only_default_variant and show_products_without_variants -%}
+          {%- assign variant_hsh = '{}' -%}
+          {%- for product in full_product.variants -%}
+            {%- assign variant = product -%}
+            
+              {%- assign variable_option1_value = variant.option1 | replace: '"', '' | replace: "'", '' -%}
+              {%- assign variable_option2_value = variant.option2 | replace: '"', '' | replace: "'", '' -%}
+              {%- assign variable_option3_value = variant.option3 | replace: '"', '' | replace: "'", '' -%}
+
+              {%- assign variable_product_variant = '{"id":"' | append:variant.id | append: '", "option1":"' | append:variable_option1_value | append: '", "option2":"' | append:variable_option2_value | append: '", "option3":"' | append:variable_option3_value | append: '", "available":' | append:variant.available | append: ', "ctitle":' | append:variant_hsh | append: '}' -%}
+              {%- assign tmp_variant_arr = variable_product_variant | split: "," -%}
+              {%- assign variants_arr = variants_arr|concat:tmp_variant_arr -%}
+
+            {%- render 'product-grid-item', full_product: full_product, product: product, collection_block_size: collection_block_size, collection_block_size_mobile: collection_block_size_mobile, index: forloop.index, last_element_class: last_element_class -%}
+          {%- endfor -%}
+        {%- else -%}
+
+          {%- assign black_list = '' | split: ',' -%}
+      {%- assign show_out_of_stock = true -%}
+      {%- assign out_of_stock_limit = 0 -%}
+      {%- for product in full_product.variants -%}
+        {%- assign product_id = product.id | append: '' -%}
+        {%- unless black_list contains product_id -%}
+          {%- if show_out_of_stock or product.inventory_quantity > out_of_stock_limit or product.inventory_policy == 'continue' -%}
+            {%- assign variant_hsh = '{}' -%}
+            {%- assign variant = product -%}
+                  
+              {%- assign variable_option1_value = variant.option1 | replace: '"', '' | replace: "'", '' -%}
+              {%- assign variable_option2_value = variant.option2 | replace: '"', '' | replace: "'", '' -%}
+              {%- assign variable_option3_value = variant.option3 | replace: '"', '' | replace: "'", '' -%}
+
+              {%- assign variable_product_variant = '{"id":"' | append:variant.id | append: '", "option1":"' | append:variable_option1_value | append: '", "option2":"' | append:variable_option2_value | append: '", "option3":"' | append:variable_option3_value | append: '", "available":' | append:variant.available | append: ', "ctitle":' | append:variant_hsh | append: '}' -%}
+              {%- assign tmp_variant_arr = variable_product_variant | split: "," -%}
+              {%- assign variants_arr = variants_arr|concat:tmp_variant_arr -%}
+
+            {%- render 'product-grid-item', full_product: full_product, product: product, collection_block_size: collection_block_size, collection_block_size_mobile: collection_block_size_mobile, index: forloop.index, last_element_class: last_element_class -%}
+          {%- endif -%}
+        {%- endunless -%}
+      {%- endfor -%}
+
+
+        {%- endif -%}
+        {%- assign joined_variants = variants_arr | join: "," -%}
+        {%- assign variable_product = variable_product | append: joined_variants | append:"]}}" -%}
+
+        {%- assign tmp_product_arr = variable_product | split: "," -%}
+        {%- assign variable_products_arr = variable_products_arr|concat:tmp_product_arr -%}
+      {%- endfor -%}
+
+      {%- assign joined_products = variable_products_arr | join: "," -%}
+      {%- assign variable_products = variable_products | append: joined_products | append:"]" -%}
+      <span data-behavior="variable_product_list" data-product_list='{{ variable_products }}'></span>
+    </main>
+    
+  {%- endpaginate -%}
+{%- endif -%}

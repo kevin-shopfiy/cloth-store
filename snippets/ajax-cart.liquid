@@ -1,0 +1,117 @@
+<script id="CartTemplate" type="text/x-template">
+
+<div class="cart-title cart-title--mobile">
+	<h2>{{ 'cart.labels.cart_title' | t }}</h2>
+</div>
+
+<form action="{{ routes.cart_url }}" method="post" class="cart-form">
+	<div class="cart-table">
+		<div class="cart-table-header med_hide">
+			<div class="cart-table-row">
+				<div class="cart-table-cell cart-table-cell--product">
+					{{- 'cart.labels.product' | t -}}
+				</div>
+				<div class="cart-table-cell cart-table-cell--price">
+					{{- 'cart.labels.price' | t -}}
+				</div>
+				<div class="cart-table-cell cart-table-cell--quantity">
+					{{- 'cart.labels.quantity' | t -}}
+				</div>
+				<div class="cart-table-cell cart-table-cell--total">
+					{{- 'cart.labels.total' | t -}}
+				</div>
+			</div>
+		</div>
+
+		<div id="CartItems" class="cart-table-body">
+			{% raw %}
+				{{ @each (it.items) => val, index }}
+				<div class="cart-table-row line-item" data-variant-id="{{ val.itemVariantId }}">
+					<div class="cart-table-cell cart-table-cell--product">
+						<div class="cart-product">
+							<a class="cart-product__thumb" href="{{ val.url }}">
+						        <div class="cart-product__thumb-img lazyload" data-bgset="{{ val.img }}" data-sizes="auto" data-parent-fit="contain"></div>
+							</a>
+
+							<div class="cart-product__desc">
+								<a href="{{ val.url }}" class="cart-product__title">{{ val.name }}</a>
+								{{ @if (val.variation) }}
+									<span class="cart-product__variant">{{ val.variation }}</span>
+								{{ /if }}
+							</div>
+						</div>
+					</div>
+					<div class="cart-table-cell cart-table-cell--price">
+						<div class="cart-product__price" data-price="{{ val.price }}">
+							{{* val.priceFormatted }}
+							{{ @if (val.unitPrice) }}
+								<span class="product-unit-price">{{* val.unitPrice }}</span>
+							{{ /if}}
+						</div>
+					</div>
+					<div class="cart-table-cell cart-table-cell--quantity">
+						<div class="cart-product__quantity">
+							<div class="js-counter counter inputGroup">
+								<input type="text" name="updates[]" id="updates_{{ val.id }}" class="inputCounter" value="{{ val.itemQty }}" />
+								<button class="inputCounter__btn inputCounter__btn--down" type="button" aria-label="{% endraw %}{{ 'general.accessibility.decrease' | t }}{% raw %}">{{* val.iconMinus }}</button>
+								<button class="inputCounter__btn inputCounter__btn--up" type="button" aria-label="{% endraw %}{{ 'general.accessibility.increase' | t }}{% raw %}">{{* val.iconPlus }}</button>
+							</div>
+						</div>
+						<button type="button" class="cart-product__remove">{% endraw %}{{ 'cart.labels.remove' | t }}{% raw %}</button>
+					</div>
+
+					<div class="cart-table-cell cart-table-cell--total med_hide">
+						<div class="cart-product__total-price">{{* val.linePriceFormatted }}</div>
+						{{* val.discounts }}
+					</div>
+				</div>
+				{{ /each }}
+			{% endraw %}
+		</div>
+	</div>
+
+	<div class="checkout-buttons">
+		<div class="cart-totals-table">
+			<p class="cart-total-price">
+				<span>{{ 'cart.labels.subtotal' | t }}:</span>
+				<span>{% raw %}{{* it.totalPrice }}{% endraw %}</span>
+			</p>
+			{% raw %}{{* it.totalDiscounts }}{% endraw %}
+		</div>
+
+		{%- if settings.tax_text -%}
+			<p class="cart-tax-info">{{ settings.tax_text }}</p>
+		{%- endif -%}
+
+		{%- if settings.enable_cart_order_notes -%}
+			<div class="order-notes">
+				<label class="order-notes__label" for="order-notes">{{ 'cart.labels.notes' | t }}</label>
+				<textarea id="order-notes" class="order-notes__content" name="note"></textarea>
+			</div>
+		{%- endif -%}
+
+		<div class="cart__buttons-wrapper">
+			{%- if settings.enable_accept_terms -%}
+				<input type="checkbox" class="acceptance__input" name="acceptance" id="acceptance" {% raw %}{{ @if (it.acceptanceChecked) }} checked{{ /if}}{% endraw %} data-cart-acceptance>
+				<label for="acceptance" class="acceptance__label">{{ settings.accept_terms_text }}</label>
+			{%- endif -%}
+
+			<div class="cart__buttons{% if settings.enable_accept_terms %}{% raw %}{{ @if (it.acceptanceChecked == false ) }} cart__buttons--disabled{{ /if }}{% endraw %}{% endif %}" data-cart-buttons>
+				<fieldset class="cart__button-fieldset" data-cart-buttons-fieldset>
+					<button class="button cart__checkout" type="submit" name="checkout">{{ 'cart.labels.checkout' | t }}</button>
+
+					{%- if additional_checkout_buttons -%}
+						<div class="additional-checkout-buttons">
+							{{ content_for_additional_checkout_buttons }}
+						</div>
+					{%- endif -%}
+				</fieldset>
+			</div>
+
+			{%- if settings.show_continue_shopping -%}
+				<a href="#" class="js-continueShopping {% if template == 'cart' %}js-go-back{% endif %} button button--secondary">{{ 'cart.labels.continue_shopping' | t }}</a>
+			{%- endif -%}
+		</div>
+	</div>
+</form>
+</script>

@@ -1,0 +1,356 @@
+{% comment %} Settings {% endcomment %}
+
+{%- assign title = section.settings.title -%}
+{%- assign content = section.settings.content -%}
+{%- assign video_url = section.settings.ex_video_url -%}
+{%- assign height = section.settings.image_height -%}
+{%- if section.settings.ex_video_url == blank -%}
+	{%- assign video_url = 'https://www.youtube.com/watch?v=_9VUPq3SxOc' -%}
+{%- endif -%}
+{%- assign transition_text = settings.transition_text -%}
+{%- assign animation_delay = 0 -%}
+
+{%- comment -%} Layout {%- endcomment -%}
+{%- assign style = section.settings.style -%}
+
+{%- comment -%} Colors {%- endcomment -%}
+{%- unless section.settings.overlay_color == blank -%}
+	{%- assign overlayColor = section.settings.overlay_color -%}
+{%- else -%}
+	{%- assign overlayColor = 'none' -%}
+{%- endunless -%}
+{%- assign overlayOpacity = section.settings.overlay_opacity | times: 0.01 | round: 2 -%}
+
+{%- comment -%} Check if Image Height setting is selected {%- endcomment -%}
+{%- assign image_height = false -%}
+{%- if height == 'original-height' -%}
+	{%- assign image_height = true -%}
+{%- endif -%}
+
+{%- if section.settings.logo != blank -%}
+<style>
+	.video-module[data-section-id="{{ section.id }}"] .video__logo { max-width: {{ section.settings.logo_max_width | append: 'px' }}; }
+</style>
+{%- endif -%}
+
+{% comment %} Section {% endcomment %}
+<section class="video-module container-wrap style-default {% if style == 'dark' %}style-dark{% else %}style-light{% endif %}" id="video-module-{{ section.id }}" data-section-id="{{ section.id }}" data-section-type="featured-video" data-height="{{ height }}">
+	<div class="container-wrap">
+		{%- capture video_text -%}
+			<div class="video-text-wrapper">
+				<div class="video-text__content">
+					{%- if section.settings.logo != blank -%}
+						{%- assign image = section.settings.logo -%}
+						{%- assign image_widths = '[295,394,590,700,800,1000,1200,1500,1800,2000,2400]' -%}
+						{%- assign image_url_pattern = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+						<img
+							class="lazyload video__logo"
+							src="{{ 'blank.gif' | asset_img_url: '1x1' }}"
+							data-src="{{ image_url_pattern }}"
+							data-widths="{{ image_widths }}"
+							data-aspectratio="{{ logo.aspect_ratio }}"
+							data-sizes="auto"
+							loading="lazy"
+							alt="{{ image.alt | escape }}">
+						<noscript>
+							<img data-swift-lazy="1" loading="lazy" src="{{ image | img_url: '512x' }}" alt="{{ image.alt | escape }}" class="video__logo">
+						</noscript>
+					{%- endif -%}
+
+					{%- if title != blank -%}
+						<h2 class="video-text__heading size--heading-1{% if transition_text %} will-animate{% endif %}"{% if transition_text %} data-animation="moPopUp" data-animation-delay="{{ animation_delay }}"{% endif %}>
+							{{- title -}}
+						</h2>
+						{%- assign animation_delay = animation_delay | plus: 250 -%}
+					{%- endif -%}
+					{%- if content != blank -%}
+						<div class="video-text__text{% if transition_text %} will-animate{% endif %}"{% if transition_text %} data-animation="moPopUp" data-animation-delay="{{ animation_delay }}"{% endif %}>
+							{{- content -}}
+						</div>
+						{%- assign animation_delay = animation_delay | plus: 250 -%}
+					{%- endif -%}
+
+					<div class="hi" >
+						<button  class="openIfram"  onclick="this.nextElementSibling.classList.remove('hide');">
+							{%- render 'icon-play' -%}
+						</button>
+						<section class="videoIframLayer hide">
+							<div class="videoIframBox">
+									<button onclick="closeVideo( this.closest('section'))" title="Close (Esc)" type="button" class="mfp-close"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 1024 1024" class="icon icon-close"><path d="M446.174 512l-432.542-432.542c-18.177-18.177-18.177-47.649 0-65.826s47.649-18.177 65.826 0l432.542 432.542 432.542-432.542c18.177-18.177 47.649-18.177 65.826 0s18.177 47.649 0 65.826l-432.542 432.542 432.542 432.542c18.177 18.177 18.177 47.649 0 65.826s-47.649 18.177-65.826 0l-432.542-432.542-432.542 432.542c-18.177 18.177-47.649 18.177-65.826 0s-18.177-47.649 0-65.826l432.542-432.542z"></path></svg></button>
+									{%- if section.settings.ex_video_url.type == 'youtube' -%}
+									<iframe data-src="https://www.youtube.com/embed/{{ section.settings.ex_video_url.id }}?enablejsapi=1"  class="js-youtube lazyload" allow="autoplay; encrypted-media" allowfullscreen ></iframe>
+								  {%- else -%}
+									<iframe data-src="https://player.vimeo.com/video/{{ section.settings.ex_video_url.id }}?enablejsapi=1"  class="js-vimeo lazyload" allow="autoplay; encrypted-media" allowfullscreen ></iframe>
+								  {%- endif -%}
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+
+			
+		{%- endcapture -%}
+
+		{%- if section.settings.image != blank -%}
+			{%- assign image = section.settings.image -%}
+			{%- if image_height -%}
+				{%- assign image_widths = '[295,394,590,700,800,1000,1200,1500,1800,2000,2400]' -%}
+				{%- assign image_url_pattern = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+				<div class="video-container {{ height }}">
+					<img
+						class="video-container-img lazyload"
+						src="{{ 'blank.gif' | asset_img_url: '1x1' }}"
+						data-src="{{ image_url_pattern }}"
+						data-widths= "{{ image_widths }}"
+						data-aspectratio="{{image.aspect_ratio }}"
+						data-sizes="auto"
+						loading="lazy"
+						alt="{{ image.alt | escape }}">
+					<noscript>
+						<img data-swift-lazy="1" loading="lazy" src="{{ image | img_url: '1024x' }}" alt="{{ image.alt | escape }}">
+					</noscript>
+
+					{%- unless section.settings.overlay_color == blank -%}
+						<div class="video-overlay" style="background-color: {{ overlayColor }} !important; opacity: {{ overlayOpacity }};"></div>
+					{%- endunless -%}
+
+					{{- video_text -}}
+				</div>
+			{%- else -%}
+				<div class="video-container {{ height }}">
+					<div
+						class="video-container-bg lazyload"
+						loading="lazy"
+						data-bgset="{% render 'bgset', image: image %}"
+						data-sizes="auto"
+						data-parent-fit="cover">
+					</div>
+					<noscript>
+						<div class="video-container-bg no-js-video-container-bg" style="background-image:url('{{ image | img_url: '1024x' }}');"></div>
+					</noscript>
+					{%- unless section.settings.overlay_color == blank -%}
+						<div class="video-overlay" style="background-color: {{ overlayColor }} !important; opacity: {{ overlayOpacity }};"></div>
+					{%- endunless -%}
+
+					{{- video_text -}}
+				</div>
+			{%- endif -%}
+		{%- else -%}
+			<div class="video-placeholder video-container {{ height }}">
+				<div class="video-container-bg video-container-bg--placeholder">{{- 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' -}}</div>
+				{%- unless section.settings.overlay_color == blank -%}
+					<div class="video-overlay" style="background-color: {{ overlayColor }} !important; opacity: {{ overlayOpacity }};"></div>
+				{%- endunless -%}
+
+				{{- video_text -}}
+			</div>
+		{%- endif -%}
+	</div>
+
+
+</section>
+
+{% comment %} Schema {% endcomment %}
+{% schema %}
+	{
+		"name": "Video",
+		"class": "shopify-section--featured-video featured-video header--full",
+		"settings": [
+			{
+				"type": "header",
+				"content": "Content"
+			},
+			{
+				"type": "text",
+				"id": "title",
+				"label": "Heading",
+				"default": "Featured video"
+			},
+			{
+				"type": "richtext",
+				"id": "content",
+				"label": "Text",
+				"default": "<p>Describe in a few words your special products, collection, or brand.</p>"
+			},
+			{
+				"type": "video_url",
+				"id": "ex_video_url",
+				"accept": [
+				  "youtube",
+				  "vimeo"
+				],
+				"default": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+				"label": "t:sections.video.settings.video_url.label",
+				"placeholder": "t:sections.video.settings.video_url.placeholder",
+				"info": "t:sections.video.settings.video_url.info"
+			  },
+			{
+				"type": "image_picker",
+				"id": "logo",
+				"label": "Logo"
+			},
+			{
+				"type": "range",
+				"id": "logo_max_width",
+				"label": "Custom logo width (in pixels)",
+				"min": 50,
+				"max": 500,
+				"default": 100,
+				"step": 5,
+				"unit": "px"
+			},
+			{
+				"type": "header",
+				"content": "Hero"
+			},
+			{
+				"type": "image_picker",
+				"id": "image",
+				"label": "Image"
+			},
+			{
+				"type": "select",
+				"id": "image_height",
+				"label": "Height",
+				"default": "five-fifty-height-hero",
+				"options": [
+					{
+						"value": "one-hundred-height-hero",
+						"label": "Full screen height"
+					},
+					{
+						"value": "original-height",
+						"label": "Image height"
+					},
+					{
+						"value": "seven-fifty-height-hero",
+						"label": "750px"
+					},
+					{
+						"value": "sixty-fifty-height-hero",
+						"label": "650px"
+					},
+					{
+						"value": "five-fifty-height-hero",
+						"label": "550px"
+					},
+					{
+						"value": "four-fifty-height-hero",
+						"label": "450px"
+					}
+				]
+			},
+			{
+				"type": "select",
+				"id": "style",
+				"label": "Style",
+				"default": "light",
+				"options": [
+					{
+						"value": "light",
+						"label": "Light"
+					},
+					{
+						"value": "dark",
+						"label": "Dark"
+					}
+				]
+			},
+			{
+				"type": "header",
+				"content": "Overlay"
+			},
+			{
+				"type": "color",
+				"id": "overlay_color",
+				"label": "Color",
+				"default": "#333"
+			},
+			{
+				"type": "range",
+				"id": "overlay_opacity",
+				"label": "Opacity",
+				"step": 5,
+				"max": 95,
+				"min": 0,
+				"unit": "%",
+				"default": 0
+			}
+		],
+		"presets": [
+			{
+				"category": "Video",
+				"name": "Video"
+			}
+		]
+	}
+{% endschema %}
+
+
+
+
+
+<style>
+
+	.openIfram{
+		background-color: transparent ;
+		border: none;
+	}
+
+.videoIframLayer{
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    bottom: 0px;
+    background-color: #000000ba;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1111;
+
+
+}
+
+.hide{
+	display: none;
+}
+.videoIframBox{
+	width: 65%;
+	height: 80%;
+	position: relative;
+}
+.videoIframBox button{
+	position: absolute;
+	top: -35px;
+	right: -10px;
+}
+.videoIframBox iframe{
+	width: 100%;
+	height: 100%;
+	border: none;
+}
+
+@media screen and (max-width: 550px) {
+
+	.videoIframBox{
+	width: 100%;
+	height: 40%;
+	position: relative;
+}
+}
+</style>
+
+<script>
+
+ function closeVideo(boxLayer) {
+	
+	let stopVideo =boxLayer.lastElementChild.lastElementChild;
+    boxLayer.classList.add("hide");
+
+   stopVideo.contentWindow.postMessage(JSON.stringify({ event: 'command',
+	   func: 'stopVideo' }), '*');
+};
+</script>

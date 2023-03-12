@@ -1,0 +1,64 @@
+<div id="searchMobile" class="nav-search nav-search-sm">
+	<div class="nav-search-overlay nav-search-overlay-sm">
+		<div class="nav-search-scroller" data-scroll-lock-fill-gap>
+			<div class="nav-search-container nav-search-container-sm container">
+				<div class="search-form__sticky-container search-form__sticky-container-sm">
+					<form action="{{ routes.search_url }}" method="get" class="search-form" role="search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" maxlength="250">
+						<div class="inputGroup">
+							<input type="search" name="q" class="nav-search-input nav-search-input-sm" tabindex="-1" id="search-field-sm" placeholder="{{ 'general.slide_out_navigation.search_placeholder' | t }}" value="" onkeyup="onSearchChange(event)" />
+							<input type="hidden" name="type" value="{{ settings.search_type }}" />
+							<input type="hidden" name="options[prefix]" class="nav-search-options" value="last" />
+							<button tabindex="-1" type="submit" class="nav-search-submit" aria-label="{{ 'general.accessibility.search' | t }}">
+								{%- render 'icon-submit' -%}
+							</button>
+						</div>
+
+						<label for="search-field" class="icon-search">
+							{%- render 'icon-search' -%}
+							<span class="accessible-label">{{ 'general.slide_out_navigation.search_label' | t }}</span>
+            </label>
+            
+            <button id="clearSearchInput" type="button" onClick="onClearSearch()" tabindex="-1" class="searchToggle searchToggle--close" aria-expanded="true" aria-label="{{ 'general.accessibility.close' | t }}">
+							{%- render 'icon-close' -%}
+						</button>
+					</form>
+				</div>
+
+				<div id="search-results" class="results results-sm"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	var clearSearchInput = document.getElementById("clearSearchInput");
+
+	clearSearchInput.style.display = "none";
+
+  var windowWidth = window.innerWidth;
+  var searchMobile = document.getElementById("searchMobile");
+
+  if (windowWidth > 768) {
+    searchMobile.remove();
+  };
+
+  function onClearSearch () {
+    var searchQuery = document.getElementById("search-field-sm");
+		var searchResults = document.getElementById("search-results");
+		var clearSearchInput = document.getElementById("clearSearchInput");
+        searchQuery.value = "";
+				searchResults.innerHTML = "";
+				clearSearchInput.style.display = "none";
+	};
+	
+	function onSearchChange (event) {
+		var searchInputValue = event.target.value;
+		var clearSearchInput = document.getElementById("clearSearchInput");
+		
+		if (searchInputValue) {
+			clearSearchInput.style.display = "block";
+		} else {
+			clearSearchInput.style.display = "none";
+		}
+	}
+</script>

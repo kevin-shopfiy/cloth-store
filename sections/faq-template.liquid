@@ -1,0 +1,69 @@
+{% comment %} FAQ Template {% endcomment %}
+
+<div data-section-id="{{ section.id }}" data-section-type="faq-template">
+	{%- unless section.settings.hide_title -%}
+	<section class="page-title container-wrap">
+		<div class="container">
+			<div class="row inline u-center">
+				<h1>{{ page.title }}</h1>
+			</div>
+		</div>
+	</section>
+	{%- endunless -%}
+
+	{%- unless page.content == blank -%}
+	<div class="container-wrap">
+		<div class="container text-content rte">
+			<div class="row row-sm u-center">
+				{{ page.content }}
+			</div>
+		</div>
+	</div>
+	{%- endunless -%}
+
+	{%- render 'faq', is_faq_template: true -%}
+</div>
+
+{% schema %}
+{
+	"name": "FAQ",
+	"settings": [
+		{
+			"type": "checkbox",
+			"id": "hide_title",
+			"label": "Hide page title",
+			"default": false
+		},
+		{
+			"type": "text",
+			"id": "title",
+			"label": "Heading"
+		},
+		{
+			"type": "text",
+			"id": "subheading",
+			"label": "Subheading"
+		}
+	],
+	"blocks": [
+		{
+			"name": "Item",
+			"type": "item",
+			"settings": [
+				{
+					"type": "text",
+					"id": "title",
+					"label": "Question",
+					"default": "Question"
+				},
+				{
+					"type": "richtext",
+					"id": "answer",
+					"label": "Answer",
+					"default": "<p>Use this answer block to discuss some commonly asked questions you've discovered from your customers interactions. You could discuss product details, size fit, shipping policies, or anything you think would help merchants make an informed decision about your product or collection. This section will appear across all products.</p>"
+				}
+			]
+		}
+	]
+}
+{% endschema %}

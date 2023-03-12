@@ -1,0 +1,22 @@
+{%- capture form_id -%}NewsletterForm--{{ section.id }}{%- endcapture -%}
+<form class="omnisend-subscribe-form">
+{%- form 'customer', id: form_id -%}
+    <div class="js-signUp-form signUp-form">
+        <input type="hidden" id="contact_tags" name="contact[tags]" value="newsletter"/>
+        <div class="inputGroup mc-field-group">
+            <label for="mce-EMAIL" class="accessible-label">{{ 'general.slide_out_navigation.search_label' | t }}</label>
+            <input class="signUp-input required email" type="email" value="" name="contact[email]" id="mce-EMAIL" class="omnisend-subscribe-input-email" placeholder="{{ 'general.newsletter_signup.email_placeholder' | t }}" required>
+            <input type="hidden" id="newsletter-first-name" name="contact[first_name]" value="Newsletter" />
+            <input type="hidden" id="newsletter-last-name" name="contact[last_name]" value="Subscriber" />
+            <button type="submit" class="signUp-submit" name="subscribe" id="mc-embedded-subscribe" aria-label="{{ 'general.accessibility.submit' | t }}">
+                {%- render 'icon-submit' -%}
+            </button>
+        </div>
+    </div>
+    {%- if form.posted_successfully? -%}
+        <div class="signUp-confirmation p">{{ 'general.newsletter_signup.success_message' | t }}</div>
+    {%- elsif form.errors -%}
+        {{ form.errors | default_errors }}
+    {%- endif -%}
+{%- endform -%}
+</form>

@@ -1,0 +1,33 @@
+{%- if product.selected_or_first_available_variant.available -%}
+	{%- assign sold_out = false -%}
+{%- else -%}
+	{%- assign sold_out = true -%}
+{%- endif -%}
+{%- capture form_id -%}ProductNewsletterForm--{{ section.id }}{%- endcapture -%}
+
+{%- if section.settings.show_newsletter -%}
+	<div class="notification-form {% unless sold_out %}visually-hidden{% endunless %}" data-notification-form>
+		{%- form 'customer', id: form_id -%}
+			{%- assign text_newsletter = section.settings.text_newsletter -%}
+			{%- if text_newsletter != blank -%}
+				<label for="contact[email]--{{ section.id }}">{{ text_newsletter }}</label>
+			{%- endif -%}
+			<div class="js-signUp-form signUp-form">
+				<input type="hidden" id="contact_tags--{{ section.id }}" name="contact[tags]" value="newsletter"/>
+				<div class="inputGroup mc-field-group">
+					<input class="signUp-input required email" type="email" value="" name="contact[email]" id="contact[email]--{{ section.id }}" placeholder="{{ 'general.newsletter_signup.email_placeholder' | t }}" required>
+					<input type="hidden" id="newsletter-first-name--{{ section.id }}" name="contact[first_name]" value="Newsletter" />
+					<input type="hidden" id="newsletter-last-name--{{ section.id }}" name="contact[last_name]" value="Subscriber" />
+					<button type="submit" class="signUp-submit" name="subscribe" id="mc-embedded-subscribe--{{ section.id }}" aria-label="{{ 'general.accessibility.subscribe' | t }}">
+						{%- render 'icon-submit' -%}
+					</button>
+				</div>
+			</div>
+			{%- if form.posted_successfully? -%}
+				<div class="signUp-confirmation p">{{ 'general.newsletter_signup.success_message' | t }}</div>
+			{%- elsif form.errors -%}
+				{{ form.errors | default_errors }}
+			{%- endif -%}
+		{%- endform -%}
+	</div>
+{%- endif -%}

@@ -1,0 +1,21 @@
+{
+  "sections": {
+    "main": {
+      "type": "product-template",
+      "settings": {}
+    },
+    "faq_section": {
+      "type": "faq-section__product",
+      "settings": {}
+    },
+    "related_products": {
+      "type": "related-products",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "faq_section",
+    "related_products"
+  ]
+}

@@ -1,0 +1,856 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Modular",
+    "theme_author": "Presidio Creative",
+    "theme_version": "1.9.7",
+    "theme_support_url": "https:\/\/modular.helpscoutdocs.com\/",
+    "theme_documentation_url": "http:\/\/modular.helpscoutdocs.com\/contact"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "General"
+      },
+      {
+        "type": "color",
+        "id": "color_heading_new",
+        "label": "Headings",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "color_text_new",
+        "label": "Text",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "color_error_new",
+        "label": "Error",
+        "default": "#d02e2e"
+      },
+      {
+        "type": "color",
+        "id": "color_border_new",
+        "label": "Borders",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "color_background_new",
+        "label": "Background",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_accent_line",
+        "label": "Accent line",
+        "default": "#2e3234"
+      },
+      {
+        "type": "header",
+        "content": "Buttons",
+        "info": "Text color automatically sets to black or white based on the button’s background color"
+      },
+      {
+        "type": "paragraph",
+        "content": "Primary"
+      },
+      {
+        "type": "color",
+        "id": "color_button_primary_bg",
+        "label": "Background",
+        "default": "#000"
+      },
+      {
+        "type": "paragraph",
+        "content": "Secondary"
+      },
+      {
+        "type": "color",
+        "id": "color_button_secondary_bg",
+        "label": "Background",
+        "default": "#fff"
+      },
+      {
+        "type": "header",
+        "content": "Announcement bar"
+      },
+      {
+        "type": "color",
+        "id": "color_top_bar",
+        "label": "Background",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "color_top_bar_text",
+        "label": "Text",
+        "default": "#ffffff"
+      },
+      {
+        "type": "header",
+        "content": "Standard navigation",
+        "info": "The below options are only applicable if you have enabled \"Standard layout\" in the Header section"
+      },
+      {
+        "type": "paragraph",
+        "content": "Home page"
+      },
+      {
+        "type": "color",
+        "id": "color_header_bg_home",
+        "label": "Header background",
+        "default": "rgba(0,0,0,0)"
+      },
+      {
+        "type": "color",
+        "id": "color_header_text_home",
+        "label": "Header text",
+        "default": "#fff"
+      },
+      {
+        "type": "paragraph",
+        "content": "Other pages"
+      },
+      {
+        "type": "color",
+        "id": "color_header_bg",
+        "label": "Header background",
+        "default": "rgba(0,0,0,0)"
+      },
+      {
+        "type": "color",
+        "id": "color_header_text",
+        "label": "Header text",
+        "default": "#000"
+      },
+      {
+        "type": "paragraph",
+        "content": "On scroll"
+      },
+      {
+        "type": "color",
+        "id": "color_header_bg_scroll",
+        "label": "Header background",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "color_header_text_scroll",
+        "label": "Header text",
+        "default": "#000"
+      },
+      {
+        "type": "paragraph",
+        "content": "Navigation dropdowns"
+      },
+      {
+        "type": "color",
+        "id": "color_dropdown_bg",
+        "label": "Background",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "color_dropdown_text",
+        "label": "Text",
+        "default": "#000"
+      },
+      {
+        "type": "header",
+        "content": "Hamburger menu",
+        "info": "The below options are only applicable if you have enabled \"Hamburger layout\" in the Header section"
+      },
+      {
+        "type": "color",
+        "id": "drawer_bg_color",
+        "label": "Background",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "drawer_text_color",
+        "label": "Text",
+        "default": "#000"
+      },
+      {
+        "type": "header",
+        "content": "Hamburger menu icon"
+      },
+      {
+        "type": "paragraph",
+        "content": "Home page"
+      },
+      {
+        "type": "color",
+        "id": "header_icon_color_home",
+        "label": "Color",
+        "default": "#222222"
+      },
+      {
+        "type": "color",
+        "id": "header_bg_color_home",
+        "label": "Background",
+        "default": "#ffffff"
+      },
+      {
+        "type": "paragraph",
+        "content": "Other pages"
+      },
+      {
+        "type": "color",
+        "id": "header_icon_color",
+        "label": "Color",
+        "default": "#222222"
+      },
+      {
+        "type": "color",
+        "id": "header_bg_color",
+        "label": "Background",
+        "default": "#ffffff"
+      },
+      {
+        "type": "paragraph",
+        "content": "On scroll"
+      },
+      {
+        "type": "color",
+        "id": "header_icon_color_scroll",
+        "label": "Color",
+        "default": "#222222"
+      },
+      {
+        "type": "color",
+        "id": "header_bg_color_scroll",
+        "label": "Background",
+        "default": "#ffffff"
+      },
+      {
+        "type": "header",
+        "content": "Products",
+        "info": "Sold out\/Sale badges"
+      },
+      {
+        "type": "color",
+        "id": "color_badge_bg",
+        "label": "Background",
+        "default": "#2e3234"
+      },
+      {
+        "type": "header",
+        "content": "Footer"
+      },
+      {
+        "type": "color",
+        "id": "color_footer_text",
+        "label": "Text",
+        "default": "#222222"
+      },
+      {
+        "type": "color",
+        "id": "color_footer_bg",
+        "label": "Background",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "color_bottom_bar_bg",
+        "label": "Bottom bar background",
+        "default": "#fafafa"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Headings"
+      },
+      {
+        "type": "font_picker",
+        "id": "header_font_picker",
+        "label": "Font",
+        "default": "pt_sans_n4"
+      },
+      {
+        "type": "checkbox",
+        "id": "useNewfontheading",
+        "label": "Use new fonts for headings",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "type_heading_family",
+        "label": "New Fonts",
+        "options": [
+          {
+            "value": "Anivers-01-Bold",
+            "label": "Anivers-01-Bold",
+            "group": "Anivers"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "heading_letter_spacing",
+        "label": "Letter spacing",
+        "min": 0,
+        "max": 2,
+        "step": 0.5,
+        "unit": "px",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "Body text"
+      },
+      {
+        "type": "font_picker",
+        "id": "general_font_picker",
+        "label": "Font",
+        "default": "work_sans_n4"
+      },
+      {
+        "type": "range",
+        "id": "body_letter_spacing",
+        "label": "Letter spacing",
+        "min": 0,
+        "max": 2,
+        "step": 0.5,
+        "unit": "px",
+        "default": 0
+      }
+    ]
+  },
+  {
+    "name": "Appearance",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Accent line"
+      },
+      {
+        "type": "select",
+        "id": "accent_line",
+        "label": "Style",
+        "default": "none",
+        "options": [
+          {
+            "label": "Curved",
+            "value": "curved"
+          },
+          {
+            "label": "Straight",
+            "value": "straight"
+          },
+          {
+            "label": "None",
+            "value": "none"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Animations"
+      },
+      {
+        "type": "checkbox",
+        "id": "transition_text",
+        "label": "Show text transition",
+        "info": "Used for headings, texts and buttons.",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "transition_grid_items",
+        "label": "Show grid items transition",
+        "info": "Used for products and blog posts.",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "transition_images_fade",
+        "label": "Show image fade effect",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "transition_collections_list",
+        "label": "Show collection zoom transition",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Pagination"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_infinity_scroll",
+        "label": "Enable infinity scroll",
+        "default": false,
+        "info": "It applies to the Collection, Blog and Search pages"
+      },
+      {
+        "type": "header",
+        "content": "Slideshow"
+      },
+      {
+        "type": "select",
+        "id": "dots_style",
+        "label": "Dots style",
+        "default": "hidden",
+        "options": [
+          {
+            "label": "Circle",
+            "value": "circle"
+          },
+          {
+            "label": "Line",
+            "value": "line"
+          },
+          {
+            "label": "Hidden",
+            "value": "hidden"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Search",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Header search"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_search",
+        "label": "Show search",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "search_type",
+        "label": "Search type",
+        "default": "product",
+        "options": [
+          {
+            "label": "Products only",
+            "value": "product"
+          },
+          {
+            "label": "Products and pages",
+            "value": "product,page"
+          },
+          {
+            "label": "Products and articles",
+            "value": "product,article"
+          },
+          {
+            "label": "Products, pages and articles",
+            "value": "product,page,article"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Overlay"
+      },
+      {
+        "type": "color",
+        "id": "search_overlay_color",
+        "label": "Color",
+        "default": "#333333"
+      },
+      {
+        "type": "range",
+        "id": "search_overlay_opacity",
+        "label": "Opacity",
+        "min": 0,
+        "max": 95,
+        "step": 5,
+        "unit": "%",
+        "default": 50
+      }
+    ]
+  },
+  {
+    "name": "Products",
+    "settings": [
+      {
+        "type": "range",
+        "id": "image_aspect_ratio",
+        "label": "Image aspect ratio",
+        "min": 0.5,
+        "max": 1.5,
+        "step": 0.1,
+        "unit": ":1",
+        "default": 1
+      },
+      {
+        "type": "select",
+        "id": "image_size",
+        "label": "Image size",
+        "default": "cover",
+        "options": [
+          {
+            "label": "Stretch",
+            "value": "cover"
+          },
+          {
+            "label": "Contain",
+            "value": "contain"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "product_title_position",
+        "label": "Product title position",
+        "default": "center",
+        "options": [
+          {
+            "label": "Left",
+            "value": "left"
+          },
+          {
+            "label": "Center",
+            "value": "center"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "show_quick_view",
+        "label": "Show Quick View button",
+        "info": "Desktop only",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_quick_view_description",
+        "label": "Show product description on Quick View",
+        "info": "Desktop only",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "price_swatches_hover",
+        "label": "Show price and swatches on hover",
+        "info": "Desktop only",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "show_quantity",
+        "label": "Show quantity picker",
+        "info": "In Quick View",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_review_stars",
+        "label": "Show review stars",
+        "info": "It is required to enable reviews from global settings",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "hover_image",
+        "label": "Show second product image on hover",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_payment_button",
+        "label": "Show dynamic checkout button",
+        "info": "Lets customers check out directly using a familiar payment method. [Learn more](https:\/\/help.shopify.com\/manual\/using-themes\/change-the-layout\/dynamic-checkout)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_variant_boxes",
+        "label": "Show variants as boxes",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_color_swatches",
+        "label": "Enable color swatches",
+        "default": true,
+        "info": "Set up your product color variant options. [Learn more](https:\/\/palo-alto.helpscoutdocs.com\/article\/145-how-to-add-color-swatches)"
+      },
+      {
+        "type": "select",
+        "id": "color_swatches_style",
+        "label": "Color swatches style",
+        "default": "circle",
+        "options": [
+          {
+            "label": "Circle",
+            "value": "circle"
+          },
+          {
+            "label": "Square",
+            "value": "square"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "product_badge_style",
+        "label": "Sale badge style",
+        "default": "circle",
+        "options": [
+          {
+            "value": "circle",
+            "label": "Circle"
+          },
+          {
+            "value": "rectangle",
+            "label": "Rectangle"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "products_rows",
+        "label": "Products rows",
+        "default": 4,
+        "min": 1,
+        "max": 4,
+        "step": 1
+      },
+      {
+        "type": "range",
+        "id": "products_columns",
+        "label": "Products per row on desktop",
+        "default": 4,
+        "min": 1,
+        "max": 4,
+        "step": 1
+      },
+      {
+        "type": "select",
+        "id": "products_columns_mobile",
+        "label": "Products per row on mobile",
+        "default": "1",
+        "options": [
+          {
+            "label": "One",
+            "value": "1"
+          },
+          {
+            "label": "Two",
+            "value": "2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Media",
+        "info": "Learn more about [media types](https:\/\/help.shopify.com\/manual\/products\/product-media)"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_video_looping",
+        "label": "Enable video looping",
+        "default": false
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_icon",
+        "label": "Cart icon style",
+        "default": "cart",
+        "options": [
+          {
+            "label": "Circle",
+            "value": "circle"
+          },
+          {
+            "label": "Cart",
+            "value": "cart"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_ajax_cart",
+        "label": "Enable ajax cart",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_cart_order_notes",
+        "label": "Show order notes",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "show_continue_shopping",
+        "label": "Show the \"Continue Shopping\" button",
+        "default": true
+      },
+      {
+        "type": "textarea",
+        "id": "tax_text",
+        "label": "Tax text",
+        "default": "Excluding taxes and shipping"
+      },
+      {
+        "type": "header",
+        "content": "Terms and conditions"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_accept_terms",
+        "label": "Enable terms and conditions requirement for checkout",
+        "info": "This will disable the \"Buy it now\" button",
+        "default": false
+      },
+      {
+        "type": "richtext",
+        "id": "accept_terms_text",
+        "label": "Checkbox label",
+        "default": "<p>I agree with the terms and conditions<\/p>"
+      }
+    ]
+  },
+  {
+    "name": "Breadcrumbs",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_breadcrumbs",
+        "label": "Show breadcrumbs",
+        "info": "Breadcrumbs, located on the Collection and Product pages, help users navigate through your products.",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Reviews",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Reviews",
+        "info": "Install Shopify's free [Product Reviews app](https:\/\/apps.shopify.com\/product-reviews) before enabling this option."
+      },
+      {
+        "type": "checkbox",
+        "id": "show_reviews",
+        "label": "Enable reviews",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_yotpo",
+        "label": "Enable Yotpo reviews",
+        "info": "If disabled default reviews will be shown on the product pages.",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "yotpo_ID",
+        "label": "Yotpo App Key",
+        "info": "Your Yotpo App Key is in your Yotpo Account Settings.  On the Account setting page locate the Store tab then scroll to API Credentials and copy the App Key."
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "32 x 32px .png required"
+      }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social links"
+      },
+      {
+        "type": "text",
+        "id": "twitter_url",
+        "label": "Twitter",
+        "info": "http:\/\/twitter.com\/shopify"
+      },
+      {
+        "type": "text",
+        "id": "facebook_url",
+        "label": "Facebook",
+        "info": "http:\/\/facebook.com\/shopify"
+      },
+      {
+        "type": "text",
+        "id": "pinterest_url",
+        "label": "Pinterest",
+        "info": "http:\/\/pinterest.com\/shopify"
+      },
+      {
+        "type": "text",
+        "id": "instagram_url",
+        "label": "Instagram",
+        "info": "http:\/\/instagram.com\/shopify"
+      },
+      {
+        "type": "text",
+        "id": "tumblr_url",
+        "label": "Tumblr",
+        "info": "http:\/\/shopify.tumblr.com"
+      },
+      {
+        "type": "text",
+        "id": "youtube_url",
+        "label": "Youtube",
+        "info": "http:\/\/youtube.com\/user\/shopify"
+      },
+      {
+        "type": "text",
+        "id": "rss_url",
+        "label": "RSS Blog Feed",
+        "info": "http:\/\/store.myshopify.com\/blogs\/news.atom"
+      },
+      {
+        "type": "header",
+        "content": "Sharing Options",
+        "info": "Sharing is only available on Product and Article pages"
+      },
+      {
+        "type": "checkbox",
+        "id": "share_on_twitter",
+        "label": "Share on Twitter",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "share_on_facebook",
+        "label": "Share on Facebook",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "share_on_pinterest",
+        "label": "Share on Pinterest",
+        "default": true
+      }
+    ]
+  }
+]

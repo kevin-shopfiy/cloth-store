@@ -1,0 +1,230 @@
+{% comment %} Site Navigation {% endcomment %}
+{%- assign menuPrimary = section.settings.menu_list -%}
+{%- assign image = section.settings.meganav_image -%}
+{%- assign image_heading = section.settings.meganav_image_heading -%}
+{%- assign image_link = section.settings.meganav_image_link -%}
+{%- assign image_aspect_ratio = section.settings.image_aspect_ratio | times: 100 -%}
+
+{%- assign has_meganav = false -%}
+{%- if linklists[menuPrimary].levels == 3 and is_hamburger_nav == false -%}
+	{%- assign has_meganav = true -%} 
+{%- endif -%}
+
+<ul class="menu {% if has_meganav %}menu--has-meganav{% endif %}">
+	{% comment %}
+		Loop through the first link list.
+	{% endcomment %}
+	{%- if menuPrimary != blank -%}
+ 		{%- for link in linklists[menuPrimary].links -%}
+			{%- assign has_sub_menu = false -%}
+
+			{%- for sublink in link.links -%}
+				{%- if link.levels > 0 -%}
+					{%- assign has_sub_menu = true -%}
+				{%- endif -%}
+			{%- endfor -%}
+
+			{%- assign is_meganav = false -%}
+			{%- if link.levels == 2 and is_hamburger_nav == false -%}
+				{%- assign is_meganav = true -%}
+			{%- endif -%}
+
+			<li class="menu-item{% if has_sub_menu == true %} has-submenu{% endif %} {% if is_meganav %}menu-item--meganav{% else %}menu-item--dropdown{% endif %}">
+				<!-- LINKS -->
+				<a href="{{ link.url }}">{{ link.title | escape }}</a>
+				{%- if has_sub_menu and is_hamburger_nav == false -%}
+					<button class="toggle-submenu" aria-haspopup="true" aria-expanded="false" aria-label="{{ link.title | escape }}">
+						{%- render 'icon-arrow' -%}
+					</button>
+				{%- endif -%}
+
+				{%- if link.levels > 0 -%}
+					{%- if is_meganav -%}
+						<div class="megamenu-wrapper">
+							<div class="megamenu-inner">
+								<div class="container">
+					{%- endif -%}
+
+					{%- capture submenuClass -%}
+						{%- if is_meganav -%}
+							submenu--items-{{ link.links.size }}
+						{%- endif -%}
+					{%- endcapture -%}
+
+					{%- comment -%} MEGAMENU IMAGE AND TEXT {%- endcomment -%}
+					{%- if is_meganav -%}
+						{%- if image != blank or image_heading != blank -%}
+							<div class="megamenu__image">
+								{%- if image != blank -%}
+									{%- capture megamenu_image -%}
+										<div class="megamenu__image-bg lazyload"
+											data-bgset="{% render 'bgset', image: image %}"
+											data-sizes="auto"
+											data-parent-fit="cover"
+											style="padding-top: {{ image_aspect_ratio }}%;">
+										</div>
+										<noscript>
+											<div class="megamenu__image-bg" style="background-image: url({{ image | img_url: '1024x' }}); padding-top: {{ image_aspect_ratio }}%;"></div>
+										</noscript>
+									{%- endcapture -%}
+
+									{%- unless image_link == blank -%}
+										<a href="{{ image_link }}" class="megamenu__image-inner">
+											{{- megamenu_image -}}
+										</a>
+									{%- else -%}
+										<div class="megamenu__image-inner">
+											{{- megamenu_image -}}
+										</div>
+									{%- endunless -%}
+								{%- endif -%}
+
+								{%- unless image_heading == blank -%}
+									<h4>
+										<span>
+											{%- if image_link != blank -%}
+												<a href="{{ image_link }}">{{ image_heading }}</a>
+											{%- else -%}
+												{{- image_heading -}}
+											{%- endif -%}
+										</span>
+									</h4>
+								{%- endunless -%}
+							</div>
+						{%- endif -%}
+					{%- endif -%}
+					{%- comment -%} END MEGANAV IMAGE AND TEXT {%- endcomment -%}
+
+					{%- if link.levels > 0 and is_hamburger_nav -%}
+						<button class="dropdown-arrow" aria-expanded="false" aria-haspopup="true" aria-label="{{ link.title | escape }}">
+							{%- render 'icon-arrow' -%}
+						</button>
+					{%- endif -%}
+
+					<ul class="submenu {{ submenuClass }}">
+						{%- comment -%} SUBMENU LINKS {%- endcomment -%}
+						{%- for sublink in link.links -%}
+							<li data-levels = "{{ sublink.levels }}" class="submenu-item {% if sublink.levels > 0 %}has-submenu{% endif %}">
+								{%- comment -%} SUBLINK TITLE {%- endcomment -%}
+								<a class="{% if is_meganav %}submenu-item__title {% endif %}visible-nav-link" href="{{ sublink.url }}" aria-expanded="false"{% if has_sub_menu %} aria-haspopup="true"{% endif %} tabindex="-1">
+									{{- sublink.title -}}
+								</a>
+
+								{%- if sublink.levels > 0 and is_hamburger_nav -%}
+									<button class="dropdown-arrow" aria-expanded="false" aria-haspopup="true" aria-label="{{ sublink.title | escape }}">
+										{%- render 'icon-arrow' -%}
+									</button>
+								{%- endif -%}
+
+								{%- if sublink.levels > 0 -%}
+
+								<ul class="submenu">
+									{%- comment -%} SUB-SUBMENU LINKS {%- endcomment -%}
+									{%- for subsublink in sublink.links -%}
+										<li class="submenu-item">
+											<a {% if forloop.last == true  %} data-last="true" {% endif %} class="visible-nav-link" href="{{ subsublink.url }}" tabindex="-1">{{ subsublink.title }}</a>
+										</li>
+									{%- endfor -%}
+								</ul>
+								{%- endif -%}
+							 </li>
+							{%- comment -%} END SUBSUBLINK {%- endcomment -%}
+						{%- endfor -%}
+
+					</ul>
+
+					{%- if is_meganav -%}
+								</div>
+							</div>
+						</div>
+						{%- comment -%} END MEGAMENU WRAPPER {%- endcomment -%}
+					{%- endif -%}
+				{%- endif -%}
+
+			</li>
+		{%- endfor -%}
+	{%- endif -%}
+</ul>
+
+{%- if is_hamburger_nav -%}
+	<div class="nav-user">
+		<ul>
+			{%- if shop.customer_accounts_enabled -%}
+				{%- if customer -%}
+					<li class="nav-user__item nav-user__item--account"><a href="{{ routes.account_url }}" class="nav-user__link" tabindex="-1">{{ 'customer.link.my_account' | t }}</a></li>
+				{%- else -%}
+					<li class="nav-user__item nav-user__item--account"><a href="{{ routes.account_login_url }}" class="nav-user__link" tabindex="-1">{{ 'customer.link.login' | t }}</a></li>
+				{%- endif -%}
+			{%- endif -%}
+
+			{%- if settings.show_search -%}
+				<li class="nav-user__item nav-user__item--search"><a href="{{ routes.search_url }}" class="nav-user__link" tabindex="-1">{{ 'general.slide_out_navigation.search_label' | t }}</a></li>
+			{%- endif -%}
+		</ul>
+	</div>
+
+	{%- if settings.twitter_url != '' or settings.facebook_url != '' or settings.instagram_url != '' or settings.pinterest_url != '' or settings.youtube_url != '' or settings.tumblr_url != '' or settings.rss_url != '' -%}
+		<div class="nav-footer">
+			<div class="nav-social">
+				<ul class="social-links social-links--nav">
+					{%- if settings.twitter_url != '' -%}
+						<li>
+							<a aria-label="{{ 'general.footer.twitter' | t }}" href="{{ settings.twitter_url }}" target="_blank" tabindex="-1" class="social-link">
+								{%- render 'icon-twitter' -%}
+							</a>
+						</li>
+					{%- endif -%}
+
+					{%- if settings.facebook_url != '' -%}
+						<li>
+							<a aria-label="{{ 'general.footer.facebook' | t }}" href="{{ settings.facebook_url }}" target="_blank" tabindex="-1" class="social-link">
+								{%- render 'icon-facebook' -%}
+							</a>
+						</li>
+					{%- endif -%}
+
+					{%- if settings.instagram_url != '' -%}
+						<li>
+							<a aria-label="{{ 'general.footer.instagram' | t }}" href="{{ settings.instagram_url }}" target="_blank" tabindex="-1" class="social-link">
+								{%- render 'icon-instagram' -%}
+							</a>
+						</li>
+					{%- endif -%}
+
+					{%- if settings.pinterest_url != '' -%}
+						<li>
+							<a aria-label="{{ 'general.footer.pinterest' | t }}"  href="{{ settings.pinterest_url }}" target="_blank" tabindex="-1" class="social-link">
+								{%- render 'icon-pinterest' -%}
+							</a>
+						</li>
+					{%- endif -%}
+
+					{%- if settings.youtube_url != '' -%}
+						<li>
+							<a aria-label="{{ 'general.footer.youtube' | t }}" href="{{ settings.youtube_url }}" target="_blank" tabindex="-1" class="social-link">
+								{%- render 'icon-youtube' -%}
+							</a>
+						</li>
+					{%- endif -%}
+
+					{%- if settings.tumblr_url != '' -%}
+						<li>
+							<a aria-label="{{ 'general.footer.tumblr' | t }}" href="{{ settings.tumblr_url }}" target="_blank" tabindex="-1" class="social-link">
+								{%- render 'icon-tumblr' -%}
+							</a>
+						</li>
+					{%- endif -%}
+
+					{%- if settings.rss_url != '' -%}
+						<li>
+							<a aria-label="{{ 'general.footer.rss' | t }}" href="{{ settings.rss_url }}" target="_blank" tabindex="-1" class="social-link">
+								{%- render 'icon-rss' -%}
+							</a>
+						</li>
+					{%- endif -%}
+				</ul>
+				<span tabindex="-1" class="last-focusable-element"></span>
+			</div>
+		</div>
+	{%- endif -%}
+{%- endif -%}

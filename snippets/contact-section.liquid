@@ -1,0 +1,60 @@
+{%- assign banner_image = section.settings.banner_image -%}
+{%- assign banner_subheading = section.settings.banner_subheading -%}
+{%- assign banner_heading = section.settings.banner_heading -%}
+{%- assign banner_text = section.settings.banner_text -%}
+
+{%- capture page_title -%}
+	{%- if show_page_title or banner_subheading != blank or banner_text != blank -%}
+	<div class="page-title">
+		<div class="container">
+			<div class="row row-sm page-title__wrapper">
+				{%- if banner_subheading != blank -%}
+					<p class="page-title__subheading subheading-text">{{ banner_subheading }}</p>
+				{%- endif -%}
+
+				{%- if show_page_title -%}
+					<h1 class="page-title__heading">{{ page.title }}</h1>
+				{%- elsif banner_heading != blank -%}
+					<h1 class="page-title__heading">{{ banner_heading }}</h1>
+				{%- endif -%}
+
+				{%- if banner_text != blank -%}
+					<div class="page-title__text">{{ banner_text }}</div>
+				{%- endif -%}
+			</div>
+		</div>
+	</div>
+	{%- endif -%}
+{%- endcapture -%}
+
+<div data-section-id="{{ section.id }}" data-section-type="contact-template">
+	{%- if banner_image -%}
+		{%- render 'banner--page', page_title: page_title, banner_image: banner_image -%}
+	{%- endif -%}
+
+	<div class="container-wrap">
+		<div class="contact-form-container container">
+			<div class="row row-med">
+				<div class="contact-column contact-column-form">
+					{%- if banner_image == blank -%}
+						{%- if contact_heading != blank or contact_content != blank-%}
+							<div class="contact-text">
+								{%- if contact_heading != blank -%}
+									<h2>{{ contact_heading }}</h2>
+								{%- endif -%}
+
+								{%- if contact_content != blank -%}
+									<div class="content-wrapper text-content rte">
+										{{- contact_content -}}
+									</div>
+								{%- endif -%}
+							</div>
+						{%- endif -%}
+					{%- endif -%}
+
+					{%- render 'contact-form' -%}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
